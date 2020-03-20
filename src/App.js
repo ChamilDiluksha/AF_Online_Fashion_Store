@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component}from 'react';
 import './App.css';
 
-class  extends Component {
+class App extends Component {
   
   render() { 
     return (  
