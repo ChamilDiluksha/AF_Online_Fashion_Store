@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {ListGroup,Card, Nav, Navbar,NavDropdown} from 'react-bootstrap'
-import './style.css';
+import user from './images/user.png';
 
 class AdminNavBar extends Component {
    
     render() { 
         return (  
-           <div>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
-                <Navbar.Brand href="#home">Admin</Navbar.Brand>
+            <div >
+                
+            <Navbar collapseOnSelect expand="lg" >
+                <Navbar.Brand href="/Admin">Admin</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
@@ -25,10 +26,30 @@ class AdminNavBar extends Component {
                         <NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
+                <Navbar.Brand href="/"  className="user">
+                            <img style={{height:"30px", width:"30px", }} src={user} alt="user" align="center"/>
+                        </Navbar.Brand>
                 </Navbar.Collapse>
             </Navbar>
+            <hr className="navDivider"/>
+
+            <div>
+                <header id="header">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-10">
+                                <h1><span className="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard <small>Manage Your Site</small></h1>
+                            </div>
+                    
+                        </div>
+                    </div>
+                </header>
+
+            </div>
+            
         </div>
 
+        
         
         );
     }
