@@ -1,29 +1,75 @@
 import React, { Component } from 'react';
-import {ListGroup,Card, Nav, Navbar,NavDropdown} from 'react-bootstrap'
+import {ListGroup,Card,Button,   Nav, Navbar,NavDropdown} from 'react-bootstrap'
 import user from './images/user.png';
+import Cookies from 'universal-cookie';
+import axios from "axios";
+
 
 class AdminNavBar extends Component {
-   
+    constructor(props) {
+        const cookies = new Cookies();
+        let user = cookies.get('user');
+            super(props);
+            this.onClickSignOut = this.onClickSignOut.bind(this);
+           
+            this.state = {
+                user: user,
+                
+            }
+    }
+
+
+    onClickSignOut(e) {
+        e.preventDefault();
+        console.log("Signout");
+        const cookies = new Cookies();
+        const obj = {
+            token: cookies.get('token'),
+            user: cookies.get('user'),
+        };
+        axios.post('http://localhost:5000/user/sign-out', obj)
+            .then(
+                (response) => {
+                    const cookies = new Cookies();
+                    cookies.remove('token');
+                    cookies.remove('user');
+                    window.location.href = "/";
+                },
+                (error) => {
+                    cookies.remove('token');
+                    cookies.remove('user');
+                    window.location.href = "/";
+                }
+            );
+    }
+S
     render() { 
         return (  
             <div >
                 
             <Navbar collapseOnSelect expand="lg" >
-                <Navbar.Brand href="/Admin">Admin</Navbar.Brand>
+                <Navbar.Brand href="/">Admin</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/Admin/AddManager">Add Store Manager</Nav.Link>
-                    <Nav.Link href="/Admin/AddCategory">Add category</Nav.Link>
-                    <Nav.Link href="/Admin/ViewManager">View Store Manager</Nav.Link>
-                    <Nav.Link href="/Admin/vieCategory">View category</Nav.Link>
+                    <Nav.Link href="/log/Admin/AddManager">Add Store Manager</Nav.Link>
+                    <Nav.Link href="/log/Admin/AddCategory">Add category</Nav.Link>
+                    <Nav.Link href="/log/Admin/ViewManager">View Store Manager</Nav.Link>
+                    <Nav.Link href="/log/Admin/vieCategory">View category</Nav.Link>
                 
                 </Nav>
                 <Nav>
                     <NavDropdown title="More" id="collasible-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
+                        <NavDropdown.Item onClick={this.onClickSignOut}>
+                            
+                                <div>
+                                    
+                                        <span>Logout</span>
+                                    
+                                </div>
+                        </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Navbar.Brand href="/"  className="user">

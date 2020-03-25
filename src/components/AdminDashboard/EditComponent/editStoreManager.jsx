@@ -141,7 +141,7 @@ class EditManager extends Component {
 
         });
 
-        window.location.href = "/Admin/ViewManager";
+        window.location.href = "/log/Admin/ViewManager";
         
     }
 

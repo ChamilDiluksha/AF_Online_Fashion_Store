@@ -13,15 +13,15 @@ class AdminDashboardController  extends Component {
         return ( 
 
             <Switch>
-                 
-                <Route path="/Admin/AddManager" component={ AddManager } />
-                <Route path="/Admin/AddCategory" component={ AddCategory } />
+               
+                <Route exact path="/log/Admin/AddManager" component={ AddManager } />
+                <Route path="/log/Admin/AddCategory" component={ AddCategory } />
 
-                <Route path="/Admin/ViewManager" component={ viewManager } />
-                <Route path="/Admin/vieCategory" component={ viewCategory } />
+                <Route path="/log/Admin/ViewManager" component={ viewManager } />
+                <Route path="/log/Admin/vieCategory" component={ viewCategory } />
 
-                <Route path="/Admin/EditManager/:id" component={ editManager } />
-                <Route path="/Admin/EditCategory/:id" component={ editCategory } />
+                <Route path="/log/Admin/EditManager/:id" component={ editManager } />
+                <Route path="/log/Admin/EditCategory/:id" component={ editCategory } />
             </Switch>
          );
     }

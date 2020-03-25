@@ -95,7 +95,7 @@ class Category extends Component {
             description : ''
 
         });
-        window.location.href = "/Admin/vieCategory";
+        window.location.href = "/log/Admin/vieCategory";
 
     }
 

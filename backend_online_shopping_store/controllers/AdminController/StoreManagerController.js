@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const mongoose = require("mongoose");
 const Manager = require("../../model/AdminModels/Manager");
 const User = require("../../model/user/user");
 const nodeMailer = require('nodemailer');
@@ -73,11 +74,20 @@ exports.addManager = (req, res, next) => {
                                     newManager.Gender = Gender;
                                     newManager.NIC = NIC;
                                 
-                                    const newUser = new User();
-                                    newUser.UserID = managerID;
-                                    newUser.Type = "StoreManager";
-                                    newUser.Username = email;
-                                    newUser.Password = hash;
+                                    const user = new User({
+                                        _id:mongoose.Types.ObjectId(),
+                                        UserID : managerID,
+                                        Type : "StoreManager",
+                                        Username : email,
+                                        Password : hash
+                                    });
+
+                                    // const newUser = new User();
+                                    // _id = mongoose.Types.ObjectId();
+                                    // newUser.UserID = managerID;
+                                    // newUser.Type = "StoreManager";
+                                    // newUser.Username = email;
+                                    // newUser.Password = hash;
 
                                     newManager
                                         .save()
@@ -88,7 +98,7 @@ exports.addManager = (req, res, next) => {
                                             console.log(err);
                                         });
 
-                                    newUser.save()
+                                        user.save()
                                         .then(result => {
                                             console.log(result);
                                             res.status(201).json({

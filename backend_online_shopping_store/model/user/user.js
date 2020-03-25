@@ -7,9 +7,15 @@ let User = new Schema({
         required: true
     },
 
+    Fname:{
+        type:String,
+        default:null
+    },
+
+
     UserID:{
         type:String,
-        required: true
+        default:null
     },
 
     Type:{

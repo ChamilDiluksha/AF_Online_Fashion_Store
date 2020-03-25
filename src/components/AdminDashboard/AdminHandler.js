@@ -10,7 +10,7 @@ class AdminDashboardHandler extends Component {
     render() { 
         return ( 
             <div>
-                <Router>
+                
                 <NavBar />
                    <div className="row">
                         <div className="col-13" style={{ paddingLeft:"30px", paddingRight:"25px"}}>
@@ -22,7 +22,7 @@ class AdminDashboardHandler extends Component {
                         </div>
                    </div>
                     
-                </Router>
+                
             </div>
          );
     }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { Link } from 'react-router-dom';
+import {Button, Col, Form} from 'react-bootstrap';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 
 class Login extends Component {
@@ -46,7 +48,7 @@ class Login extends Component {
                     cookies.set('token', response.data.token, { path: '/',expires:time });
                     cookies.set('user', {"username":response.data.username,"userId":response.data.userId,"type":response.data.type}, { path: '/',expires:time});
                     //console.log("User :" , cookies.get('user'));
-                    window.location.href = "/";
+                    window.location.href = "/log";
                 },
                 (error) => {
                     //console.log(error);
@@ -61,6 +63,9 @@ class Login extends Component {
         });
     }
 
+
+    
+
     render() { 
         return ( 
             <div>
@@ -71,7 +76,7 @@ class Login extends Component {
                     ) : (null)
                 }
                 </div>
-                <div style={{paddingLeft:"450px", paddingTop:"80px"}}>
+                <div style={{paddingLeft:"450px", paddingTop:"80px", paddingBottom:"50px"}}>
                 <form onSubmit={this.onSubmit}>
                 <MDBContainer>
                     <MDBRow>
@@ -84,23 +89,25 @@ class Login extends Component {
                                 </h3>
                             </div>
 
-                        <label>Your Email</label>
-                        <MDBInput
-                     
-                            group
-                            type="email"
-                            validate
-                            error="wrong"
-                            success="right"
-                        />
-                        <label>Your password</label>
-                        <MDBInput
-                          
-                            group
-                            type="password"
-                            validate
-                            containerClass="mb-0"
-                        />
+                            <Form.Group >
+                                < Form.Control 
+                                required
+                                type="email" 
+                                placeholder="Enter email"
+                                name="email" 
+                                value={this.state.username}
+                                onChange={this.onChangeUsername}
+                                />
+                            </Form.Group>
+                            <Form.Group >
+                            <Form.Control 
+                                required
+                                type="password" 
+                                placeholder="Password" 
+                                name="password" 
+                                value={this.state.password}
+                                onChange={this.onChangePassword}/>
+                            </Form.Group>
                         <p className="font-small blue-text d-flex justify-content-end pb-3">
                             Forgot
                             <a href="#!" className="blue-text ml-1">
@@ -152,10 +159,10 @@ class Login extends Component {
                         <MDBModalFooter className="mx-5 pt-3 mb-1">
                             <p className="font-small grey-text d-flex justify-content-end">
                                 Not a member?
-                                <a href="#!" className="blue-text ml-1">
+                                <Link to="/Signup"className="edit">
 
                                     Sign Up
-                                </a>
+                                </Link>
                             </p>
                         </MDBModalFooter>
                         </MDBCard>
