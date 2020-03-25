@@ -7,18 +7,7 @@ class AdminDashboardHandler extends Component {
     
     render() { 
         return ( 
-            <div>
-                <Router>
-                    <div>
-                        <NavBar />
-                        <SideNavBar />
-                    </div>
-                    <div>
-
-                    </div>
-                    
-                </Router>
-            </div>
+            
          );
     }
 }
