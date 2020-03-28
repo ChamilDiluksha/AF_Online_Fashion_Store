@@ -39,7 +39,7 @@ onClickSignOut = (e) => {
               const cookies = new Cookies();
               cookies.remove('token');
               cookies.remove('user');
-              window.location.href = "/sign-in";
+              window.location.href = "/";
 
               // if( window.location.path === "http://localhost:3000/log"){
               //     console.log('inside if')
