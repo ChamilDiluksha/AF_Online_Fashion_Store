@@ -11,7 +11,7 @@ export default class Dashboard extends Component{
         super(props);
         this.state = {
             user: user,
-            userType: user.type
+           
         }
     }
     render(){

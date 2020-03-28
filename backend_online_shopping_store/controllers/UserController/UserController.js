@@ -92,7 +92,7 @@ exports.userSignin =(req,res,next) => {
                 return res.status(200).json({
                     message:'Authentication successful',
                     token:token,
-                    username:user[0].UserId,
+                    username:user[0].Fname,
                     userId:user[0]._id,
                     type:user[0].Type
                 });

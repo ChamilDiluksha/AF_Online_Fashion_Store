@@ -13,7 +13,7 @@ class AdminNavBar extends Component {
             this.onClickSignOut = this.onClickSignOut.bind(this);
            
             this.state = {
-                user: user,
+                user: user.type,
                 
             }
     }
@@ -33,7 +33,12 @@ class AdminNavBar extends Component {
                     const cookies = new Cookies();
                     cookies.remove('token');
                     cookies.remove('user');
-                    window.location.href = "/";
+                    window.location.href = "/sign-in";
+
+                    // if( window.location.path === "http://localhost:3000/log"){
+                    //     console.log('inside if')
+                    //     window.location.path = "/";
+                    // }
                 },
                 (error) => {
                     cookies.remove('token');
@@ -59,7 +64,8 @@ S
                 
                 </Nav>
                 <Nav>
-                    <NavDropdown title="More" id="collasible-nav-dropdown">
+                    <NavDropdown title={this.state.user} id="collasible-nav-dropdown">
+                      
                         <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item onClick={this.onClickSignOut}>
