@@ -35,10 +35,10 @@ class AdminNavBar extends Component {
                     cookies.remove('user');
                     window.location.href = "/sign-in";
 
-                    // if( window.location.path === "http://localhost:3000/log"){
-                    //     console.log('inside if')
-                    //     window.location.path = "/";
-                    // }
+                    //  if( window.location.pathname === 'http://localhost:3000/sign-in'){
+                    //      console.log('inside if')
+                    //      window.location.href = "/";
+                    //  }
                 },
                 (error) => {
                     cookies.remove('token');
@@ -47,7 +47,7 @@ class AdminNavBar extends Component {
                 }
             );
     }
-S
+
     render() { 
         return (  
             <div >

@@ -43,7 +43,7 @@ exports.addManager = (req, res, next) => {
         }).exec()
           .then(manager => {
             if (manager.length >= 1) {
-                return res.status(409).json({
+                return res.json({
                     message: 'Error: Manager is already exists'
                 });
             } else {
@@ -52,7 +52,7 @@ exports.addManager = (req, res, next) => {
                 }).exec()
                   .then(manager => {
                         if (manager.length >= 1) {
-                            return res.status(409).json({
+                            return res.json({
                                 message: 'Error: Email is already exists'
                             });
                         } else {
@@ -133,7 +133,7 @@ exports.addManager = (req, res, next) => {
 
                                         Emailtransporter.sendMail(mailOption, (err,info) => {
                                                 if(err){
-                                                    console.log('++++++' +err);
+                                                    console.log(err);
                                                 }else{
                                                     console.log('Email Sent : ' + info.response);
                                                 }

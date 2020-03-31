@@ -8,12 +8,15 @@ const User = require('../../model/user/user');
 
 
 exports.user_signup = (req,res,next) => {
-    User.find({Username: req.body.Username})
+
+    const {Username} = req.body;
+    User.find({Username})
         .exec()
         .then(user => {
+            //console.log(user)
             if(user.length >= 1){
-                return res.status(406).json({
-                    message: 'Already exist'
+                return res.json({
+                    message: 'User Already exist'
                 });
             }else{
                 bcrypt.hash(req.body.Password,10,(err, hash) =>{
@@ -22,18 +25,18 @@ exports.user_signup = (req,res,next) => {
                             error: err
                         })
                     }else{
-                        const user = new User({
+                        const nwuser = new User({
                             _id:mongoose.Types.ObjectId(),
                             Type: "User",
                             Fname:req.body.fname,
                             Username: req.body.Username,
                             Password: hash
                         });
-                        user
+                        nwuser
                             .save()
                             .then(result => {
                                 console.log('User Created',result);
-                                res.status(201).json({
+                                res.status(200).json({
                                     message: 'User Created'
                                 })
                             })
@@ -46,6 +49,12 @@ exports.user_signup = (req,res,next) => {
                     }
                 });
             }
+        })
+        .catch( err =>{
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
         });
 }
 
@@ -56,11 +65,11 @@ exports.user_signup = (req,res,next) => {
 exports.userSignin =(req,res,next) => {
     User.find({Username:req.body.Username}).exec().then(user => {
         if(user.length < 1){
-            return res.status(401).send('unauthorized');
+            return res.send({message:'unauthorized User!!!!'});
         }
         bcrypt.compare(req.body.Password, user[0].Password,(err,result) => {
             if(err){
-                return res.status(401).send('unauthorized');
+                return res.send({message :'Password does not match!!!!!'});
             }
             if(result){
                 let token = null;

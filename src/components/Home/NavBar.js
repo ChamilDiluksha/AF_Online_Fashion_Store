@@ -4,11 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './HomeStyle.css';
 import Cookies from 'universal-cookie';
 import axios from "axios";
-
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem , Form, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-// Boptstrap components
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem , Form, FormControl, Button } from 'react-bootstrap';
+
+
 
 export default class NavBar extends Component {
 
@@ -79,28 +79,21 @@ onClickSignOut = (e) => {
 
             {
             (this.state.user) ?
-
                   (<Nav>
-                          <NavDropdown title={ (this.state.user) ? this.state.user.username : 'Sign In'} id="collasible-nav-dropdown">
-
-                            
-                                    <NavDropdown.Item onClick={this.onClickSignOut}>
-                                        
-                                            <div>
-                                                
-                                                    <span>Logout</span>
-                                                
-                                            </div>
-                                    </NavDropdown.Item>
+                        <NavDropdown title={ (this.state.user) ? this.state.user.username : 'Sign In'} id="collasible-nav-dropdown">
+                            <NavDropdown.Item onClick={this.onClickSignOut}>  
+                                <div>
+                                    <span>Logout</span>
+                                </div>
+                            </NavDropdown.Item>
                           
-                          </NavDropdown>
-                      </Nav>
-                      )
-                      :
-
-                    (<Nav.Link href="/sign-in"><i class="fas fa-user mr-2"/> { (this.state.user) ? this.state.user.username : 'Sign In'}</Nav.Link>)
+                        </NavDropdown>
+                    </Nav>
+                  )
+                  :
+                  (<Nav.Link href="/sign-in"><i class="fas fa-user mr-2"/> { (this.state.user) ? this.state.user.username : 'Sign In'}</Nav.Link>)
                
-           }
+            }
 
            
             <Form inline>

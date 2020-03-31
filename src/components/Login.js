@@ -3,6 +3,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 import {Button, Col, Form} from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert'
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 
 class Login extends Component {
@@ -48,7 +49,13 @@ class Login extends Component {
                     cookies.set('token', response.data.token, { path: '/',expires:time });
                     cookies.set('user', {"username":response.data.username,"userId":response.data.userId,"type":response.data.type}, { path: '/',expires:time});
                     //console.log("User :" , cookies.get('user'));
-                    window.location.href = "/log";
+                    this.setState({
+                        message: response.data.message
+                    });
+                    if(this.state.message === 'Authentication successful'){
+                        window.location.href = "/log";
+                    }
+                   
                 },
                 (error) => {
                     //console.log(error);
@@ -88,6 +95,29 @@ class Login extends Component {
                                 <strong>Sign in</strong>
                                 </h3>
                             </div>
+
+                        {   (this.state.message) ? 
+
+                                (
+                                    (this.state.message === 'Authentication successful') ? 
+                                    
+                                    (   <Alert variant="success">
+                                            <center>{this.state.message}</center> 
+                                        </Alert>
+                                    )
+
+                                    :
+
+                                    (  <Alert variant="danger">
+                                            <center>{this.state.message}</center> 
+                                        </Alert>
+                                    )
+                                
+                                )
+                                :
+                                null
+                            
+                        }
 
                             <Form.Group >
                                 < Form.Control 

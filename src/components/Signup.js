@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 import {Form} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert'
 import axios from 'axios';
 
 class Signup extends Component {
@@ -50,17 +51,22 @@ class Signup extends Component {
                 console.log(res.data.message);
             }
         );
-
-
+        
         this.setState({
             fname:'',
             Username: '',
             Password: '',
-            message: ''
+            
 
         });
-        window.location.href = "/sign-in";
 
+        if(this.state.message === 'User Created') {
+            window.location.href = "/sign-in";
+        }
+        
+
+       
+       
     }
     render() { 
         return ( 
@@ -78,6 +84,30 @@ class Signup extends Component {
                             <strong>Sign Up</strong>
                             </h3>
                         </div>
+
+                        {   (this.state.message) ? 
+
+                            (
+                                (this.state.message === 'User Created') ? 
+                                
+                                (   <Alert variant="success">
+                                        <center>{this.state.message}</center> 
+                                    </Alert>
+                                )
+
+                                :
+
+                                (  <Alert variant="danger">
+                                        <center>{this.state.message}</center> 
+                                    </Alert>
+                                )
+
+                            )
+                            :
+                            null
+
+                        }
+
                         <Form.Group >
                             < Form.Control 
                             required
@@ -108,7 +138,7 @@ class Signup extends Component {
                             value={this.state.password}
                             onChange={this.onChangePassword}/>
                         </Form.Group>
-                   
+                       
                     <div className="text-center mb-3">
                     <MDBBtn
                             type="submit"
