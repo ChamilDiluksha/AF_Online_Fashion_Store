@@ -101,6 +101,7 @@ class Category extends Component {
 
     render() { 
         return ( 
+            <div style={{paddingBottom :"30px"}}>
             <Form onSubmit={this.onSubmit}>
 
                     <Form.Row>
@@ -160,6 +161,7 @@ class Category extends Component {
                         Submit
                     </Button>
             </Form>
+            </div>
          );
     }
 }

@@ -15,11 +15,11 @@ exports.addCategory = (req, res, next) => {
     CategoryItem.find({
         CategoryID
     }).exec()
-    .then(category => {
+      .then(category => {
 
-        if(category.length > 1){
-            return this.status(409).json({
-                message : 'Error : category already exist'
+        if(category.length >= 1){
+            return res.json({
+                message : 'Category already exist'
             });
         }else{
 

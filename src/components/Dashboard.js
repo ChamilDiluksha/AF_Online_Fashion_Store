@@ -11,7 +11,7 @@ export default class Dashboard extends Component{
         super(props);
         this.state = {
             user: user,
-            userType: user.type
+           
         }
     }
     render(){
@@ -20,7 +20,9 @@ export default class Dashboard extends Component{
                 {
                     (this.state.user.type === "User") ? (<Container/>) :  
 
-                    (this.state.user.type === "Admin") ? (<Admin/>)  : null
+                    (this.state.user.type === "Admin") ? (<Admin/>)  : 
+                    
+                    (this.state.user.type === "StoreManager") ? (<Admin/>)  :null
                 }
                 
             </div>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Button, Col, Form} from 'react-bootstrap';
 import axios from 'axios';
+import {  Message } from 'semantic-ui-react'
+import {  Card, Divider, Image, Placeholder } from 'semantic-ui-react'
 
 class EditManager extends Component {
     constructor(props) {
@@ -147,8 +149,13 @@ class EditManager extends Component {
 
     render() { 
         return ( 
-            <div>
-            <h5 style={{padding:"15px"}}>Edit Store Manager : {this.state.fname}</h5>
+            <div className="row">
+            <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"100px"}}>
+            {(this.state.Gender === 'Female') ? 
+            <Image  src='https://react.semantic-ui.com/images/avatar/small/molly.png' rounded size='mini' avatar/> : 
+            <Image  src='https://react.semantic-ui.com/images/avatar/small/matthew.png' rounded size='mini' avatar/>
+            }
+            <h5 style={{padding:"1px"}}>Edit Store Manager : {this.state.fname}</h5>
 
             <Form onSubmit={this.onSubmit}>
                 <Form.Row>
@@ -254,7 +261,55 @@ class EditManager extends Component {
                 Submit
             </Button>
         </Form>
-</div>
+        </div>
+        <div style={{ paddingBottom:"30px"}}>
+        <Card.Group >
+          
+            <Card >
+              {
+                (this.state.Gender === 'Female') ? 
+                <Image  src='https://react.semantic-ui.com/images/avatar/large/molly.png' /> : 
+                <Image  src='https://react.semantic-ui.com/images/avatar/large/matthew.png' />
+            
+              }
+
+              <Card.Content>
+     
+                    <Card.Header>{this.state.fname}</Card.Header>
+                    <Card.Meta>{this.state.email}</Card.Meta>
+                    <Card.Description>{this.state.address}</Card.Description>
+    
+              </Card.Content>
+
+            </Card>
+          
+        </Card.Group>
+        </div>
+
+        {   (this.state.message) ? 
+
+            (
+                (this.state.message === 'Manager successfully created') ? 
+                
+                (   
+                    <Message color='green'>
+                        <center>{this.state.message}</center>
+                    </Message>
+                )
+
+                :
+
+                (   <Message color='red'>
+                        <center>{this.state.message}</center>
+                    </Message>
+                )
+
+            )
+            :
+            null
+
+            }
+    </div>
          );
     }
 }
