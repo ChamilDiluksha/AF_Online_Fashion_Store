@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
-import {Form} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Alert from 'react-bootstrap/Alert'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import axios from 'axios';
 
 class Signup extends Component {
@@ -72,129 +70,82 @@ class Signup extends Component {
         return ( 
 
             
-            <div style={{paddingLeft:"450px", paddingTop:"80px" , paddingBottom:"50px"}}>
+           
             <form onSubmit={this.onSubmit}>
-            <MDBContainer>
-                <MDBRow>
-                    <MDBCol md="6">
-                    <MDBCard>
-                    <MDBCardBody className="mx-4">
-                        <div className="text-center">
-                            <h3 className="dark-grey-text mb-5">
-                            <strong>Sign Up</strong>
-                            </h3>
-                        </div>
+            <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 400 }}>
+              <Header as='h2' color='teal' textAlign='center'>
+                Sign-Up 
+              </Header>
+              <form onSubmit={this.onSubmit}>
+              <Form  onSubmit={this.onSubmit} size='large'>
+                <Segment stacked>
+                <Form.Input 
+                    fluid icon='user' 
+                    iconPosition='left' 
+                    placeholder='First Name' 
+                    value={this.state.Fname}
+                    onChange={this.onChangeFname}
+                  />
+                  <Form.Input 
+                    fluid icon='user' 
+                    iconPosition='left' 
+                    placeholder='E-mail address' 
+                    value={this.state.username}
+                    onChange={this.onChangeUsername}
+                  />
+                  <Form.Input
+                    fluid
+                    icon='lock'
+                    iconPosition='left'
+                    placeholder='Password'
+                    type='password'
+                    value={this.state.password}
+                    onChange={this.onChangePassword}/>
+                  
+        
+                  <Button color='teal' fluid size='large' type="submit">
+                    Sign up
+                  </Button>
+                </Segment>
+              </Form>
+              </form>
 
-                        {   (this.state.message) ? 
+              {   (this.state.message !== '') ? 
 
-                            (
-                                (this.state.message === 'User Created') ? 
-                                
-                                (   <Alert variant="success">
-                                        <center>{this.state.message}</center> 
-                                    </Alert>
-                                )
+                    (
+                        (this.state.message === 'User Created') ? 
+                        
+                        (   <div>
+                            <Message color='green'>
+                                <center>{this.state.message}</center>
+                            </Message>
 
-                                :
+                            <Message color='olive'>
+                                    Account created Successfully..  <Link to="/sign-in"className="edit">Sign In</Link>
+                            </Message>
+                            </div>
+                        )
 
-                                (  <Alert variant="danger">
-                                        <center>{this.state.message}</center> 
-                                    </Alert>
-                                )
+                        :
 
-                            )
-                            :
-                            null
+                        (   <Message color='red'>
+                                 <center>{this.state.message}</center>
+                            </Message>
+                        )
 
-                        }
+                    )
+                    :
+                    <Message color='olive'>
+                        Already have an account?  <Link to="/sign-in"className="edit">Sign In</Link>
+                    </Message>
+          
 
-                        <Form.Group >
-                            < Form.Control 
-                            required
-                            type="text" 
-                            placeholder="Name"
-                            name="fname" 
-                            value={this.state.Fname}
-                            onChange={this.onChangeFname}
-                            />
-                        </Form.Group>
-
-                        <Form.Group >
-                            < Form.Control 
-                            required
-                            type="email" 
-                            placeholder="Enter email"
-                            name="email" 
-                            value={this.state.username}
-                            onChange={this.onChangeUsername}
-                            />
-                        </Form.Group>
-                        <Form.Group >
-                        <Form.Control 
-                            required
-                            type="password" 
-                            placeholder="Password" 
-                            name="password" 
-                            value={this.state.password}
-                            onChange={this.onChangePassword}/>
-                        </Form.Group>
-                       
-                    <div className="text-center mb-3">
-                    <MDBBtn
-                            type="submit"
-                            gradient="blue"
-                            rounded
-                            className="btn-block z-depth-1a"
-                            >
-                            Sign Up
-                    </MDBBtn>
-                    </div>
-                    <p className="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2">
-
-                     or Sign up with:
-                    </p>
-                    <div className="row my-3 d-flex justify-content-center">
-                        <MDBBtn
-                            type="submit"
-                            color="white"
-                            rounded
-                            className="mr-md-3 z-depth-1a"
-                        >
-                        <MDBIcon fab icon="facebook-f" className="blue-text text-center" />
-                        </MDBBtn>
-                            <MDBBtn
-                            type="button"
-                            color="white"
-                            rounded
-                            className="mr-md-3 z-depth-1a"
-                            >
-                        <MDBIcon fab icon="twitter" className="blue-text" />
-                        </MDBBtn>
-                            <MDBBtn
-                            type="button"
-                            color="white"
-                            rounded
-                            className="z-depth-1a"
-                            >
-                        <MDBIcon fab icon="google-plus-g" className="blue-text" />
-                        </MDBBtn>
-                    </div>
-                    </MDBCardBody>
-                    <MDBModalFooter className="mx-5 pt-3 mb-1">
-                        <p className="font-small grey-text d-flex justify-content-end">
-                            Not a member?
-                            <Link to="/sign-in"className="edit">
-
-                                Sign In
-                            </Link>
-                        </p>
-                    </MDBModalFooter>
-                    </MDBCard>
-                    </MDBCol>
-                    </MDBRow>
-                    </MDBContainer>
+            }
+            </Grid.Column>
+            </Grid>
             </form>
-            </div>
+          
          );
     }
 }
