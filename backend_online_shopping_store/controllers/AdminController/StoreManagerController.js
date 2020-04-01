@@ -29,12 +29,12 @@ exports.addManager = (req, res, next) => {
 
     if(password !== ComPassword){
         return res.send({
-            message: 'Error: Confirm Password is not matching!'
+            message: 'Confirm Password is not matching!'
         });
     }
     if(new Date(DOB) >= Date.now()){
         return res.send({
-            message: 'Error: Incorrect DOB!'
+            message: 'Incorrect DOB!'
         });
     }
 
@@ -44,7 +44,7 @@ exports.addManager = (req, res, next) => {
           .then(manager => {
             if (manager.length >= 1) {
                 return res.json({
-                    message: 'Error: Manager is already exists'
+                    message: 'Manager is already exists'
                 });
             } else {
                 Manager.find({
@@ -53,7 +53,7 @@ exports.addManager = (req, res, next) => {
                   .then(manager => {
                         if (manager.length >= 1) {
                             return res.json({
-                                message: 'Error: Email is already exists'
+                                message: 'Email is already exists'
                             });
                         } else {
                             bcrypt.hash(password, 10, (err, hash) => {
@@ -102,7 +102,7 @@ exports.addManager = (req, res, next) => {
                                         .then(result => {
                                             console.log(result);
                                             res.status(201).json({
-                                                message: 'Manager successfully created'
+                                                message: 'Manager successfully created and send the creditianlas'
                                             })
                                         })
                                         .catch(err => {
@@ -187,13 +187,13 @@ exports.editManager = (req, res) => {
 
     if(new Date(DOB) >= Date.now()){
         return res.send({
-            message: 'Error: Incorrect DOB!'
+            message: 'Incorrect DOB!'
         });
     }
 
     Manager.findById(req.params.id, (err, manager) => {
         if (!manager)
-            res.status(404).send("data is not found");
+            res.status(404).send("Store Manager data is not found");
         else {
             manager.managerID = managerID;
             manager.fname = fname;
@@ -206,7 +206,7 @@ exports.editManager = (req, res) => {
             manager.NIC = NIC;
 
             manager.save().then(manager => {
-                res.json('Update complete');
+                res.json('Update Store Manager Successfully');
             })
                 .catch(err => {
                     res.status(400).send("unable to update the database");

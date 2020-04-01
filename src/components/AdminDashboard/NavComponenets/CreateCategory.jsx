@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {  Message } from 'semantic-ui-react'
 import {Button, Col, Form} from 'react-bootstrap';
 
 class Category extends Component {
@@ -82,6 +83,7 @@ class Category extends Component {
 
     render() { 
         return ( 
+            <div style={{paddingBottom :"30px"}}>
             <Form onSubmit={this.onSubmit}>
 
                     <Form.Row>
@@ -141,6 +143,31 @@ class Category extends Component {
                         Submit
                     </Button>
             </Form>
+
+            {   (this.state.message) ? 
+
+                (
+                    (this.state.message === 'Category successfully created') ? 
+                    
+                    (   
+                        <Message color='green'>
+                            <center>{this.state.message}</center>
+                        </Message>
+                    )
+
+                    :
+
+                    (   <Message color='red'>
+                            <center>{this.state.message}</center>
+                        </Message>
+                    )
+
+                )
+                :
+                null
+
+            }
+            </div>
          );
     }
 }

@@ -81,6 +81,7 @@ class Signup extends Component {
               <Form  onSubmit={this.onSubmit} size='large'>
                 <Segment stacked>
                 <Form.Input 
+                    required
                     fluid icon='user' 
                     iconPosition='left' 
                     placeholder='First Name' 
@@ -88,6 +89,7 @@ class Signup extends Component {
                     onChange={this.onChangeFname}
                   />
                   <Form.Input 
+                    required
                     fluid icon='user' 
                     iconPosition='left' 
                     placeholder='E-mail address' 
@@ -96,6 +98,7 @@ class Signup extends Component {
                   />
                   <Form.Input
                     fluid
+                    required
                     icon='lock'
                     iconPosition='left'
                     placeholder='Password'

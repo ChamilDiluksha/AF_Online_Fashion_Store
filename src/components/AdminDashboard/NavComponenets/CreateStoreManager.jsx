@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Button, Col, Form} from 'react-bootstrap';
 import axios from 'axios';
-
+import {  Message } from 'semantic-ui-react'
 class StoreManager extends Component {
     constructor(props) {
         super(props);
@@ -144,7 +144,7 @@ class StoreManager extends Component {
 
     render() { 
         return ( 
-            <div>
+            <div style={{padding:"15px"}}>
             <h5 style={{padding:"15px"}}>Create Store Manager</h5>
 
             <Form onSubmit={this.onSubmit}>
@@ -273,7 +273,32 @@ class StoreManager extends Component {
                 Submit
             </Button>
         </Form>
-</div>
+
+        
+        {   (this.state.message) ? 
+
+            (
+                (this.state.message === 'Manager successfully created') ? 
+                
+                (   
+                    <Message color='green'>
+                        <center>{this.state.message}</center>
+                    </Message>
+                )
+
+                :
+
+                (   <Message color='red'>
+                        <center>{this.state.message}</center>
+                    </Message>
+                )
+
+            )
+            :
+           null
+
+            }
+    </div>
          );
     }
 }

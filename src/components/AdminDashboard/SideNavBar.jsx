@@ -7,7 +7,7 @@ class SideNavBar extends Component {
     render() { 
         return ( 
            
-           
+            <div style={{paddingBottom :"30px"}}>
                         <Card style={{ width: '18rem' }}>
                         <Card.Header action href="/Admin"><i className="fas fa-users-cog" style={{paddingRight:"10px"}}></i>Dashboard</Card.Header>
                         <ListGroup variant="flush">
@@ -17,7 +17,7 @@ class SideNavBar extends Component {
                             <ListGroup.Item action href="/log/Admin/vieCategory"> <i className="fas fa-clipboard-list" style={{paddingRight:"10px"}}></i>View category</ListGroup.Item>
                         </ListGroup>
                         </Card>
-                      
+            </div>    
          );
     }
 }
