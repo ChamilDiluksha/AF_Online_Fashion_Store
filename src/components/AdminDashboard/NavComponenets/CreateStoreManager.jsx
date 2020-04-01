@@ -278,7 +278,7 @@ class StoreManager extends Component {
         {   (this.state.message) ? 
 
             (
-                (this.state.message === 'Manager successfully created') ? 
+                (this.state.message === 'Manager successfully created and send the creditianlas') ? 
                 
                 (   
                     <Message color='green'>

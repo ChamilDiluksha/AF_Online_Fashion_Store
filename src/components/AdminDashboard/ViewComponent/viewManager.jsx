@@ -48,7 +48,7 @@ class ViewManager extends Component {
 
     render() { 
         return ( 
-            <div className="row">
+            <div className="row" >
             <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"100px"}}>
 
                 <h5 align="center">Managers List</h5>
