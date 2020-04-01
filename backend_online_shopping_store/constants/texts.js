@@ -4,6 +4,11 @@ module.exports = {
         DB_CONNECTED : "Database is connected ",
         DB_NOT_CONNECTED : "Can not connect to the database ",
         SERVER : "Server is running on Port : "
-    }
+    },
    
+    emailConfigure : {
+        Email : 'chamilpearson@gmail.com',
+        password: 'Sliit#*1996'
+
+    }
 }

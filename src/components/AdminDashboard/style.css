@@ -1,7 +1,8 @@
 body{
-  background:#f4f4f4;
+  font-family: 'Baloo Da 2', cursive !important;
+  color: #424242 !important;
+  
 }
-
 /* Navbar */
 .navbar{
   min-height: 33px !important;

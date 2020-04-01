@@ -26,6 +26,17 @@ mongoose.connect(serverMessages.MONGODB_URL,
 });
 
 
+const adminRouteCreateManager = require('./routes/adminRoute/managerRoute');
+app.use('/storemanager', adminRouteCreateManager);
+
+const adminRouteCategory = require('./routes/adminRoute/CategoryRote');
+app.use('/category', adminRouteCategory);
+
+const userRoute = require('./routes/UserRoutes/userRouter');
+app.use('/user', userRoute);
+
+
+
 // server listening port
 app.listen(port, () => {
     console.log(serverMessages.SERVER + port);
