@@ -16,7 +16,6 @@ import Items from '../src/components/Home/Items';
 import Description from '../src/components/Home/Description';
 import 'semantic-ui-css/semantic.min.css';
 
-
 import AddManager from './components/AdminDashboard/NavComponenets/CreateStoreManager';
 import AddCategory from './components/AdminDashboard/NavComponenets/CreateCategory';
 import viewManager from './components/AdminDashboard/ViewComponent/viewManager';
