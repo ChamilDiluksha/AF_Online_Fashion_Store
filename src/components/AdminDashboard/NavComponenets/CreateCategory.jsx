@@ -135,6 +135,8 @@ class Category extends Component {
     render() { 
         return ( 
             <div style={{paddingBottom :"30px"}}>
+            <div className="row">
+            <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"60px"}}>
             <Form onSubmit={this.onSubmit}>
 
                     <Form.Row>
@@ -181,6 +183,49 @@ class Category extends Component {
 
 
                     <Form.Group>
+                    <Form.Control
+                                required
+                                type="text"
+                                id="description"
+                                name="description"
+                                value={this.state.description}
+                                onChange={this.onChangeDescription}
+                                placeholder="Description" />
+                    </Form.Group>
+
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+            </Form>
+
+            {   (this.state.message) ? 
+
+                (
+                    (this.state.message === 'Category successfully created') ? 
+                    
+                    (   
+                        <Message color='green'>
+                            <center>{this.state.message}</center>
+                        </Message>
+                    )
+
+                    :
+
+                    (   <Message color='red'>
+                            <center>{this.state.message}</center>
+                        </Message>
+                    )
+
+                )
+                :
+                null
+
+            }
+            </div>
+            <div style={{ paddingTop:"5px"}}> 
+
+                
+            <Form.Group>
                                 <Form.Label>Sub Item</Form.Label>
 
                                 {}
@@ -226,47 +271,8 @@ class Category extends Component {
                                 </table>
                             </Form.Group>
 
-
-
-                    <Form.Group>
-                    <Form.Control
-                                required
-                                type="text"
-                                id="description"
-                                name="description"
-                                value={this.state.description}
-                                onChange={this.onChangeDescription}
-                                placeholder="Description" />
-                    </Form.Group>
-
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-            </Form>
-
-            {   (this.state.message) ? 
-
-                (
-                    (this.state.message === 'Category successfully created') ? 
-                    
-                    (   
-                        <Message color='green'>
-                            <center>{this.state.message}</center>
-                        </Message>
-                    )
-
-                    :
-
-                    (   <Message color='red'>
-                            <center>{this.state.message}</center>
-                        </Message>
-                    )
-
-                )
-                :
-                null
-
-            }
+            </div>
+            </div>
             </div>
          );
     }
