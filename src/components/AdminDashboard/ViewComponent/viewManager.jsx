@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import TableRow from '../ViewDetails/ManagerDetails';
+import { Image, Statistic } from 'semantic-ui-react'
 
 class ViewManager extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            managers : []
+            managers : [],
+            Female:0,
+            Male:0
          };
     }
 
@@ -22,6 +25,21 @@ class ViewManager extends Component {
     }
 
 
+    countPersons(){
+        let male = 0;
+        let female = 0;
+
+         this.state.managers.map( object => {
+             if(object.Gender ==='Male'){
+                 male += 1; 
+             }else{
+                 female += 1;
+             }
+        });
+
+       return female
+    }
+
     tabRow(){
         return this.state.managers.map(function(object, i){
             return <TableRow obj={object} key={i} />;
@@ -30,7 +48,9 @@ class ViewManager extends Component {
 
     render() { 
         return ( 
-            <div >
+            <div className="row" >
+            <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"100px"}}>
+
                 <h5 align="center">Managers List</h5>
                 <MDBTable small  style={{ marginTop: 20, width:"600px" }}>
                 <MDBTableHead>
@@ -45,6 +65,31 @@ class ViewManager extends Component {
                     { this.tabRow() }
                     </MDBTableBody>
                 </MDBTable>
+                </div>
+                <div style={{ paddingTop:"50px"}}>
+               
+                <Statistic.Group>
+            
+                        <Statistic color='teal'>
+                        <Statistic.Value>
+                            <Image src='https://react.semantic-ui.com/images/avatar/small/matthew.png' inline circular />
+                            {this.state.managers.length}
+                        </Statistic.Value>
+                        <Statistic.Label>Store Managers</Statistic.Label>
+                        </Statistic>
+
+                        <Statistic color='pink'>
+                        <Statistic.Value> {this.countPersons()}</Statistic.Value>
+                        <Statistic.Label>Female</Statistic.Label>
+                        </Statistic>
+
+                        
+                        <Statistic color='violet'>
+                        <Statistic.Value> { this.state.managers.length - this.countPersons()}</Statistic.Value>
+                        <Statistic.Label>Male</Statistic.Label>
+                        </Statistic>
+                </Statistic.Group>
+                </div>
             </div>
          );
     }

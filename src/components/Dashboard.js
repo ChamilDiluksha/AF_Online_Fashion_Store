@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import Admin from './AdminDashboard/AdminHandler';
+import UploadDressItems from "./StoreManagerComponent/UploadDressItems"
 import Container from './Home/Container';
 import Cookies from "universal-cookie";
 
@@ -20,7 +21,9 @@ export default class Dashboard extends Component{
                 {
                     (this.state.user.type === "User") ? (<Container/>) :  
 
-                    (this.state.user.type === "Admin") ? (<Admin/>)  : null
+                    (this.state.user.type === "Admin") ? (<Admin/>)  : 
+                    
+                    (this.state.user.type === "StoreManager") ? (<UploadDressItems/>)  :null
                 }
                 
             </div>

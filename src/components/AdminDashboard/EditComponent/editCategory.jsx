@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Button, Col, Form} from 'react-bootstrap';
+import {Button, Col, Form, FormControl} from 'react-bootstrap';
 
 class Category extends Component {
     constructor(props) {
@@ -19,6 +19,10 @@ class Category extends Component {
             CategoryType : '',
             SubType : '',
             description : '',
+            stages:[
+                {stage:""}
+            ],
+            ItemStages:[],
             message:''
 
 
@@ -34,6 +38,7 @@ class Category extends Component {
                     CategoryID: response.data.CategoryID,
                     CategoryType: response.data.CategoryType,
                     SubType: response.data.SubType,
+                    stages:response.data.stages,
                     description: response.data.description,
                 });
             })
@@ -68,12 +73,56 @@ class Category extends Component {
         });
     }
 
+
+    handleAddStage = () => {
+        const item = {
+            stage: "",
+        };
+        this.setState({
+            stages: [...this.state.stages, item]
+        });
+    };
+
+
+    handleChangeStageName = idx => e => {
+        const stages = [...this.state.stages];
+        stages[idx] = {
+            stage: e.target.value,
+        };
+        this.setState({
+            stages
+        });
+    };
+
+
+    handleRemoveStage = () => {
+
+        this.setState({
+            stages: this.state.stages.slice(0, -1)
+        
+        });
+    };
+
+
     onSubmit(e) {
         e.preventDefault();
+
+
+        let editstages;
+        for(let i = 0; i < this.state.stages.length ; i++){
+            editstages = {
+                stageNo: i + 1,
+                stage: this.state.stages[i].stage,
+            };
+            this.state.ItemStages.push(editstages);
+        }
+
+
         const obj = {
             CategoryID: this.state.CategoryID,
             CategoryType : this.state.CategoryType,
             SubType : this.state.SubType,
+            stages: this.state.ItemStages,
             description :this.state.description 
         }
 
@@ -92,6 +141,8 @@ class Category extends Component {
             CategoryID: '',
             CategoryType : '',
             SubType : '',
+            ItemStages:[],
+            stages:[{stage:''}],
             description : ''
 
         });
@@ -101,6 +152,10 @@ class Category extends Component {
 
     render() { 
         return ( 
+            
+          
+            <div className="row">
+            <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"60px"}}>
             <Form onSubmit={this.onSubmit}>
 
                     <Form.Row>
@@ -160,6 +215,56 @@ class Category extends Component {
                         Submit
                     </Button>
             </Form>
+            </div>
+            <div style={{ paddingTop:"5px"}}> 
+            <Form.Group>
+                                <Form.Label>Sub Item</Form.Label>
+
+                                {}
+                                <table  className="stageTable" id="tab_logic">
+                                    <thead>
+
+                                            <tr>
+                                                <td>No</td>
+                                                <td align="center">Item</td>
+                                            </tr>
+
+                                    </thead>
+                                    <tbody>
+                                    {this.state.stages.map((item, idx) => (
+                                        <tr id="addr0" key={idx}>
+                                            <td>
+                                                <h6>{idx+1}</h6>
+                                            </td>
+                                            <td>
+                                                <FormControl
+                                                    type="text"
+                                                    aria-label="stage"
+                                                    value={this.state.stages[idx].stage}
+                                                    onChange={this.handleChangeStageName(idx)}
+                                                   
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                                <table className="buttons">
+                                    <tbody>
+                                    <tr>
+                                        <td align="right">
+                                           <br/> <Button onClick={this.handleAddStage}>Add Item</Button>
+                                        </td>
+                                        <td align="left">
+                                        <br/><Button onClick={this.handleRemoveStage}>Delete Item</Button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </Form.Group>
+            </div>
+
+            </div>
          );
     }
 }

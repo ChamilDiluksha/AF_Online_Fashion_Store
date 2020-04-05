@@ -8,6 +8,7 @@ exports.addCategory = (req, res, next) => {
         CategoryID,
         CategoryType,
         SubType,
+        stages,
         description
     } = body;
 
@@ -15,11 +16,11 @@ exports.addCategory = (req, res, next) => {
     CategoryItem.find({
         CategoryID
     }).exec()
-    .then(category => {
+      .then(category => {
 
-        if(category.length > 1){
-            return this.status(409).json({
-                message : 'Error : category already exist'
+        if(category.length >= 1){
+            return res.json({
+                message : 'Category already exist'
             });
         }else{
 
@@ -27,6 +28,7 @@ exports.addCategory = (req, res, next) => {
             newCategory.CategoryID = CategoryID;
             newCategory.CategoryType = CategoryType;
             newCategory.SubType = SubType;
+            newCategory.stages = stages;
             newCategory.description = description;
 
             newCategory
@@ -70,6 +72,7 @@ exports.editCategory = (req, res) => {
         CategoryID,
         CategoryType,
         SubType,
+        stages,
         description
     } = body;
 
@@ -80,6 +83,7 @@ exports.editCategory = (req, res) => {
             category.CategoryID = CategoryID;
             category.CategoryType = CategoryType;
             category.SubType = SubType;
+            category.stages = stages;
             category.description = description;
 
             category.save().then(category => {

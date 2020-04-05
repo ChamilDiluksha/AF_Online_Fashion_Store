@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {ListGroup,Card,Button,   Nav, Navbar,NavDropdown} from 'react-bootstrap'
-import user from './images/user.png';
+import './cssstyle.css';
+import {Nav, Navbar, NavDropdown} from 'react-bootstrap'
 import Cookies from 'universal-cookie';
 import axios from "axios";
 
+class StoreNavigation extends Component {
 
-class AdminNavBar extends Component {
     constructor(props) {
         const cookies = new Cookies();
         let user = cookies.get('user');
@@ -17,7 +17,6 @@ class AdminNavBar extends Component {
                 
             }
     }
-
 
     onClickSignOut(e) {
         e.preventDefault();
@@ -47,23 +46,25 @@ class AdminNavBar extends Component {
                 }
             );
     }
-
     render() { 
         return (  
-            <div >
+           <div>
+               <h3 className = "header"> ~~ STORE MANAGER ~~</h3>
+               <hr style = {{ color: '#333333', backgroundColor: '#333333', height: 2}}/>
+
+               <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
                 
-            <Navbar collapseOnSelect expand="lg" >
-                <Navbar.Brand href="/">Admin</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/log/Admin/AddManager">Add Store Manager</Nav.Link>
-                    <Nav.Link href="/log/Admin/AddCategory">Add category</Nav.Link>
-                    <Nav.Link href="/log/Admin/ViewManager">View Store Manager</Nav.Link>
-                    <Nav.Link href="/log/Admin/vieCategory">View category</Nav.Link>
-                
+                    <Nav.Link href="">HOME</Nav.Link>
+                    <Nav.Link href="">ADD ITEMS</Nav.Link>
+                    <Nav.Link href="/ViewItems">VIEW ALL</Nav.Link>
+                    <Nav.Link href="">UPDATE ITEMS</Nav.Link>
+                    <Nav.Link href="">DELETED ITEMS</Nav.Link>
                 </Nav>
-                <Nav>
+               
+                   <Nav>
                     <NavDropdown title={this.state.user} id="collasible-nav-dropdown">
                       
                         <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
@@ -78,33 +79,18 @@ class AdminNavBar extends Component {
                         </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
-                <Navbar.Brand href="/"  className="user">
-                            <img style={{height:"30px", width:"30px", }} src={user} alt="user" align="center"/>
-                        </Navbar.Brand>
                 </Navbar.Collapse>
             </Navbar>
-            <hr className="navDivider"/>
-
-            <div>
-                <header id="header">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-10">
-                                <h1><span className="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard <small>Manage Your Site</small></h1>
-                            </div>
-                    
-                        </div>
-                    </div>
-                </header>
-
-            </div>
+            <hr style = {{ color: '#333333', backgroundColor: '#333333', height: 2}}/>
             
-        </div>
-
-        
-        
+            <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
+            
+            </div>
+           </div>      
         );
+        
     }
 }
  
-export default AdminNavBar;
+
+ export default StoreNavigation

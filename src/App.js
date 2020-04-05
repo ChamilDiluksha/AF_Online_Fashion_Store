@@ -14,7 +14,7 @@ import Footer from '../src/components/Home/Footer';
 import Wishlist from '../src/components/Wishlist/Wishlist';
 import Items from '../src/components/Home/Items';
 import Description from '../src/components/Home/Description';
-
+import 'semantic-ui-css/semantic.min.css';
 
 import AddManager from './components/AdminDashboard/NavComponenets/CreateStoreManager';
 import AddCategory from './components/AdminDashboard/NavComponenets/CreateCategory';

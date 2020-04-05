@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Image } from 'semantic-ui-react'
 import axios from 'axios';
 
 
@@ -15,14 +16,19 @@ class ManagerDetails extends Component {
         axios.delete('http://localhost:5000/storemanager/delete/'+this.props.obj._id)
             .then(console.log('Deleted'))
             .catch(err => console.log(err));
-        window.location.href = "/Admin/ViewManager";
+        window.location.href = "/log/Admin/ViewManager";
     }
 
     render() { 
         return ( 
             <tr>
             <td>
-                {this.props.obj.fname}
+            {(this.props.obj.Gender === 'Female') ? 
+            <Image  src='https://react.semantic-ui.com/images/avatar/small/molly.png' avatar/> : 
+            <Image  src='https://react.semantic-ui.com/images/avatar/small/matthew.png' avatar/>
+            }
+            
+            <span>{this.props.obj.fname}</span>
             </td>
             <td>
                 {this.props.obj.email}

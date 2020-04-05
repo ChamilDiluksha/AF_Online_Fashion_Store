@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Button, Col, Form} from 'react-bootstrap';
+import {  Message } from 'semantic-ui-react'
+import {Button, Col, Form, FormControl} from 'react-bootstrap';
 
 class Category extends Component {
     constructor(props) {
@@ -18,12 +19,18 @@ class Category extends Component {
             CategoryID: '',
             CategoryType : '',
             SubType : '',
+            ItemStages:[],
+            allStages:[
+                {stage:''}
+            ],
             description : '',
             message:''
 
 
          }
     }
+
+
     onChangeCategoryID(e) {
         this.setState({
             CategoryID: e.target.value
@@ -48,12 +55,55 @@ class Category extends Component {
         });
     }
 
+
+    handleAddStage = () => {
+        const item = {
+            stage: "",
+        };
+        this.setState({
+            allStages: [...this.state.allStages, item]
+        });
+    };
+
+
+    handleChangeStageName = idx => e => {
+        const allStages = [...this.state.allStages];
+        allStages[idx] = {
+            stage: e.target.value,
+        };
+        this.setState({
+            allStages
+        });
+    };
+
+
+    handleRemoveStage = () => {
+
+        this.setState({
+            allStages: this.state.allStages.slice(0, -1)
+        
+        });
+    };
+
     onSubmit(e) {
         e.preventDefault();
+
+        let stages;
+        for(let i = 0; i < this.state.allStages.length ; i++){
+            stages = {
+                stageNo: i + 1,
+                stage: this.state.allStages[i].stage,
+            };
+            this.state.ItemStages.push(stages);
+        }
+
+
+
         const obj = {
             CategoryID: this.state.CategoryID,
             CategoryType : this.state.CategoryType,
             SubType : this.state.SubType,
+            stages: this.state.ItemStages,
             description :this.state.description 
         }
 
@@ -73,6 +123,8 @@ class Category extends Component {
             CategoryID: '',
             CategoryType : '',
             SubType : '',
+            ItemStages:[],
+            allStages:[{stage:''}],
             description : ''
 
         });
@@ -82,6 +134,9 @@ class Category extends Component {
 
     render() { 
         return ( 
+            <div style={{paddingBottom :"30px"}}>
+            <div className="row">
+            <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"60px"}}>
             <Form onSubmit={this.onSubmit}>
 
                     <Form.Row>
@@ -126,6 +181,7 @@ class Category extends Component {
                         </Form.Control>
                     </Form.Group>
 
+
                     <Form.Group>
                     <Form.Control
                                 required
@@ -141,6 +197,83 @@ class Category extends Component {
                         Submit
                     </Button>
             </Form>
+
+            {   (this.state.message) ? 
+
+                (
+                    (this.state.message === 'Category successfully created') ? 
+                    
+                    (   
+                        <Message color='green'>
+                            <center>{this.state.message}</center>
+                        </Message>
+                    )
+
+                    :
+
+                    (   <Message color='red'>
+                            <center>{this.state.message}</center>
+                        </Message>
+                    )
+
+                )
+                :
+                null
+
+            }
+            </div>
+            <div style={{ paddingTop:"5px"}}> 
+
+                
+            <Form.Group>
+                                <Form.Label>Sub Item</Form.Label>
+
+                                {}
+                                <table  className="stageTable" id="tab_logic">
+                                    <thead>
+
+                                            <tr>
+                                                <td>No</td>
+                                                <td align="center">Item</td>
+                                            </tr>
+
+                                    </thead>
+                                    <tbody>
+                                    {this.state.allStages.map((item, idx) => (
+                                        <tr id="addr0" key={idx}>
+                                            <td>
+                                                <h6>{idx+1}</h6>
+                                            </td>
+                                            <td>
+                                                <FormControl
+                                                    type="text"
+                                                    aria-label="stage"
+                                                    value={this.state.allStages[idx].stage}
+                                                    onChange={this.handleChangeStageName(idx)}
+                                                   
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                                <table className="buttons">
+                                    <tbody>
+                                    <tr>
+                                        <td align="right">
+                                            <Button onClick={this.handleAddStage}>Add Item</Button>
+                                        </td>
+                                        <td align="left">
+                                            <Button onClick={this.handleRemoveStage}>Delete Item</Button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </Form.Group>
+
+            </div>
+            </div>
+            </div>
          );
     }
 }
