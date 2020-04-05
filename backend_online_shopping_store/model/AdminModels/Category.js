@@ -18,11 +18,21 @@ let Category = new Schema({
         required: true
     },
 
+    stages: {
+        type: [{
+            stageNo: {
+                type: Number
+            },
+            stage: {
+                type: String
+            }
+        }]
+    },
+
     description: {
         type: String,
         required: true
     }
-
 },
 {
     collection: 'Category'
