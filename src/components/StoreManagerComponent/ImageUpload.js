@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import Dropzone from 'react-dropzone'
-import { Icon } from 'antd'
 import Axios from 'axios';
 
 
@@ -42,7 +41,7 @@ function ImageUpload(props) {
                        {...getRootProps()}
                    >
                     <input {...getInputProps()} />
-                    <Icon type="plus" style={{ fontSize: '3rem'}} />
+                    
                 </div>
                 )}   
             </Dropzone> 
