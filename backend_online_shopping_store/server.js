@@ -35,7 +35,11 @@ app.use('/category', adminRouteCategory);
 const userRoute = require('./routes/UserRoutes/userRouter');
 app.use('/user', userRoute);
 
+const productRoute = require('./routes/ProductRoute/productRouters');
+app.use('/product', productRoute);
 
+//use this to show the image you have in node js server to client (react js)
+app.use('/uploads', express.static('uploads'));
 
 // server listening port
 app.listen(port, () => {
