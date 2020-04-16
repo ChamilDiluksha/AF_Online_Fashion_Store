@@ -8,7 +8,7 @@ class UploadDressItems extends Component {
         return ( 
             <div>
                 <StoreNavigation />
-                <AddDressForm/>
+                <AddDressForm />
             </div>
          );
     }

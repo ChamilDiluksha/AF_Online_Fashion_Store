@@ -1,154 +1,262 @@
-import React, {useState } from 'react';
-import { Form, Checkbox, Button} from 'antd';
-import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
-import ImageUpload from './ImageUpload';
+import React, { Component } from 'react'
+import {Button, Col, Form} from 'react-bootstrap';
+import axios from 'axios';
+import Cookies from "universal-cookie";
+import ImageUpload from '../StoreManagerComponent/ImageUpload';
 
-function AddDressForm() {
 
-    const [Images, setImages] = useState([])
-    const updateImages = (newImages) => {
-        setImages(newImages)
+export class UploadProductPage extends Component {
+
+    constructor(props) {
+        const cookies = new Cookies();
+        let user = cookies.get('user');
+        super(props);
+        this.state = {
+            user: user,
+            DressCode: '',
+            description: '',
+            Category:'None',
+            DressType:'',
+            Subtype:'',
+            images: [],
+            DressPrice: 0,
+            Discount : 0,
+            ArrayCategory:[],
+            stages:[
+                {stage:""}
+            ],
+           
+        }
     }
 
-    const [DressCode, setDressCode] = useState("");
-    const [ContinentValue, setContinentValue] = useState(1);
-    const[DressPrice, setDressPrice] = useState("");
-    const[DressDiscount, setDressDiscount] = useState("");
 
-    const [isExtraSmallChecked, setExtraSmallChecked] = React.useState(true);
-    const [isSmallChecked, setSmallChecked] = React.useState(true);
-    const [isMediumChecked, setMediumChecked] = React.useState(true);
-    const [isLargeChecked, setLargeChecked] = React.useState(true);
-    const [isExtraLargeChecked, setExtraLargeChecked] = React.useState(true);
+    componentDidMount(){
+        axios.get('http://localhost:5000/category/')
+            .then(response => {
+                this.setState({ ArrayCategory: response.data });
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
 
-    const Continents = [
-        { key: 1, value: "   T-Shirt" },
-        { key: 2, value: "   Blouse" },
-        { key: 3, value: "   Skirt" },
-        { key: 4, value: "   Denim" },
-        { key: 5, value: "   Trouser" },
-        { key: 6, value: "   Frock" },
-        { key: 7, value: "   Shirt" }
-    ]
-
-    const onCodeChange = (event) =>  {
-        setDressCode(event.currentTarget.value)
+           
     }
 
-    const onContentSelectChange = (event) => {
-        setContinentValue(event.currentTarget.value)
+    onChangeDressCode = (e) => {
+        this.setState({ DressCode: e.target.value })
     }
 
-    const onPriceChange = (event) => {
-        setDressPrice(event.currentTarget.value)
+    OnchaneCategory = (e) => {
+        this.setState({ 
+            Category: e.target.value
+        })
+
+        this.state.ArrayCategory.forEach(element => {
+            if(this.state.Category === element.CategoryType){
+
+                axios.get('http://localhost:5000/category/' + element._id)
+                .then(response => {
+                    this.setState({ stages: response.data.stages });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+            }
+        });
+
+    
     }
 
-    const onDiscChange = (event) => {
-        setDressDiscount(event.currentTarget.value)
+    handleChangeDressType = (e) => {
+        this.setState({ DressType: e.target.value })
     }
 
-    return (
-        <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
+    onChangeDressDesciption = (e) => {
+        // console.log(event.currentTarget.value)
+        this.setState({ description: e.target.value })
+    }
+
+ 
+
+    onChangeDressPrice = (e) => {
+        this.setState({ DressPrice: e.target.value })
+    }
+
+    onChangeDiscount = (e) => {
+        this.setState({ Discount: e.target.value })
+    }
+
+    onChangeSubtype = (e) => {
+        this.setState({ Subtype: e.target.value })
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+
+        const obj = {
+            user: this.state.user.userId,
+            DressCode: this.state.DressCode,
+            description: this.state.description,
+            Category: this.state.Category,
+            DressType: this.state.DressType,
+            images: this.state.images,
+            Subtype:this.state.Subtype,
+            DressPrice: this.state.DressPrice,
+            Discount:this.state.Discount,
+        }
+      
+        axios.post('http://localhost:5000/product/create', obj)
+            .then(response => {
+                if (response.data.success) {
+                    alert('Product Uploaded Successfully')
+                   
+                } else {
+                    alert('Failed to upload video')
+                }
+            })
+
+            this.setState({
+                DressCode: '',
+                description : '',
+                Category : '',
+                DressType:'',
+                images:[],
+                Subtype:'',
+                description : '',
+                DressPrice:0,
+                Discount:0
+    
+            });
+           
+    }
+
+    updateFiles = (newImages) => {
+        console.log(newImages)
+        this.setState({ images: newImages })
+    }
+
+
+
+    render() {
+        return (
+            <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
             <h3 class = "x"> !!! Upload Item Here !!! </h3>
-
-            <Form onSubmit>
+            </div>
             <br /> <br />
-             <label> Enter Dress Image </label> <br />
-                 <div> <ImageUpload refreshFunction = {updateImages} /> </div>
+                <label> Enter Dress Image </label> <br />
+                <div> <ImageUpload refreshFunction = {this.updateFiles} /> </div>
 
-                <br /> <br />
-        
-                <label> Dress Code </label> <br/>
-                <input onChange = {onCodeChange} values = {DressCode} style = {{width: '700px', height: '45px', backgroundColor: '#f4f4f4', borderRadius: '.5rem'}}/> 
-                <br/> <br/>
-
-                <label> Category </label> 
-                  <ToggleButtonGroup type = "radio" name = "category" style = {{marginLeft: '3rem', color: 'black' }} defaultValue = {1} >
-                      <ToggleButton className = "btn" value = {1}> Men </ToggleButton>
-                      <ToggleButton value = {2}> Women </ToggleButton>
-                      <ToggleButton value = {3}> Kids </ToggleButton>
-                </ToggleButtonGroup>
-                <br/> <br/>
-
-                <label> Dress Type </label> <br />
-                <select 
-                    style = {{width: '700px', height: '45px', backgroundColor: '#f4f4f4', borderBottomColor: '#f4f4f4', borderRightColor: '#f4f4f4', borderRadius: '.5rem'}}
-                    onChange={onContentSelectChange} >
-                    {Continents.map(item => (
-                        <option key={item.key} value={item.key}>{item.value} 
-                        </option>
-                    ))}
-                </select>
-                <br /> <br />
-
-                <label> Price (LKR) </label> <br />
-                <input onChange = {onPriceChange} type = {Number} values = {DressPrice} style = {{width: '700px', height: '45px', backgroundColor: '#f4f4f4', borderRadius: '.5rem'}}/> 
-                <br/> <br/>
-
-                <label> Discouont </label> <br />
-                <input onChange = {onDiscChange} type = {Number} values = {DressDiscount} style = {{width: '700px', height: '45px', backgroundColor: '#f4f4f4', borderRadius: '.5rem'}}/> 
-                <br/> <br/>
-
-                <label> Sizes </label> <br />
-                <Checkbox
-                    id = "extrasmall"
-                    isChecked = {isExtraSmallChecked}
-                    name = "example-full"
-                    labelPadding = "4px 0"
-                    onChange = {setExtraSmallChecked}
-                    style = {{marginRight: '5em'}}
-                    >
-                Extra Small
-                </Checkbox>
+                 <Form onSubmit = {this.onSubmit}>
                 
-                <Checkbox
-                    id = "small"
-                    isChecked = {isSmallChecked}
-                    name = "example-full"
-                    labelPadding = "4px 0"
-                    onChange = {setSmallChecked}
-                    style = {{marginRight: '5em'}}
-                >
-                Small
-                </Checkbox>
-                <Checkbox
-                    id = "Medium"
-                    isChecked = {isMediumChecked}
-                    name = "example-full"
-                    labelPadding = "4px 0"
-                    onChange = {setMediumChecked}
-                    style = {{marginRight: '5em'}}
-                >
-                Medium
-                </Checkbox>
-                <Checkbox
-                    id = "large"
-                    isChecked = {isLargeChecked}
-                    name = "example-full"
-                    labelPadding = "4px 0"
-                    onChange = {setLargeChecked}
-                    style = {{marginRight: '5em'}}
-                >
-                Large
-                </Checkbox>
-                <Checkbox
-                    id = "extralarge"
-                    isChecked = {isExtraLargeChecked}
-                    name = "example-full"
-                    labelPadding = "4px 0"
-                    onChange = {setExtraLargeChecked}
-                >
-                Extra Large
-                </Checkbox>
-                 <br /> <br />
-
-                 <Button style = {{marginLeft: '13em'}}> SUBMIT</Button>
-                 <Button style = {{marginLeft: '5em'}}> CLEAR</Button>
-
-            </Form>
             
+
+                  <Form.Group as ={Col} >
+                  <Form.Label>Dress Code</Form.Label>
+                  <Form.Control required 
+                                type="text" 
+                                id = "dcode" 
+                                name = "dresscode" 
+                                value = {this.state.DressCode} 
+                                onChange = {this.onChangeDressCode}  />
+                  </Form.Group>
+
+                  <Form.Group as={Col}>
+                  <Form.Label>Select Dress Category</Form.Label>
+                  <Form.Control as="select" 
+                    id="typeCategory"
+                    name="Ctype"
+                    value={this.state.Category}
+                    onChange={this.OnchaneCategory} >
+                    <option>None</option>
+                    {
+                        this.state.ArrayCategory.map(function(category) {
+                        return <option 
+                        key={category.CategoryType}
+                        value={category.CategoryType}>{category.CategoryType}
+                        </option>;
+                        })
+                    }
+                  </Form.Control>
+                  </Form.Group>
+
+                  
+                  <Form.Group as={Col}>
+                  <Form.Label>Select Dress Type</Form.Label>
+                  <Form.Control as="select" 
+                        id="Dtype"
+                        name="Dtype"
+                        value={this.state.DressType}
+                        onChange={this.handleChangeDressType} >
+                     {
+                        this.state.ArrayCategory.map(function(category) {
+                        return <option 
+                        key={category.SubType}
+                        value={category.SubType}>{category.SubType}
+                        </option>;
+                        })
+                    }
+                  </Form.Control>
+                  </Form.Group>
+
+                  <Form.Group as={Col}>
+                  <Form.Label>Select Sub Dress Type</Form.Label>
+                  <Form.Control as="select" 
+                        id="Dtype"
+                        name="Dtype"
+                        value={this.state.Subtype}
+                        onChange={this.onChangeSubtype} >
+                       
+                    {
+                        this.state.stages.map((item, idx) => {
+                            return <option 
+                            key={idx}
+                            value={this.state.stages[idx].stage}>{this.state.stages[idx].stage}
+                            </option>;
+                        })
+                    }
+                  </Form.Control>
+                  </Form.Group>
+
+
+                  <Form.Group as ={Col} >
+                  <Form.Label>Dress Description</Form.Label>
+                  <Form.Control required 
+                                type="text" 
+                                id = "description" 
+                                name = "dressdescription" 
+                                value = {this.state.description} 
+                                onChange = {this.onChangeDressDesciption}  />
+                  </Form.Group>
+
+                  <Form.Group as ={Col} >
+                  <Form.Label>Dress Price</Form.Label>
+                  <Form.Control required 
+                                type="number" 
+                                id = "dprice" 
+                                name = "dressprice" 
+                                value = {this.state.DressPrice} 
+                                onChange = {this.onChangeDressPrice}  />
+                  </Form.Group>
+
+                  <Form.Group as ={Col} >
+                  <Form.Label>Dress Discount</Form.Label>
+                  <Form.Control required 
+                                type="number" 
+                                id = "discount" 
+                                name = "dressdiscount" 
+                                value = {this.state.Discount} 
+                                onChange = {this.onChangeDiscount}  />
+                  </Form.Group>
+
+
+              
+              <Button variant="outline-primary" type="submit">SUBMIT</Button>
+
+                </Form>
         </div>
-    )
+        )
+    }
 }
 
-export default AddDressForm
+export default UploadProductPage
