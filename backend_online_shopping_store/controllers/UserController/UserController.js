@@ -151,3 +151,15 @@ exports.user_signout =(req,res,next) => {
         }
     });
 }
+
+
+exports.GetAlluser_details = (req, res) => {
+    User.find((err, user) => {
+        if(err){
+            console.log(err);
+        }
+        else {
+            res.json(user);
+        }
+    });
+}
