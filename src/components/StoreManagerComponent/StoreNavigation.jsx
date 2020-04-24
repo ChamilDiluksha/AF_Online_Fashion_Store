@@ -49,7 +49,7 @@ class StoreNavigation extends Component {
     render() { 
         return (  
            <div>
-               <h3 style = {{marginLeft: '650px'}}> ~~ STORE MANAGER ~~</h3>
+               <h3 className = "header"> ~~ STORE MANAGER ~~</h3>
                <hr style = {{ color: '#333333', backgroundColor: '#333333', height: 2}}/>
 
                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
@@ -57,11 +57,9 @@ class StoreNavigation extends Component {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="">HOME</Nav.Link>
-                    <Nav.Link href="">ADD ITEMS</Nav.Link>
-                    <Nav.Link href="/ViewItems">VIEW ALL</Nav.Link>
-                    <Nav.Link href="">UPDATE ITEMS</Nav.Link>
-                    <Nav.Link href="">DELETED ITEMS</Nav.Link>
+                <Nav.Link href="">HOME</Nav.Link>
+                    <Nav.Link href="/log">ADD ITEMS</Nav.Link>
+                    <Nav.Link href="/log/StoreManager/ViewDressDetails">VIEW ALL</Nav.Link>
                 </Nav>
                
                    <Nav>
@@ -70,8 +68,11 @@ class StoreNavigation extends Component {
                         <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item onClick={this.onClickSignOut}>
+                            
                                 <div>
-                                    <span>Logout</span>
+                                    
+                                        <span>Logout</span>
+                                    
                                 </div>
                         </NavDropdown.Item>
                     </NavDropdown>
