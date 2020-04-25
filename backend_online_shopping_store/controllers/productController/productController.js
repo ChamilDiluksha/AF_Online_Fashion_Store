@@ -92,3 +92,94 @@ exports.addProduct = (req, res, next) => {
         }
     });
 }
+
+
+exports.getAllProducts = (req, res) => {
+    ProductItem.find((err, product) => {
+        if(err){
+            console.log(err);
+        }
+        else {
+            res.json(product);
+        }
+    });
+}
+
+
+exports.getProduct = (req, res) => {
+    let productid = req.params.id;
+    ProductItem.findById(productid)
+    .then(product => res.json(product))
+    .catch(err => res.status(400).json('Error: ' + err));
+}
+
+
+exports.editProduct = (req, res) => {
+
+    const {body} = req;
+
+    const {
+        user,
+        DressCode,
+        description,
+        Category,
+        DressType,
+        Subtype,
+        DressPrice,
+        Discount,
+        images
+
+    } = body;
+
+    ProductItem.findById(req.params.id, (err, product) => {
+        if (!product)
+            res.status(404).send("product data is not found");
+        else {
+
+           
+            product.UserId = user;
+            product.DressCode = DressCode;
+            product.Category = Category;
+            product.DressType = DressType;
+            product.DressPrice = DressPrice;
+            product.Discount = Discount;
+            product.images = images;
+            product.description = description;
+            product.Subtype = Subtype;
+
+            product
+                .save()
+                .then(result => {
+                    console.log(result);
+                    res.status(201).json({
+                        success: true,
+                        message: 'Product successfully Updated'
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.json({
+                        success: false,
+                        
+                    })
+                });
+
+        }
+    });
+}
+
+exports.deleteProduct = (req,res) => {
+    ProductItem.remove({_id: req.params.id})
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: "product deleted"
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error:err
+            });
+        });
+}
