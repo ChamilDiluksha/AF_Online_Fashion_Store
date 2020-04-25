@@ -4,9 +4,9 @@ const ProductController = require('../../controllers/productController/productCo
 
 ProductRouter.post("/uploadImage", ProductController.UploadImage);
 ProductRouter.post("/create", ProductController.addProduct);
-// ProductRouter.get("/", ProductController.getAllCategory);
-// ProductRouter.get("/:id", ProductController.getCategory);
-// ProductRouter.put("/update/:id", ProductController.editCategory);
-// ProductRouter.delete("/delete/:id", ProductController.deleteCategory);
+ProductRouter.get("/", ProductController.getAllProducts);
+ProductRouter.get("/:id", ProductController.getProduct);
+ProductRouter.put("/update/:id", ProductController.editProduct);
+ProductRouter.delete("/delete/:id", ProductController.deleteProduct);
 
 module.exports = ProductRouter;

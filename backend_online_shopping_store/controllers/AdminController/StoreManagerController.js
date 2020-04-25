@@ -96,6 +96,9 @@ exports.addManager = (req, res, next) => {
                                         })
                                         .catch(err => {
                                             console.log(err);
+                                            return res.json({
+                                                message: 'Please enter Email with only simple letters'
+                                            });
                                         });
 
                                         user.save()

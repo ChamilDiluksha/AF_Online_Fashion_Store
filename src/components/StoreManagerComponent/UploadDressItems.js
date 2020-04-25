@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StoreNavigation from  './StoreNavigation';
-import AddDressForm from  './AddDressForm';
+import ProductController from './ProductController';
 
 class UploadDressItems extends Component {
     
@@ -8,7 +8,7 @@ class UploadDressItems extends Component {
         return ( 
             <div>
                 <StoreNavigation />
-                <AddDressForm />
+                <ProductController />
             </div>
          );
     }

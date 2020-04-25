@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 import ImageUpload from '../StoreManagerComponent/ImageUpload';
 
 
-export class UploadProductPage extends Component {
+export class EditProductPage extends Component {
 
     constructor(props) {
         const cookies = new Cookies();
@@ -15,7 +15,7 @@ export class UploadProductPage extends Component {
             user: user,
             DressCode: '',
             description: '',
-            Category:'',
+            Category:'None',
             DressType:'',
             Subtype:'',
             images: [],
@@ -38,8 +38,25 @@ export class UploadProductPage extends Component {
             .catch(function (error) {
                 console.log(error);
             })
-
-           
+ 
+    
+            axios.get('http://localhost:5000/product/'+this.props.match.params.id)
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    DressCode: response.data.DressCode,
+                    Category :  response.data.Category,
+                    DressType: response.data.DressType,
+                    images: response.data.images,
+                    Subtype: response.data.Subtype,
+                    description :  response.data.description,
+                    DressPrice: response.data.DressPrice,
+                    Discount: response.data.Discount
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
     onChangeDressCode = (e) => {
@@ -105,13 +122,13 @@ export class UploadProductPage extends Component {
             Discount:this.state.Discount,
         }
       
-        axios.post('http://localhost:5000/product/create', obj)
+        axios.put('http://localhost:5000/product/update/'+this.props.match.params.id, obj)
             .then(response => {
                 if (response.data.success) {
-                    alert('Product Uploaded Successfully')
+                    alert('Product Updated Successfully')
                    
                 } else {
-                    alert('Failed to upload video')
+                    alert('Failed to Update Product')
                 }
             })
 
@@ -127,6 +144,7 @@ export class UploadProductPage extends Component {
                 Discount:0
     
             });
+            window.location.href = "/log/StoreManager/ViewDressDetails";
            
     }
 
@@ -168,7 +186,7 @@ export class UploadProductPage extends Component {
                     name="Ctype"
                     value={this.state.Category}
                     onChange={this.OnchaneCategory} >
-                    
+                    <option>None</option>
                     {
                         this.state.ArrayCategory.map(function(category) {
                         return <option 
@@ -259,4 +277,4 @@ export class UploadProductPage extends Component {
     }
 }
 
-export default UploadProductPage
+export default EditProductPage

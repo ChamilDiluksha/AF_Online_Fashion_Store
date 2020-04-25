@@ -7,12 +7,15 @@ import viewManager from './ViewComponent/viewManager';
 import viewCategory from './ViewComponent/viewCategory';
 import editManager from './EditComponent/editStoreManager';
 import editCategory from './EditComponent/editCategory';
+import alluser from './AllUsers/allusers';
  
 class AdminDashboardController  extends Component {
     render() { 
         return ( 
 
             <Switch>
+
+                <Route exact path="/log" component={ alluser } />
                
                 <Route exact path="/log/Admin/AddManager" component={ AddManager } />
                 <Route path="/log/Admin/AddCategory" component={ AddCategory } />
