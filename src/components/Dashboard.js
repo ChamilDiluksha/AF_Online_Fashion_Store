@@ -19,11 +19,16 @@ export default class Dashboard extends Component{
         return (
             <div >
                 {
-                    (this.state.user.type === "User") ? (<Container/>) :  
+                     (this.state.user) ?
+                     (
+                        (this.state.user.type === "User") ? (<Container/>) :  
 
-                    (this.state.user.type === "Admin") ? (<Admin/>)  : 
-                    
-                    (this.state.user.type === "StoreManager") ? (<UploadDressItems/>)  :null
+                        (this.state.user.type === "Admin") ? (<Admin/>)  : 
+                        
+                        (this.state.user.type === "StoreManager") ? (<UploadDressItems/>)  :null
+                     )
+                     :
+                     (window.location.pathname = '/')
                 }
                 
             </div>
