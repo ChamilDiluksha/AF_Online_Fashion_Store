@@ -43,8 +43,8 @@ app.use("/uploads", express.static("uploads"));
 const cartRoute = require("./routes/CartRoute/CartRoute");
 app.use("/cart", cartRoute);
 
-const orderRoute = require("./routes/CartRoute/OrderRoute");
-app.use("/order", orderRoute);
+// const orderRoute = require("./routes/CartRoute/OrderRoute");
+// app.use("/order", orderRoute);
 
 // server listening port
 app.listen(port, () => {

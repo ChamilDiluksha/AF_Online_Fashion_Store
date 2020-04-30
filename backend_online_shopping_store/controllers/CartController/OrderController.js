@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const Cart = require("../../model/CartModels/Cart");
+const multer = require("multer");
 const Product = require("../../model/product/");
 const nodeMailer = require("nodemailer");
 const texts = require("../../constants/texts");
@@ -11,7 +12,8 @@ exports.addOrder = (req, res, next) => {
 
   const { UserID, CartItems } = body;
 
-  Cart.find({
+  Car;
+  t.find({
     UserID,
   })
     .exec()

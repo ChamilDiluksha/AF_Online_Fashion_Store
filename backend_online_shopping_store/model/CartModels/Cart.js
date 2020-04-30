@@ -5,18 +5,20 @@ let Cart = new Schema(
   {
     UserID: {
       type: String,
-      required: true,
+      required: true
     },
-    CartItems: [
-      {
-        DressCode: String,
-        DressType: String,
-        DressPrice: Number,
-        Quantity: Number,
-        Discount: Number,
-        Image: { data: Buffer, contentType: String },
-      },
-    ],
+    CartItems: {
+      type: [
+        {
+          DressCode: String,
+          DressType: String,
+          DressPrice: Number,
+          Quantity: Number,
+          Discount: Number,
+          Image: { data: Buffer, contentType: String }
+        }
+      ]
+    },
   },
   {
     collection: "Cart",

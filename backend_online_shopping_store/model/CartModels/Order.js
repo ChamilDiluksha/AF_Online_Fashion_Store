@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 let Order = new Schema(
   {
-    _id: {
+    OrderId: {
       type: String,
       required: true,
     },
@@ -33,6 +33,7 @@ let Order = new Schema(
 
     PlacedDate: {
       type: Date,
+      required: true,
     },
   },
 
