@@ -58,7 +58,7 @@ validateToken(){
                         const cookies = new Cookies();
                         cookies.remove('token',this.state.token);
                         cookies.remove('user',this.state.user);
-                       
+
                        // window.location.href = "/";
                     }
                 },
@@ -68,14 +68,14 @@ validateToken(){
 
 }
 
-  
+
 
   render() {
     return (
       <React.Fragment>
-  
-   
-     
+
+
+
         <div className="home">
 
 
@@ -84,22 +84,22 @@ validateToken(){
                     ((window.location.pathname === '/') ? (window.location.pathname = '/log') : null) : null//true
                     //((window.location.pathname !== '/') ? (window.location.pathname = '/') : null) //false
             }
-        
-          
+
+
           <Router>
             <Switch>
-              
+
               <Route exact path="/" exact component={ Container }/>
               <Route  path="/log"  component={ Dashboard }/>
-              
-              <Route path="/description" component={ Description }/>
+
+              <Route path="/description/:id" component={ Description }/>
               <Route path="/Signup" component={ Signup }/>
               <Route path="/sign-in" component={ Login }/>
-              <Route path="/items" component={ Items }/>
+              <Route path="/items/:id" component={ Items }/>
               <Route path="/wishlist" component={ Wishlist }/>
 
-              
-            
+
+
             </Switch>
 
             </Router>
@@ -108,9 +108,9 @@ validateToken(){
                   <Footer/>
                 ) : null
             }
-        
+
         </div>
-      
+
         </React.Fragment>
     );
   }
