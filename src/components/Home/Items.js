@@ -4,7 +4,7 @@ import axios from 'axios';
 // Import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './HomeStyle.css';
-
+import NavBar from './NavBar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
@@ -76,12 +76,15 @@ export default class Items extends Component {
 }
   render() {
     return (
-      <div className="main-container">
-        { this.getCategory() }
-        <div className="container mt-4 category-container">
-          <div className="row">
-              { this.displayItems() }
-            </div>
+      <div>
+        <NavBar/>
+        <div className="main-container">
+          { this.getCategory() }
+          <div className="container mt-4 category-container">
+            <div className="row">
+                { this.displayItems() }
+              </div>
+          </div>
         </div>
       </div>
     )
