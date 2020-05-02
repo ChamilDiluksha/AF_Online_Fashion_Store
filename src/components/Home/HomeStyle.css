@@ -54,3 +54,7 @@ body {
 .cus-service li {
   cursor: pointer;
 }
+
+.category-card:hover, .product-card:hover {
+  transform: scale(1.05);
+}

@@ -5,18 +5,28 @@ import './WishlistStyles.css';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
 import { Link } from 'react-router-dom';
+import Cookies from "universal-cookie";
 
 import category1 from'./images/category1.jpg';
 import category2 from'./images/category2.jpg';
 import category3 from'./images/category3.jpg';
 
 export default class wishlist extends Component {
+  constructor(props) {
+      const cookies = new Cookies();
+      let user = cookies.get('user');
+
+      super(props);
+      this.state = {
+          user: user
+      }
+  }
+
   render() {
     return (
       <div className="main-container">
-        <h1 className="page-header ml-4">My Wishlist</h1>
+        <h1 className="page-header ml-4">My Wishlist - {this.state.user.userId}</h1>
         <div className="container mt-4 category-container">
           <div className="row">
               <Card  className="mr-4" style={{ width: '18rem' }}>

@@ -39,7 +39,7 @@ export default class Container extends Component {
   // Methods for create category cards
   renderCards() { return this.state.category.map(function(object, i){
       return <Link to={'/items/'+ object._id}>
-        <Card  className="mr-4" style={{ width: '18rem' }}>
+        <Card  className="mr-4 category-card" style={{ width: '18rem' }}>
           <Card.Img variant="top" src={category1} />
           <Card.Body>
             <Card.Title className="text-center">{object.CategoryType}</Card.Title>

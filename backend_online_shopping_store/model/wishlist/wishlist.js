@@ -2,24 +2,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Wishlist = new Schema({
-
-    _id: {
-        type: String,
-        required: true
+    Subtype: {
+      type: String,
+      required: true
     },
 
     DressPrice: {
-        type: String,
-        required: true
+        type: Number,
+        required: true,
+        default:0
     },
 
-    images: {
+    Images: {
+        type: Array,
+        default:[]
+    },
+
+    UserId:{
         type: String
-    },
-
-    UserId: {
-        type: String,
-        required: true
     }
 },
     {

@@ -6,10 +6,10 @@ import './HomeStyle.css';
 import Cookies from "universal-cookie";
 import NavBar from './NavBar';
 import Card from 'react-bootstrap/Card';
+import { Comment, Header, Rating } from 'semantic-ui-react';
 import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Form from 'react-bootstrap/Form';
-
+import Badge from 'react-bootstrap/Badge';
+import RatingStar from './Ratings/ratings';
 import men1 from './images/men1.jpg';
 import men2 from './images/men2.jpg';
 import men3 from './images/men3.jpg';
@@ -22,7 +22,6 @@ export default class Description extends Component {
     let user = cookies.get('user');
     super(props);
 
-
     this.state = {
       // UserID: user.username.toString(),
       UserID: '',
@@ -34,8 +33,12 @@ export default class Description extends Component {
       Image: '',
       Description: '',
       Subtype: '',
-      productid: ''
-    };
+      productid: '',
+      Quantity: 0
+    }
+
+    this.clickDecrement = this.clickDecrement.bind(this);
+    this.clickIncrement = this.clickIncrement.bind(this);
   }
 
   componentDidMount() {
@@ -52,14 +55,42 @@ export default class Description extends Component {
               DressPrice: response.data.DressPrice,
               Subtype: response.data.Subtype,
               Description: response.data.description,
-              Image: response.data.images
+              Image: response.data.images,
+              Quantity: 0
             });
         })
           .catch(function (error) {
             console.log(error);
           })
+
+
   }
 
+  clickWhishList() {
+    window.location.href = "/wishlist";
+  }
+
+  clickDecrement() {
+    let quentity = this.state.Quantity;
+
+    if (quentity > 0) {
+      quentity = quentity - 1;
+    }
+
+    this.setState({ Quantity: quentity})
+  }
+
+  clickIncrement() {
+    let quentity = this.state.Quantity;
+
+    quentity = quentity + 1;
+
+    this.setState({ Quantity: quentity})
+  }
+
+  getState() {
+    console.log(this.state);
+  }
   render() {
 
     return (
@@ -69,47 +100,75 @@ export default class Description extends Component {
           <div className="container mt-4 category-container">
             <div className="row">
               <div className="col-md-6">
-              <Card  className="mr-4" style={{ width: '18rem' }}>
+              <Card  className="mr-4 product-card" style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={`http://localhost:5000/${this.state.Image[0]}`} />
                 <Card.Body>
-                  <Card.Title className="text-center">Rs. {this.state.DressPrice}.00</Card.Title>
+                  <Card.Title className="text-center"><h2>Rs. {this.state.DressPrice}.00</h2></Card.Title>
                 </Card.Body>
               </Card>
               </div>
               <div className="col-md-6">
                 <h1 className="page-header ml-4 text-center">{this.state.Subtype}</h1>
                 <ul className="mt-5">
+                  <li>{this.state.DressCode}</li>
+                  <li>Rs. {this.state.DressPrice}.00</li>
+                  <li>{this.state.DressType}</li>
+                  <li>{this.state.Subtype}</li>
                   <li>{this.state.Description}</li>
                 </ul>
+                <div className="text-center mt-4 mb-4">
+                <label >Select Quentity</label><br/>
+                  <Button variant="outline-dark" className="mr-3" onClick={this.clickDecrement}>-</Button><Button variant="outline-dark" className="mr-3">{this.state.Quantity}</Button><Button variant="outline-dark" onClick={this.clickIncrement}>+</Button>
+                </div>
                 <Button variant="dark" className="mb-2" block><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button>
-                <Button variant="outline-dark" className="mb-2" block><i class="fas fa-heart mr-2"/> Add to Wishlist</Button>
+                <Button variant="outline-dark" onClick={this.clickWhishList} className="mb-2" block><i class="fas fa-heart mr-2"/> Add to Wishlist</Button>
               </div>
             </div>
 
+            <div class="ui comments">
               <h3 className="page-header mt-5">Review & Comments..</h3>
-              <ListGroup className="mt-5">
-                <ListGroup.Item><h4>Comment 1</h4><h6>User 1</h6></ListGroup.Item>
-                <ListGroup.Item><h4>Comment 2</h4><h6>User 2</h6></ListGroup.Item>
-                <ListGroup.Item><h4>Comment 3</h4><h6>User 3</h6></ListGroup.Item>
-                <ListGroup.Item><h4>Comment 4</h4><h6>User 4</h6></ListGroup.Item>
-                <ListGroup.Item><h4>Comment 5</h4><h6>User 5</h6></ListGroup.Item>
-              </ListGroup>
-              <Form>
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Label className="mt-5">Add Your Comment.</Form.Label>
-                  <Form.Control as="textarea" rows="3" />
-                </Form.Group>
-                <Form.Label className="mt-3">Add Your Review.</Form.Label>
-                <div className="col-md-6">
-                  <Form.Group controlId="formBasicRangeCustom">
-                    <Form.Control type="range" custom />
-                  </Form.Group>
+              <div class="comment">
+                <div class="avatar"><img src="/images/avatar/small/matt.jpg" /></div>
+                <div class="content">
+                  <h3 class="author">Matt</h3>
+                  <div class="metadata"><h6>Today at 5:42PM</h6></div>
+                  <div class="text"><h5>How artistic!</h5></div>
                 </div>
-                <Button variant="dark"type="submit" className="mt-3">
-                  Submit
-                </Button>
-              </Form>
-
+                <RatingStar/>
+                <hr/>
+              </div>
+              <div class="comment">
+                <div class="avatar"><img src="/images/avatar/small/matt.jpg" /></div>
+                <div class="content">
+                  <h3 class="author">Matt</h3>
+                  <div class="metadata"><h6>Today at 5:42PM</h6></div>
+                  <div class="text"><h5>How artistic!</h5></div>
+                </div>
+                <RatingStar/>
+                <hr/>
+              </div>
+              <div class="comment">
+                <div class="avatar"><img src="/images/avatar/small/matt.jpg" /></div>
+                <div class="content">
+                  <h3 class="author">Matt</h3>
+                  <div class="metadata"><h6>Today at 5:42PM</h6></div>
+                  <div class="text"><h5>How artistic!</h5></div>
+                </div>
+                <RatingStar/>
+                <hr/>
+              </div>
+              <div class="comment">
+                <div class="avatar"><img src="/images/avatar/small/matt.jpg" /></div>
+                <div class="content">
+                  <h3 class="author">Matt</h3>
+                  <div class="metadata"><h6>Today at 5:42PM</h6></div>
+                  <div class="text"><h5>How artistic!</h5></div>
+                </div>
+                {this.getState()}
+                <RatingStar/>
+                <hr/>
+              </div>
+              </div>
           </div>
         </div>
       </div>
