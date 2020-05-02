@@ -110,11 +110,11 @@ export default class Description extends Component {
               <div className="col-md-6">
                 <h1 className="page-header ml-4 text-center">{this.state.Subtype}</h1>
                 <ul className="mt-5">
-                  <li>{this.state.DressCode}</li>
-                  <li>Rs. {this.state.DressPrice}.00</li>
-                  <li>{this.state.DressType}</li>
-                  <li>{this.state.Subtype}</li>
-                  <li>{this.state.Description}</li>
+                  <li><b>Dress Code : </b>{this.state.DressCode}</li>
+                  <li><b>Price : </b>Rs. {this.state.DressPrice}.00</li>
+                  <li><b>Type : </b>{this.state.DressType}</li>
+                  <li><b>Subtype : </b>{this.state.Subtype}</li>
+                  <li><b>Description : </b>{this.state.Description}</li>
                 </ul>
                 <div className="text-center mt-4 mb-4">
                 <label >Select Quentity</label><br/>

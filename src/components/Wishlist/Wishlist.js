@@ -2,7 +2,7 @@ import React, {Component}from 'react';
 // Import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './WishlistStyles.css';
-
+import NavBar from '../Home/NavBar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
@@ -25,8 +25,10 @@ export default class wishlist extends Component {
 
   render() {
     return (
+      <div>
+      <NavBar/>
       <div className="main-container">
-        <h1 className="page-header ml-4">My Wishlist - {this.state.user.userId}</h1>
+        <h1 className="page-header ml-4">My Wishlist</h1>
         <div className="container mt-4 category-container">
           <div className="row">
               <Card  className="mr-4" style={{ width: '18rem' }}>
@@ -56,6 +58,7 @@ export default class wishlist extends Component {
             </div>
         </div>
       </div>
+    </div>
     )
   }
 }

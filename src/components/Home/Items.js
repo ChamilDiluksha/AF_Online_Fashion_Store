@@ -66,7 +66,7 @@ export default class Items extends Component {
               <Card.Body>
                 <Card.Title className="text-center">{ object.DressCode }</Card.Title>
                 <Card.Text  className="text-center">Rs. { object.DressPrice }.00</Card.Text>
-                <Button variant="dark" className="mb-2" block><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button>
+                <Link to={'/description/'+ object._id}><Button variant="dark" className="mb-2" block ><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button></Link>
                 <Button variant="outline-dark" className="mb-2" block><i class="fas fa-heart mr-2"/> Add to Wishlist</Button>
               </Card.Body>
             </Card>
