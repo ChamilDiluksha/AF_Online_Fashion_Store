@@ -7,10 +7,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Cookies from "universal-cookie";
-
+import axios from 'axios';
 import category1 from'./images/category1.jpg';
 import category2 from'./images/category2.jpg';
 import category3 from'./images/category3.jpg';
+
+import DisplayWishlist from './DisplayWishlist/DisplayWishlist';
 
 export default class wishlist extends Component {
   constructor(props) {
@@ -19,8 +21,34 @@ export default class wishlist extends Component {
 
       super(props);
       this.state = {
-          user: user
+          user: user,
+          Subtype: '',
+          Wishlist: []
       }
+
+      // - {this.state.user.userId}
+      this.renderCards = this.renderCards.bind(this);
+
+  }
+
+  componentDidMount() {
+      axios.get('http://localhost:5000/wishlist/display')
+          .then(response => {
+              this.setState({ Wishlist: response.data });
+          })
+          .catch(function (error) {
+              console.log(error);
+          })
+  }
+
+
+  renderCards() { return this.state.Wishlist.map(function(object, i){
+      return <DisplayWishlist obj={object} key={i} />;
+  });
+}
+
+  getState() {
+    console.log(this.state);
   }
 
   render() {
@@ -28,33 +56,10 @@ export default class wishlist extends Component {
       <div>
       <NavBar/>
       <div className="main-container">
-        <h1 className="page-header ml-4">My Wishlist</h1>
+        <h1 className="page-header ml-4">My Wishlist </h1>
         <div className="container mt-4 category-container">
           <div className="row">
-              <Card  className="mr-4" style={{ width: '18rem' }}>
-                <Link to='/description'><Card.Img variant="top" src={category1} /></Link>
-                <Card.Body>
-                  <Card.Title className="text-center">Men</Card.Title>
-                  <Button variant="dark" className="mb-2" block><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button>
-                  <Button variant="outline-dark" className="mb-2" block><i class="fas fa-trash mr-2"/> Remove from Wishlist</Button>
-                </Card.Body>
-              </Card>
-              <Card className="mr-4" style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={category2} />
-                <Card.Body>
-                  <Card.Title className="text-center">Women</Card.Title>
-                  <Button variant="dark" className="mb-2" block><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button>
-                  <Button variant="outline-dark" className="mb-2" block><i class="fas fa-trash mr-2"/> Remove from Wishlist</Button>
-                </Card.Body>
-              </Card>
-              <Card className="mr-4" style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={category3} />
-                <Card.Body>
-                  <Card.Title className="text-center">Kids</Card.Title>
-                  <Button variant="dark" className="mb-2" block><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button>
-                  <Button variant="outline-dark" className="mb-2" block><i class="fas fa-trash mr-2"/> Remove from Wishlist</Button>
-                </Card.Body>
-              </Card>
+              {this.renderCards()}
             </div>
         </div>
       </div>

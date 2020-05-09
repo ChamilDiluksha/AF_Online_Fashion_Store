@@ -6,8 +6,9 @@ import Cookies from 'universal-cookie';
 import axios from "axios";
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import DisplayWishlist from '../Wishlist/DisplayWishlist/DisplayWishlist';
 
-
+import Card from 'react-bootstrap/Card';
 
 
 export default class NavBar extends Component {
@@ -20,8 +21,12 @@ export default class NavBar extends Component {
 
     this.state = {
       user: user,
-
+      Subtype: '',
+      Images: [],
+      Wishlist: []
     }
+
+    this.hideWishlistBtn = this.hideWishlistBtn.bind(this);
   }
 
 
@@ -54,7 +59,26 @@ export default class NavBar extends Component {
       );
   }
 
+  componentDidMount() {
+      axios.get('http://localhost:5000/wishlist/display')
+          .then(response => {
+              this.setState({ Wishlist: response.data });
+          })
+          .catch(function (error) {
+              console.log(error);
+          })
+  }
 
+  hideWishlistBtn() {
+    const cookies = new Cookies();
+    let user = cookies.get('user');
+
+    if (user) {
+      return (
+      <Button variant="outline-dark" className="float-right mr-4 mb-4 mt-4 wishlist-btn" onClick={() => {window.location.href = "/wishlist";}}>Wish List <i class="fas fa-heart" /></Button>
+      );
+    }
+  }
 
   render() {
     return (
@@ -102,7 +126,7 @@ export default class NavBar extends Component {
             </Form>
           </Navbar.Collapse>
         </Navbar>
-        <Link to='/wishlist'><Button variant="outline-dark" className="float-right mr-4 mb-4 mt-4 wishlist-btn" onClick={() => { console.log('Hello'); }}>Wish List <i class="fas fa-heart" /></Button></Link>
+        {this.hideWishlistBtn()}
         {/* <Link to={{
           pathname: '/usercart',
           aboutProps: this.state

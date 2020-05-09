@@ -7,7 +7,7 @@ import './HomeStyle.css';
 import NavBar from './NavBar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
+import Cookies from "universal-cookie";
 import { Link } from 'react-router-dom';
 
 import men1 from'./images/men1.jpg';
@@ -16,8 +16,11 @@ import men3 from'./images/men3.jpg';
 
 export default class Items extends Component {
   constructor(props) {
+    const cookies = new Cookies();
+    let user = cookies.get('user');
       super(props);
       this.state = {
+          user: user,
           category : [],
           product: [],
           CategoryType: ''
@@ -31,7 +34,6 @@ export default class Items extends Component {
   componentDidMount() {
       axios.get('http://localhost:5000/product/')
         .then(response => {
-          console.log(response.data);
             this.setState({
               product: response.data
             });
@@ -64,10 +66,11 @@ export default class Items extends Component {
             <Card  className="mr-4 product-card" style={{ width: '18rem' }}>
               <Link to={'/description/'+ object._id}><Card.Img variant="top" src={`http://localhost:5000/${ object.images[0]} `} alt="No Preview"/></Link>
               <Card.Body>
-                <Card.Title className="text-center">{ object.DressCode }</Card.Title>
+                <Card.Title className="text-center">{ object.Subtype }</Card.Title>
                 <Card.Text  className="text-center">Rs. { object.DressPrice }.00</Card.Text>
+                <Card.Text  className="text-center"><p><b>Discount:</b> Rs. { object.Discount }.00</p></Card.Text>
                 <Link to={'/description/'+ object._id}><Button variant="dark" className="mb-2" block ><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button></Link>
-                <Button variant="outline-dark" className="mb-2" block><i class="fas fa-heart mr-2"/> Add to Wishlist</Button>
+                <Link to={'/description/'+ object._id}><Button variant="outline-dark" className="mb-2" block><i class="fas fa-heart mr-2"/> Add to Wishlist</Button></Link>
               </Card.Body>
             </Card>
           </Link> : ''

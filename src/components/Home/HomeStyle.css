@@ -55,6 +55,10 @@ body {
   cursor: pointer;
 }
 
-.category-card:hover, .product-card:hover {
+.category-card:hover, .product-card:hover, .wishlist-card:hover {
   transform: scale(1.05);
+}
+
+.price {
+  text-decoration: line-through;
 }

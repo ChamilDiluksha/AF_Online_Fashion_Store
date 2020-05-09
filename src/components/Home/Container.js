@@ -26,6 +26,7 @@ export default class Container extends Component {
         }
   }
 
+  // Get all categories from db usin axios
   componentDidMount() {
       axios.get('http://localhost:5000/category/')
           .then(response => {
@@ -37,7 +38,7 @@ export default class Container extends Component {
   }
 
   // Methods for create category cards
-  renderCards() { return this.state.category.map(function(object, i){
+  renderCards() { return this.state.category.map(function(object, i) {
       return <Link to={'/items/'+ object._id}>
         <Card  className="mr-4 category-card" style={{ width: '18rem' }}>
           <Card.Img variant="top" src={category1} />

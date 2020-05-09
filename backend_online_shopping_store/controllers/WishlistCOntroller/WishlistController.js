@@ -1,50 +1,48 @@
 const WishlistItems = require("../../model/wishlist/wishlist");
 
+// Method for add wishlist items
 exports.addItem = (req, res, next) => {
 
-    const {body} = req;
+  const Subtype = req.body.Subtype;
+  const DressPrice = req.body.DressPrice;
+  const Images = req.body.Images;
+  const UserId = req.body.UserId;
 
-    const {
-        Subtype,
-        DressPrice,
-        Images,
-        UserId
-    } = body;
-
-
-    WishlistItems.find({
-        _id
-    }).exec()
-      .then(listItem => {
-
-        if(listItem.length >= 1){
-            return res.json({
-                message : 'Already in Wishlist..!'
-            });
-        }else{
-
-            const newlistItem = new WishlistItems();
-            newlistItem.Subtype = Subtype;
-            newlistItem.DressPrice = DressPrice;
-            newlistItem.Images = Images;
-            newlistItem.UserId = UserId;
-
-
-            newlistItem
-                .save()
-                .then(result => {
-                    console.log(result);
-                    res.status(201).json({
-                        message: 'Added to Wishlist..'
-                    })
-                })
-                .catch(err => {
-                    console.log(err);
+    // WishlistItems.find({
+    //   UserId, Subtype
+    // }).exec()
+    //   .then(listItem => {
+    //
+    //         if(listItem.length >= 1){
+    //             return res.json({
+    //                 message : 'Already in Wishlist..!'
+    //             });
+    //         }
+    //
+    //         else{
+                const newlistItem = new WishlistItems({
+                  Subtype,
+                  DressPrice,
+                  Images,
+                  UserId,
                 });
-        }
-    });
+
+                newlistItem
+                    .save()
+                    .then(result => {
+                        console.log(result);
+                        res.status(200).json({
+                            message: 'Added to Wishlist..'
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            // }
+    // });
 }
 
+// Method for get all wishlist items
 exports.getAllItems = (req, res) => {
     WishlistItems.find((err, listItem) => {
         if(err){
@@ -56,6 +54,7 @@ exports.getAllItems = (req, res) => {
     });
 }
 
+// Method for delete wishlist items
 exports.deleteItem = (req,res) => {
     WishlistItems.remove({_id: req.params.id})
         .exec()

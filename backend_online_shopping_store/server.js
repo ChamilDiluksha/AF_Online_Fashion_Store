@@ -43,6 +43,12 @@ app.use("/uploads", express.static("uploads"));
 const cartRoute = require("./routes/CartRoute/CartRoute");
 app.use("/cart", cartRoute);
 
+const wishlistRoute = require("./routes/WishlistRoute/wishlistRoute");
+app.use("/wishlist", wishlistRoute);
+
+const commentRoute = require("./routes/CommentRoute/commentRoute");
+app.use("/comment", commentRoute);
+
 // const orderRoute = require("./routes/CartRoute/OrderRoute");
 // app.use("/order", orderRoute);
 

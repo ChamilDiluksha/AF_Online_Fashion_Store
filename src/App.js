@@ -11,7 +11,7 @@ import Dashboard from './components/Dashboard';
 import NavBar from '../src/components/Home/NavBar';
 import Container from '../src/components/Home/Container';
 import Footer from '../src/components/Home/Footer';
-import Wishlist from '../src/components/Wishlist/Wishlist';
+import Wishlist from './components/Wishlist/Wishlist';
 import Items from '../src/components/Home/Items';
 import Description from '../src/components/Home/Description';
 import 'semantic-ui-css/semantic.min.css';
