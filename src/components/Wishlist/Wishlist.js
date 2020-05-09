@@ -2,19 +2,31 @@ import React, {Component}from 'react';
 // Import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './WishlistStyles.css';
-
+import NavBar from '../Home/NavBar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
 import { Link } from 'react-router-dom';
+import Cookies from "universal-cookie";
 
 import category1 from'./images/category1.jpg';
 import category2 from'./images/category2.jpg';
 import category3 from'./images/category3.jpg';
 
 export default class wishlist extends Component {
+  constructor(props) {
+      const cookies = new Cookies();
+      let user = cookies.get('user');
+
+      super(props);
+      this.state = {
+          user: user
+      }
+  }
+
   render() {
     return (
+      <div>
+      <NavBar/>
       <div className="main-container">
         <h1 className="page-header ml-4">My Wishlist</h1>
         <div className="container mt-4 category-container">
@@ -46,6 +58,7 @@ export default class wishlist extends Component {
             </div>
         </div>
       </div>
+    </div>
     )
   }
 }

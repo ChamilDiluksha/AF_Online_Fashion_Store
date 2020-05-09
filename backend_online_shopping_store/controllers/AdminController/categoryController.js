@@ -58,11 +58,28 @@ exports.getAllCategory = (req, res) => {
     });
 }
 
-exports.getCategory = (req, res) => {
-    let categoryid = req.params.id;
-    CategoryItem.findById(categoryid)
-    .then(category => res.json(category))
-    .catch(err => res.status(400).json('Error: ' + err));
+// exports.getCategory = (req, res) => {
+//     let categoryid = req.params.id;
+//     CategoryItem.findById(categoryid)
+//     .then(category => res.json(category))
+//     .catch(err => res.status(400).json('Error: ' + err));
+// }
+
+exports.getCategory = ((req, res) => {
+  CategoryItem.findById(req.params.id)
+    .then(exercise => res.json(exercise))
+      .catch(err => res.status(400).json('Error: ' + err));
+});
+
+exports.getClickedCategory = (req, res) => {
+    let categoryid = req.query.id;
+
+    CategoryItem.find({'CategoryID': {$in:categoryid }})
+      .populate('writer')
+        .exec((err, category => {
+          if (err) return res.status(400).send(err)
+          return res.status(200).send(category)
+        }))
 }
 
 exports.editCategory = (req, res) => {

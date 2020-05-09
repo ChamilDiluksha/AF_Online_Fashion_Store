@@ -7,40 +7,40 @@ const User = require('../../model/user/user');
 
 
 
-exports.user_signup = (req,res,next) => {
+exports.user_signup = (req, res, next) => {
 
-    const {Username} = req.body;
-    User.find({Username})
+    const { Username } = req.body;
+    User.find({ Username })
         .exec()
         .then(user => {
             //console.log(user)
-            if(user.length >= 1){
+            if (user.length >= 1) {
                 return res.json({
                     message: 'User Already exist'
                 });
-            }else{
-                bcrypt.hash(req.body.Password,10,(err, hash) =>{
-                    if(err){
+            } else {
+                bcrypt.hash(req.body.Password, 10, (err, hash) => {
+                    if (err) {
                         return res.status(500).json({
                             error: err
                         })
-                    }else{
+                    } else {
                         const nwuser = new User({
-                            _id:mongoose.Types.ObjectId(),
+                            _id: mongoose.Types.ObjectId(),
                             Type: "User",
-                            Fname:req.body.fname,
+                            Fname: req.body.fname,
                             Username: req.body.Username,
                             Password: hash
                         });
                         nwuser
                             .save()
                             .then(result => {
-                                console.log('User Created',result);
+                                console.log('User Created', result);
                                 res.status(200).json({
                                     message: 'User Created'
                                 })
                             })
-                            .catch( err =>{
+                            .catch(err => {
                                 console.log(err);
                                 res.status(500).json({
                                     error: err
@@ -50,7 +50,7 @@ exports.user_signup = (req,res,next) => {
                 });
             }
         })
-        .catch( err =>{
+        .catch(err => {
             console.log(err);
             res.status(500).json({
                 error: err
@@ -62,18 +62,18 @@ exports.user_signup = (req,res,next) => {
 
 
 
-exports.userSignin =(req,res,next) => {
-    User.find({Username:req.body.Username}).exec().then(user => {
-        if(user.length < 1){
-            return res.send({message:'unauthorized User!!!!'});
+exports.userSignin = (req, res, next) => {
+    User.find({ Username: req.body.Username }).exec().then(user => {
+        if (user.length < 1) {
+            return res.send({ message: 'unauthorized User!!!!' });
         }
-        bcrypt.compare(req.body.Password, user[0].Password,(err,result) => {
-            if(err){
-                return res.send({message :'Password does not match!!!!!'});
+        bcrypt.compare(req.body.Password, user[0].Password, (err, result) => {
+            if (err) {
+                return res.send({ message: 'Password does not match!!!!!' });
             }
-            if(result){
+            if (result) {
                 let token = null;
-                if(user[0].Token === null) {
+                if (user[0].Token === null) {
                     token = jwt.sign(
                         {
                             Username: user[0].Username,
@@ -84,7 +84,7 @@ exports.userSignin =(req,res,next) => {
                             expiresIn: "5h"
                         }
                     );
-                }else{
+                } else {
                     token = user[0].Token;
                 }
                 user[0]._id = user[0]._id;
@@ -93,19 +93,19 @@ exports.userSignin =(req,res,next) => {
                 user[0]
                     .save()
                     .then(result => {
-                        console.log("User - "+user[0]._id+" Signed-in, Time - "+Date.now());
+                        console.log("User - " + user[0]._id + " Signed-in, Time - " + Date.now());
                     })
-                    .catch( err =>{
+                    .catch(err => {
                         console.log(err);
                     });
                 return res.status(200).json({
-                    message:'Authentication successful',
-                    token:token,
-                    username:user[0].Fname,
-                    userId:user[0]._id,
-                    type:user[0].Type
+                    message: 'Authentication successful',
+                    token: token,
+                    username: user[0].Fname,
+                    userId: user[0]._id,
+                    type: user[0].Type
                 });
-            }else{
+            } else {
                 return res.status(401).send('UNAUTHORIZED');
             }
         })
@@ -113,13 +113,13 @@ exports.userSignin =(req,res,next) => {
 }
 
 
-exports.user_validate =(req,res,next) => {
-    User.find({_id:req.body.user.userId,Token:req.body.token }).exec().then(user => {
-        if(user.length < 1){
+exports.user_validate = (req, res, next) => {
+    User.find({ _id: req.body.user.userId, Token: req.body.token }).exec().then(user => {
+        if (user.length < 1) {
             return res.status(200).json({
                 valid: false
             });
-        }else {
+        } else {
             return res.status(200).json({
                 valid: true
             });
@@ -127,22 +127,22 @@ exports.user_validate =(req,res,next) => {
     });
 }
 
-exports.user_signout =(req,res,next) => {
-    User.find({_id:req.body.user.userId,Token:req.body.token }).exec().then(user => {
-        if(user.length < 1){
+exports.user_signout = (req, res, next) => {
+    User.find({ _id: req.body.user.userId, Token: req.body.token }).exec().then(user => {
+        if (user.length < 1) {
             return res.status(404).send('user not found');
-        }else {
+        } else {
             user[0]._id = req.body.user.userId;
             user[0].Token = null;
             user[0]
                 .save()
                 .then(result => {
-                    console.log("User - "+user[0]._id+" Signed-out, Time - "+Date.now());
+                    console.log("User - " + user[0]._id + " Signed-out, Time - " + Date.now());
                     res.status(200).json({
                         message: 'Sign Out',
                     });
                 })
-                .catch( err =>{
+                .catch(err => {
                     console.log(err);
                     res.status(500).json({
                         error: err
@@ -155,7 +155,7 @@ exports.user_signout =(req,res,next) => {
 
 exports.GetAlluser_details = (req, res) => {
     User.find((err, user) => {
-        if(err){
+        if (err) {
             console.log(err);
         }
         else {

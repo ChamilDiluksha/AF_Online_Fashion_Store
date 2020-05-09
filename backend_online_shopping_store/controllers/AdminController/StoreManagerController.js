@@ -96,6 +96,9 @@ exports.addManager = (req, res, next) => {
                                         })
                                         .catch(err => {
                                             console.log(err);
+                                            return res.json({
+                                                message: 'Please enter Email with only simple letters'
+                                            });
                                         });
 
                                         user.save()
@@ -221,7 +224,7 @@ exports.deleteManager = (req,res,next) => {
         .exec()
         .then(result => {
             res.status(200).json({
-                message: "Manager deleted"
+                message: "Manager deleted",
             });
         })
         .catch(err => {
@@ -230,4 +233,6 @@ exports.deleteManager = (req,res,next) => {
                 error:err
             });
         });
+
+        
 }
