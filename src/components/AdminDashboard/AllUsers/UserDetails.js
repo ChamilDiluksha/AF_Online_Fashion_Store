@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Image } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react';
+import axios from 'axios';
+
 
 
 class userDetails extends Component {
@@ -7,6 +9,15 @@ class userDetails extends Component {
         super(props);
         this.state = {  }
     }
+
+    delete() {
+        axios.delete('http://localhost:5000/user/delete/'+this.props.obj._id)
+            .then(console.log('Deleted'))
+            .catch(err => console.log(err));
+        window.location.href = "/log";
+    }
+
+
     render() { 
         return ( 
             <tr>
@@ -19,6 +30,18 @@ class userDetails extends Component {
             </td>
             <td>
                 {this.props.obj.Type}
+            </td>
+            <td>
+
+                <p
+                    className="delete"
+                    onClick={e =>
+                        window.confirm("Are you sure you wish to delete this User?") &&
+                        this.delete()
+                    }
+                >
+                <i className="fas fa-trash" style={{paddingRight:"10px"}}></i>
+                </p>
             </td>
         </tr>
          );

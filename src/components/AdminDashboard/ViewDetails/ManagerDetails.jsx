@@ -44,7 +44,7 @@ class ManagerDetails extends Component {
                 <p
                     className="delete"
                     onClick={ () =>
-                        window.confirm("Are you sure you wish to delete this admin?") &&
+                        window.confirm("Are you sure you wish to delete this Store Manager?") &&
                         this.delete()
                     }
                 >
