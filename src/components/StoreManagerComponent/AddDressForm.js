@@ -3,7 +3,7 @@ import {Button, Col, Form} from 'react-bootstrap';
 import axios from 'axios';
 import Cookies from "universal-cookie";
 import ImageUpload from '../StoreManagerComponent/ImageUpload';
-
+import Pitem from './list';
 
 export class UploadProductPage extends Component {
 
@@ -50,21 +50,6 @@ export class UploadProductPage extends Component {
         this.setState({ 
             Category: e.target.value
         })
-
-        this.state.ArrayCategory.forEach(element => {
-            if(this.state.Category === element.CategoryType){
-
-                axios.get('http://localhost:5000/category/' + element._id)
-                .then(response => {
-                    this.setState({ stages: response.data.stages });
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-            }
-        });
-
-    
     }
 
     handleChangeDressType = (e) => {
@@ -88,6 +73,27 @@ export class UploadProductPage extends Component {
 
     onChangeSubtype = (e) => {
         this.setState({ Subtype: e.target.value })
+    }
+
+    onCheckComplete = (id) =>{
+        const crossItem = this.state.ArrayCategory.find( itemCross => itemCross.CategoryID === id);
+      
+       
+        this.state.ArrayCategory.forEach(element => {
+            if(crossItem.CategoryID === element.CategoryID){
+
+                axios.get('http://localhost:5000/category/' + element._id)
+                .then(response => {
+                    this.setState({ 
+                        stages: response.data.stages,
+                        Category:response.data.CategoryType
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+            }
+        });
     }
 
     onSubmit = (e) => {
@@ -161,24 +167,14 @@ export class UploadProductPage extends Component {
                                 onChange = {this.onChangeDressCode}  />
                   </Form.Group>
 
-                  <Form.Group as={Col}>
-                  <Form.Label>Select Dress Category</Form.Label>
-                  <Form.Control as="select" 
-                    id="typeCategory"
-                    name="Ctype"
-                    value={this.state.Category}
-                    onChange={this.OnchaneCategory} >
-                    
-                    {
-                        this.state.ArrayCategory.map(function(category) {
-                        return <option 
-                        key={category.CategoryType}
-                        value={category.CategoryType}>{category.CategoryType}
-                        </option>;
-                        })
-                    }
-                  </Form.Control>
-                  </Form.Group>
+                  <Form.Group as ={Col} >
+                  <Form.Label>  Select Dress Category   </Form.Label>
+                        
+                        <Pitem 
+                        TodoItem={this.state.ArrayCategory} 
+                        onCheckComplete={this.onCheckComplete}/>
+                     
+                   </Form.Group>  
 
                   
                   <Form.Group as={Col}>

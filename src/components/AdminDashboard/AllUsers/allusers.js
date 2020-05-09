@@ -55,7 +55,7 @@ class users extends Component {
                     <tr>
                         <th>User Emails</th>
                         <th>User Type</th>
-                       
+                        <th colSpan="1">Action</th>
                     </tr>
                     </MDBTableHead>
                     <MDBTableBody>

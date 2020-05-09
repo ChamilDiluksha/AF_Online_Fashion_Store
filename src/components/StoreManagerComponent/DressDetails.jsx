@@ -56,7 +56,7 @@ class DressDetails extends Component {
                         <p
                             className="delete"
                             onClick={ () =>
-                                window.confirm("Are you sure you wish to delete this admin?") &&
+                                window.confirm("Are you sure you wish to delete this product (Dress) ??") &&
                                 this.delete()
                             }
                         >

@@ -114,7 +114,7 @@ class App extends Component {
 
           </Router>
           {
-            (window.location.pathname !== '/sign-in' && window.location.pathname !== '/log') ? (
+            (window.location.pathname !== '/sign-in') ? (
               <Footer />
             ) : null
           }
