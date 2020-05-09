@@ -7,6 +7,6 @@ userRouter.post('/sign-in', UserController.userSignin);
 userRouter.post('/sign-out', UserController.user_signout);
 userRouter.post('/validate', UserController.user_validate);
 userRouter.get('/', UserController.GetAlluser_details);
-//userRouter.delete("/delete/:userId", UserController.user_delete);
+userRouter.delete("/delete/:id", UserController.deleteUser);
 
 module.exports = userRouter;
