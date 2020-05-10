@@ -14,6 +14,7 @@ import men2 from './images/men2.jpg';
 import men3 from './images/men3.jpg';
 import { Link } from 'react-router-dom';
 import AddComment from '../AddComment';
+import Moment from 'react-moment';
 
 export default class Description extends Component {
   constructor(props) {
@@ -37,7 +38,6 @@ export default class Description extends Component {
       Comments: [],
       NewPrice: 0
     }
-    console.log(user);
 
     this.clickDecrement = this.clickDecrement.bind(this);
     this.clickIncrement = this.clickIncrement.bind(this);
@@ -134,10 +134,10 @@ export default class Description extends Component {
     return this.state.Comments.map(function(object, i) {
       if (object.ProductId == prodId)  {
         return   <div class="comment">
-          <div class="avatar"><img src="/images/avatar/small/matt.jpg" /></div>
+          <div class="avatar"><img src="https://react.semantic-ui.com/images/avatar/small/matthew.png" /></div>
           <div class="content">
-            <h3 class="author">{object.UserId}</h3>
-            <div class="metadata"><h6>{object.date}</h6></div>
+            <h3 class="author">{object.Username}</h3>
+            <div class="metadata"><h6><Moment format="YYYY/MM/DD">{object.date}</Moment></h6></div>
             <div class="text"><h5>{object.Comment}</h5></div>
           </div>
           <Rating icon='star' defaultRating={object.Review} maxRating={4} size='huge' disabled/>
@@ -178,15 +178,16 @@ export default class Description extends Component {
                   <Button variant="outline-dark" className="mr-3" onClick={this.clickDecrement}>-</Button><Button variant="outline-dark" className="mr-3">{this.state.Quantity}</Button><Button variant="outline-dark" onClick={this.clickIncrement}>+</Button>
                 </div>
                 <Button variant="dark" className="mb-2" block><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button>
-                <Button variant="outline-dark" onClick={this.addToWhishList} className="mb-2" block><i class="fas fa-heart mr-2"/> Add to Wishlist</Button>
+                <Button variant="outline-dark" onClick={this.addToWhishList} className="mb-4" block><i class="fas fa-heart mr-2"/> Add to Wishlist</Button>
               </div>
+
             </div>
 
             <div class="ui comments">
               <h3 className="page-header mt-5">Review & Comments..</h3>
                 {this.displayComments()}
+                <AddComment productid={this.state.productid}/>
             </div>
-            <AddComment/>
           </div>
         </div>
       </div>
