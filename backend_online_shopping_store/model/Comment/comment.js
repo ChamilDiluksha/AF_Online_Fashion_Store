@@ -24,6 +24,9 @@ let Comment = new Schema({
 
     UserId:{
         type: String
+    },
+    Username: {
+      type: String
     }
 },
     {
