@@ -13,20 +13,16 @@ let Cart = new Schema(
           DressCode: String,
           DressType: String,
           DressPrice: Number,
-          Size: String,
           Quantity: Number,
           Discount: Number,
-          DressImage: String,
-          ProductId: String
+          Image: { data: Buffer, contentType: String }
         }
       ]
     },
-    TotalItems: { type: Number },
-    TotalPrice: { type: Number }
   },
   {
-    collection: "Carts",
+    collection: "Cart",
   }
 );
 
-module.exports = mongoose.model("Carts", Cart);
+module.exports = mongoose.model("Cart", Cart);

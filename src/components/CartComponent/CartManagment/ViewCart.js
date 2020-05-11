@@ -3,12 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from "universal-cookie";
 import objectId from "bson-objectid";
-import NavBar from '../../Home/NavBar';
-
 
 import Alert from 'react-bootstrap/Alert';
 import { Redirect } from 'react-router-dom'
-import { Toast } from 'react-bootstrap';
 
 
 export default class ViewCart extends Component {
@@ -18,7 +15,6 @@ export default class ViewCart extends Component {
         super(props);
 
         this.state = {
-            // UserID: this.state.user,
             CartItems: [],
             ExistingCartItems: [],
             itemAtCart: 'false',
@@ -26,23 +22,15 @@ export default class ViewCart extends Component {
             passingCart: [],
             message: '',
             redirect: true,
-            added: '',
-            TotalPrice: 0,
-            // TotalPrice: (this.props.location.aboutProps.DressPrice) * (this.props.location.aboutProps.Quantity),
-            TotalItems: 0,
-            product: this.props.location.aboutProps.productid
+            added: ''
         };
     }
 
 
     setCartData = async () => {
         const cartEntry = {
-
-            UserID: this.props.location.aboutProps.user.userId,
-
-            TotalItems: 1,
-            TotalPrice: (this.props.location.aboutProps.DressPrice) * (this.props.location.aboutProps.Quantity),
-
+            UserID: this.props.location.aboutProps.UserID,
+            // UserID: this.state.UserID,
             CartItems: [{
                 _id: objectId.generate(),
                 DressCode: this.props.location.aboutProps.DressCode,
@@ -50,8 +38,7 @@ export default class ViewCart extends Component {
                 DressPrice: this.props.location.aboutProps.DressPrice,
                 Quantity: this.props.location.aboutProps.Quantity,
                 Discount: this.props.location.aboutProps.Discount,
-                DressImage: this.props.location.aboutProps.Image[0],
-                ProductId: this.props.location.aboutProps.productid
+                Image: this.props.location.aboutProps.Image,
 
             }]
         };
@@ -75,22 +62,15 @@ export default class ViewCart extends Component {
             });
 
             this.state.ExistingCartItems.CartItems.map(object => {
+                if (object.DressCode === this.props.location.aboutProps.DressCode) {
 
-                console.log(this.props.location.aboutProps.productid);
-                console.log(object.ProductId);
-
-
-                if (this.props.location.aboutProps.productid == object.ProductId) {
-                    console.log("insideeee");
                     object.DressPrice = this.props.location.aboutProps.DressPrice;
-                    object.Quantity = object.Quantity + this.props.location.aboutProps.Quantity;
+                    object.Quantity = this.props.location.aboutProps.Quantity;
                     console.log(object.Quantity);
                     object.Discount = this.props.location.aboutProps.Discount;
+                    object.Image = this.props.location.aboutProps.Image;
                     this.setState({
-                        itemAtCart: "true",
-                        TotalPrice: this.state.ExistingCartItems.TotalPrice + (this.props.location.aboutProps.Quantity * object.DressPrice),
-                        TotalItems: this.state.ExistingCartItems.TotalItems
-
+                        itemAtCart: "true"
                     })
 
                 }
@@ -103,20 +83,15 @@ export default class ViewCart extends Component {
             console.log(this.state.passingCart);
             if (this.state.itemAtCart === "false") {
                 this.setState({
-                    passingCart: [...this.state.passingCart, cartEntry.CartItems[0]],
-                    TotalItems: this.state.ExistingCartItems.TotalItems + 1,
-                    TotalPrice: (this.props.location.aboutProps.DressPrice) * (this.props.location.aboutProps.Quantity) + this.state.ExistingCartItems.TotalPrice
+                    passingCart: [...this.state.passingCart, cartEntry.CartItems[0]]
                 })
             };
 
             const tempUpdateCart = {
-                CartItems: this.state.passingCart,
-                TotalItems: this.state.TotalItems,
-                TotalPrice: this.state.TotalPrice
+                CartItems: this.state.passingCart
             }
 
             console.log("herrrr");
-
             const tempup = await axios.put('http://localhost:5000/cart/update/' + _id, tempUpdateCart);
 
 
@@ -140,52 +115,30 @@ export default class ViewCart extends Component {
             });
 
             console.log(this.state.added);
-            // <Toast>Added to the Cart Sucessfully</Toast>
-
-            // window.location.href = "/description/:" + this.state.product;
 
         }
 
-        // if (this.state.added) {
-        // <Alert>Added to the Cart Sucessfully</Alert>
-        // window.location.href = "/description/:" + this.state.product;
 
-        // }
 
-        window.alert("Added to the cart Sucessfully");
-        window.location.href = "/";
 
 
     }
 
     renderRedirect = () => {
-        const cookies = new Cookies();
-        let user = cookies.get('user');
-
-        if (user) {
-
+        console.log(this.props.location.aboutProps.UserID);
+        if (this.props.location.aboutProps.UserID != null) {
+            return <Redirect to='/' />
         } else {
-            alert('Please Login First..!');
-            window.location.href = "/sign-in";
+            return <Redirect to='/sign-in' />
         }
-        // console.log(this.props.location.aboutProps.UserID);
-        // if (this.props.location.aboutProps.UserID != null) {
-        //     return <Redirect to='/' />
-        // } else {
-        //     return <Redirect to='/sign-in' />
-        // }
 
     }
 
 
     async componentDidMount() {
         console.log(this.props.location.aboutProps.UserID);
-        const cookies = new Cookies();
-        let user = cookies.get('user');
+
         this.setCartData();
-
-
-
 
 
     }
@@ -199,10 +152,6 @@ export default class ViewCart extends Component {
             <div>
 
                 <div>
-                    <NavBar />
-                    <div>
-
-                    </div>
                     {this.renderRedirect()}
 
                 </div>

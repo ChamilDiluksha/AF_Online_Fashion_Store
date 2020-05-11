@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 let Order = new Schema(
   {
-    OrderID: {
+    OrderId: {
       type: String,
       required: true,
     },
@@ -19,12 +19,9 @@ let Order = new Schema(
           DressCode: String,
           DressType: String,
           DressPrice: Number,
-          Size: String,
           Quantity: Number,
           Discount: Number,
-          Image: String,
-          DressImage: String,
-          ProductId: String
+          Image: { data: Buffer, contentType: String },
         },
       ],
     },
@@ -37,12 +34,6 @@ let Order = new Schema(
     PlacedDate: {
       type: Date,
       required: true,
-    },
-    PaymentType: {
-      type: String
-    },
-    Address: {
-      type: String
     },
   },
 

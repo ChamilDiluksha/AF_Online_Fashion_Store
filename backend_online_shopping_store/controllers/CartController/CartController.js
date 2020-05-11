@@ -9,14 +9,13 @@ const emailCongig = texts.emailConfigure;
 exports.addToCart = (req, res, next) => {
   const { body } = req;
 
-  const { UserID, CartItems, TotalItems, TotalPrice } = body;
+  const { UserID, CartItems } = body;
   Cart.find({
     UserID,
   })
     .exec()
     .then((cart) => {
       if (cart.length >= 1) {
-        console.log("gggggg" + cart.length)
         return res.json({
           message: "Error - You have already added items to your cart from this username",
         })
@@ -25,8 +24,6 @@ exports.addToCart = (req, res, next) => {
         const newCartEntry = new Cart();
         newCartEntry.UserID = UserID;
         newCartEntry.CartItems = CartItems;
-        newCartEntry.TotalItems = TotalItems;
-        newCartEntry.TotalPrice = TotalPrice;
 
         newCartEntry
           .save()
@@ -90,7 +87,7 @@ exports.userInCart = (req, res, next) => {
 
 exports.editCartEntry = (req, res) => {
   const { body } = req;
-  const { CartItems, TotalItems, TotalPrice } = body;
+  const { CartItems } = body;
 
 
   Cart.findById(req.params.id, (err, cart) => {
@@ -98,9 +95,8 @@ exports.editCartEntry = (req, res) => {
       res.status(404).send("Error - Could not find the cart item inside the cart");
     else {
       cart.CartItems = CartItems;
-      cart.TotalItems = TotalItems;
-      cart.TotalPrice = TotalPrice;
 
+      console.log(CartItems);
       cart.save()
         .then((cart) => {
           res.json({
@@ -112,10 +108,10 @@ exports.editCartEntry = (req, res) => {
         .catch((err) => {
           res.json({
 
-            message: err + "Error - Could not update the cart"
+            message: "Error - Could not update the cart"
 
           });
-
+          // res.status(400).send("Error - Could not update the cart");
         });
     }
   });

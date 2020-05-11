@@ -30,7 +30,6 @@ import ViewCart from './components/CartComponent/CartManagment/ViewCart';
 import ViewOrder from './components/CartComponent/OrderManagment/ViewOrder';
 import UserCart from './components/CartComponent/CartManagment/UserCart';
 import CartView from './components/CartComponent/CartManagment/CartView';
-import Checkout from './components/CartComponent/CartManagment/Checkout';
 
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -113,7 +112,6 @@ class App extends Component {
               <Route path="/viewcart" component={ViewCart} />
 
               <Route path="/cartview" component={CartView} />
-              <Route path="/checkout" component={Checkout} />
             </Switch>
 
           </Router>
