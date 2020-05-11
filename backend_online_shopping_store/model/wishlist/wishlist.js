@@ -20,6 +20,10 @@ let Wishlist = new Schema({
 
     UserId:{
         type: String
+    },
+
+    ProductId:{
+        type: String
     }
 },
     {

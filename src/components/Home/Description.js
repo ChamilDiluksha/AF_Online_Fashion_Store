@@ -109,9 +109,10 @@ export default class Description extends Component {
           Subtype: this.state.Subtype,
           DressPrice: this.state.DressPrice,
           Images: this.state.Image,
-          UserId: this.state.user.userId
+          UserId: this.state.user.userId,
+          ProductId: this.state.productid
       }
-
+      console.log(obj);
       axios.post('http://localhost:5000/wishlist/create', obj)
       .then(response => {
         window.location.href = "/wishlist";

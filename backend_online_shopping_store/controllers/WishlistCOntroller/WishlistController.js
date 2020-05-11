@@ -7,6 +7,8 @@ exports.addItem = (req, res, next) => {
   const DressPrice = req.body.DressPrice;
   const Images = req.body.Images;
   const UserId = req.body.UserId;
+  const ProductId = req.body.ProductId;
+
 
     // WishlistItems.find({
     //   UserId, Subtype
@@ -25,6 +27,7 @@ exports.addItem = (req, res, next) => {
                   DressPrice,
                   Images,
                   UserId,
+                  ProductId
                 });
 
                 newlistItem
