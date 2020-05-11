@@ -23,12 +23,10 @@ export default class NavBar extends Component {
       user: user,
       Subtype: '',
       Images: [],
-      Wishlist: [],
-      category: []
+      Wishlist: []
     }
 
-    this.btnLinks = this.btnLinks.bind(this);
-    this.displayHistory = this.displayHistory.bind(this);
+    this.hideWishlistBtn = this.hideWishlistBtn.bind(this);
   }
 
 
@@ -69,51 +67,18 @@ export default class NavBar extends Component {
           .catch(function (error) {
               console.log(error);
           })
-
-      axios.get('http://localhost:5000/category/')
-      .then(response => {
-          this.setState({ category: response.data });
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
   }
 
-  btnLinks() {
+  hideWishlistBtn() {
     const cookies = new Cookies();
     let user = cookies.get('user');
 
+    if (user) {
       return (
-      <Button variant="outline-dark" className="float-right mr-4 mb-4 mt-4 wishlist-btn" onClick={() => {
-          if (user) {
-            window.location.href = "/wishlist";
-          }
-
-          else {
-            alert('Please Login First..!');
-            window.location.href = "/sign-in";
-          }
-        }
-      }>Wish List <i class="fas fa-heart" /></Button>
+      <Button variant="outline-dark" className="float-right mr-4 mb-4 mt-4 wishlist-btn" onClick={() => {window.location.href = "/wishlist";}}>Wish List <i class="fas fa-heart" /></Button>
       );
-
+    }
   }
-
-  displayHistory() {
-    const cookies = new Cookies();
-    let user = cookies.get('user');
-    return (
-      (user) ?
-        <Nav.Link href="#link">Purchase History</Nav.Link>
-        : ''
-      );
-  }
-
-  onChangeCategory(e) {
-  this.setState({
-    category: e.target.value
-  });
-}
 
   render() {
     return (
@@ -125,20 +90,15 @@ export default class NavBar extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <NavDropdown title="Categories" id="basic-nav-dropdown" value={this.state.category} onChange={this.onChangeCategory}>
-                {
-                  this.state.category.map(function(category) {
-                    return <NavDropdown.Item href="#action/3.1">{category}</NavDropdown.Item>;
-                  })
-                }
-
-
+              <NavDropdown title="Categories" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Men</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Women</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Kids</NavDropdown.Item>
               </NavDropdown>
 
-              <Nav.Link href="/delivery">Delivery</Nav.Link>
-              <Nav.Link href="/sizeguide">Size Guide</Nav.Link>
+              <Nav.Link href="#home">Delivery</Nav.Link>
+              <Nav.Link href="#link">Size Guide</Nav.Link>
               <Nav.Link href="#link">About Us</Nav.Link>
-              {this.displayHistory()}
             </Nav>
 
             {
@@ -166,7 +126,7 @@ export default class NavBar extends Component {
             </Form>
           </Navbar.Collapse>
         </Navbar>
-        {this.btnLinks()}
+        {this.hideWishlistBtn()}
         {/* <Link to={{
           pathname: '/usercart',
           aboutProps: this.state

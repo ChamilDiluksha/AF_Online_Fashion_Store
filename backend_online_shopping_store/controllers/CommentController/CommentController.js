@@ -7,17 +7,29 @@ exports.addComment = (req, res) => {
     const date = Date.parse(req.body.date);
     const ProductId = req.body.ProductId;
     const UserId = req.body.UserId;
-    const Username = req.body.Username;
 
+    // WishlistItems.find({
+    //     _id
+    // }).exec()
+    //   .then(listItem => {
+    //
+    //     if(listItem.length >= 1){
+    //         return res.json({
+    //             message : 'Already in Wishlist..!'
+    //         });
+    //     }else{
 
             const newComment = new Comments({
               Comment,
               Review,
               date,
               ProductId,
-              UserId,
-              Username
+              UserId
             });
+            // newlistItem.Subtype = Subtype;
+            // newlistItem.DressPrice = DressPrice;
+            // newlistItem.Images = Images;
+            // newlistItem.UserId = UserId;
 
             newComment
                 .save()
@@ -30,6 +42,9 @@ exports.addComment = (req, res) => {
                 .catch(err => {
                     console.log(err);
                 });
+    //     }
+    // });
+// }
 }
 
 // Method for get all comments
