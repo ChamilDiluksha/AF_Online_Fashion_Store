@@ -12,6 +12,8 @@ import NavBar from '../src/components/Home/NavBar';
 import Container from '../src/components/Home/Container';
 import Footer from '../src/components/Home/Footer';
 import Wishlist from './components/Wishlist/Wishlist';
+import Delivery from '../src/components/Home/Delivery';
+import Sizeguide from '../src/components/Home/Sizeguide';
 import Items from '../src/components/Home/Items';
 import Description from '../src/components/Home/Description';
 import 'semantic-ui-css/semantic.min.css';
@@ -104,8 +106,8 @@ class App extends Component {
               <Route path="/sign-in" component={Login} />
               <Route path="/items/:id" component={Items} />
               <Route path="/wishlist" component={Wishlist} />
-
-
+              <Route path="/delivery" component={Delivery} />
+              <Route path="/sizeguide" component={Sizeguide} />
               <Route path="/vieworder" component={ViewOrder} />
               <Route path="/viewcart" component={ViewCart} />
 
