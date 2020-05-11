@@ -49,8 +49,8 @@ app.use("/wishlist", wishlistRoute);
 const commentRoute = require("./routes/CommentRoute/commentRoute");
 app.use("/comment", commentRoute);
 
-// const orderRoute = require("./routes/CartRoute/OrderRoute");
-// app.use("/order", orderRoute);
+const orderRoute = require("./routes/CartRoute/OrderRoute");
+app.use("/order", orderRoute);
 
 // server listening port
 app.listen(port, () => {
