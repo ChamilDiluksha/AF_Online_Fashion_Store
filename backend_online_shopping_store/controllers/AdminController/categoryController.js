@@ -1,4 +1,5 @@
 const CategoryItem = require("../../model/AdminModels/Category");
+const multer = require('multer');
 
 exports.addCategory = (req, res, next) => {
 
@@ -9,7 +10,8 @@ exports.addCategory = (req, res, next) => {
         CategoryType,
         SubType,
         stages,
-        description
+        description,
+        images
     } = body;
 
 
@@ -30,6 +32,7 @@ exports.addCategory = (req, res, next) => {
             newCategory.SubType = SubType;
             newCategory.stages = stages;
             newCategory.description = description;
+            newCategory.images = images;
 
             newCategory
                 .save()
@@ -128,4 +131,34 @@ exports.deleteCategory = (req,res,next) => {
                 error:err
             });
         });
+}
+
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './uploads/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}_${file.originalname}`)
+    },
+    fileFilter: (req, file, cb) => {
+        const ext = path.extname(file.originalname)
+        if (ext !== '.jpg' || ext !== '.png') {
+            return cb(res.status(400).end('only jpg, png are allowed'), false);
+        }
+        cb(null, true)
+    }
+})
+
+let upload = multer({ storage: storage }).single("file");
+
+
+exports.UploadImage = (req, res, next) => {
+
+    upload(req, res, err => {
+        if (err) {
+            return res.json({ success: false, err })
+        }
+        return res.json({ success: true, image: res.req.file.path, fileName: res.req.file.filename })
+    })
+    
 }

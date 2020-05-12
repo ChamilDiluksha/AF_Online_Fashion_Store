@@ -20,7 +20,7 @@ class ImageUpload extends Component {
         }
         formData.append("file", files[0])
         //save the Image we chose inside the Node Server 
-        Axios.post('http://localhost:5000/product/uploadImage', formData, config)
+        Axios.post('http://localhost:5000/category/uploadImage', formData, config)
             .then(response => {
                 if (response.data.success) {
 
@@ -61,7 +61,7 @@ class ImageUpload extends Component {
             >
                 {({ getRootProps, getInputProps }) => (
                     <div style={{
-                        width: '300px', height: '240px', border: '1px solid lightgray',
+                        width: '30px', height: '24px', border: '1px solid lightgray',
                         display: 'flex', alignItems: 'center', justifyContent: 'center'
                     }}
                         {...getRootProps()}
@@ -69,16 +69,15 @@ class ImageUpload extends Component {
                         <input {...getInputProps()} />
                         <i class="fas fa-plus"></i>
 
-
                     </div>
                 )}
             </Dropzone>
 
-            <div style={{ display: 'flex', width: '350px', height: '240px', overflowX: 'scroll' }}>
+            <div style={{ display: 'flex', width: '35px', height: '24px', overflowX: 'scroll' }}>
 
             {this.state.Images.map((image, index) => (
                     <div onClick={() => this.onDelete(image)}>
-                        <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`http://localhost:5000/${image}`} alt={`productImg-${index}`} />
+                        <img style={{ minWidth: '30px', width: '30px', height: '240px' }} src={`http://localhost:5000/${image}`} alt={`productImg-${index}`} />
                     </div>
                 ))}
 
