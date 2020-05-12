@@ -1,43 +1,46 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const Cart = require("../../model/CartModels/Cart");
-// const Product = require("../../model/product/");
-const nodeMailer = require("nodemailer");
 const texts = require("../../constants/texts");
-const emailCongig = texts.emailConfigure;
+
 
 exports.addToCart = (req, res, next) => {
   const { body } = req;
-
-  const { UserID, CartItems } = body;
-  Cart.find({
+  const {
     UserID,
-  })
-    .exec()
-    .then((cart) => {
-      if (cart.length >= 1) {
-        return res.json({
-          message: "Error - You have already added items to your cart from this username",
-        })
-          ;
-      } else {
-        const newCartEntry = new Cart();
-        newCartEntry.UserID = UserID;
-        newCartEntry.CartItems = CartItems;
+    DressCode,
+    Subtype,
+    Description,
+    ProductId,
+    Quantity,
+    DressPrice,
+    DressImage,
+    Total
+  } = body
 
-        newCartEntry
-          .save()
-          .then((result) => {
-            console.log(result);
-            res.status(201).json({
-              message: "Item has been added to the cart sucessfully",
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+  const newCartEntry = new Cart();
+  newCartEntry.UserID = UserID;
+  newCartEntry.DressCode = DressCode;
+  newCartEntry.Subtype = Subtype;
+  newCartEntry.Description = Description;
+  newCartEntry.ProductId = ProductId;
+  newCartEntry.Quantity = Quantity;
+  newCartEntry.DressPrice = DressPrice;
+  newCartEntry.DressImage = DressImage;
+  newCartEntry.Total = Total;
+
+  newCartEntry
+    .save()
+    .then((result) => {
+      console.log(result);
+      res.status(201).json({
+        message: "Item has been added to the cart sucessfully",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
+
 };
 
 exports.getAllCartEntries = (req, res) => {
@@ -49,6 +52,90 @@ exports.getAllCartEntries = (req, res) => {
     }
   });
 };
+
+
+
+exports.editCartEntry = (req, res) => {
+  const { body } = req;
+  const {
+    UserID,
+    DressCode,
+    Subtype,
+    Description,
+    ProductId,
+    Quantity,
+    DressPrice,
+    DressImage,
+    Total
+  } = body
+
+
+
+  Cart.findById(req.params.id, (err, cart) => {
+    if (!cart)
+      res.status(404).send("Error - Could not find the cart item inside the cart");
+    else {
+      cart.UserID = UserID;
+      cart.DressCode = DressCode;
+      cart.Subtype = Subtype;
+      cart.Description = Description;
+      cart.ProductId = ProductId;
+      cart.Quantity = Quantity;
+      cart.DressPrice = DressPrice;
+      cart.DressImage = DressImage;
+      cart.Total = Total;
+
+
+      cart.save()
+        .then((cart) => {
+          res.json({
+            // message: "cart edited Successfully" + cart.CartItems
+            message: "Your cart has been updated!!"
+
+          });
+        })
+        .catch((err) => {
+          res.json({
+
+            message: "Error - Could not update the cart"
+
+          });
+          // res.status(400).send("Error - Could not update the cart");
+        });
+    }
+  });
+};
+
+
+
+
+
+exports.deleteCartItem = (req, res, next) => {
+  const { body } = req;
+
+  const { UserID } = body;
+
+  Cart.remove({ _id: req.params.id })
+    .exec()
+    .then((result) => {
+      res.status(200).json({
+        message: "Cart entry deleted",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+
+
+
+
+
+
 
 
 
@@ -85,57 +172,8 @@ exports.userInCart = (req, res, next) => {
     )
 };
 
-exports.editCartEntry = (req, res) => {
-  const { body } = req;
-  const { CartItems } = body;
 
 
-  Cart.findById(req.params.id, (err, cart) => {
-    if (!cart)
-      res.status(404).send("Error - Could not find the cart item inside the cart");
-    else {
-      cart.CartItems = CartItems;
-
-      console.log(CartItems);
-      cart.save()
-        .then((cart) => {
-          res.json({
-            // message: "cart edited Successfully" + cart.CartItems
-            message: "Your cart has been updated!!"
-
-          });
-        })
-        .catch((err) => {
-          res.json({
-
-            message: "Error - Could not update the cart"
-
-          });
-          // res.status(400).send("Error - Could not update the cart");
-        });
-    }
-  });
-};
-
-exports.deleteCartItem = (req, res, next) => {
-  const { body } = req;
-
-  const { UserID } = body;
-
-  Cart.remove({ _id: req.params.id })
-    .exec()
-    .then((result) => {
-      res.status(200).json({
-        message: "Cart entry deleted",
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
-    });
-};
 
 
 

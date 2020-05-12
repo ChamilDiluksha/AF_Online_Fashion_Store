@@ -44,6 +44,19 @@ exports.getAllComments = (req, res) => {
     });
 }
 
+exports.updateComment = (req, res) => {
+  Exercise.findById(req.params.id)
+    .then(comment => {
+      comment.Comment = req.body.Comment;
+      comment.Review = req.body.Review;
+
+      comment.save()
+        .then(() => res.json('Comment Updated..'))
+          .catch(err => res.status(400).json('Error: ' + err));
+    })
+      .catch(err => res.status(400).json('Error: ' + err));
+}
+
 // Method for delete comment
 exports.deleteComment = (req,res) => {
     Comments.remove({_id: req.params.id})
