@@ -4,25 +4,36 @@ const Schema = mongoose.Schema;
 let Cart = new Schema(
   {
     UserID: {
-      type: String,
-      required: true
+      type: String
     },
-    CartItems: {
-      type: [
-        {
-          DressCode: String,
-          DressType: String,
-          DressPrice: Number,
-          Quantity: Number,
-          Discount: Number,
-          Image: { data: Buffer, contentType: String }
-        }
-      ]
+    DressCode: {
+      type: String
     },
+    Subtype: {
+      type: String
+    },
+    Description: {
+      type: String
+    },
+    ProductId: {
+      type: String
+    },
+    Quantity: {
+      type: Number
+    },
+    DressPrice: {
+      type: Number,
+
+    },
+    DressImage: {
+      type: String
+    },
+    Total: {
+      type: Number
+    }
   },
   {
     collection: "Cart",
-  }
-);
+  });
 
 module.exports = mongoose.model("Cart", Cart);

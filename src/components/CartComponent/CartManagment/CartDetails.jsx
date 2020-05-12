@@ -1,133 +1,214 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBContainer } from "mdbreact";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCol,
+  MDBContainer,
+} from "mdbreact";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Cookies from "universal-cookie";
 import "./cartStyles.css";
 import { Grid } from "semantic-ui-react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class CartDetails extends Component {
   constructor(props) {
+    const cookies = new Cookies();
+    let user = cookies.get("user");
+
     super(props);
     this.state = {
+      user: user,
+      Subtype: "",
+      cid: this.props.obj._id,
+      name: this.props.obj.Description,
       Quantity: this.props.obj.Quantity,
-      id: this.props.obj._id,
-      index: 0,
-      Cart: this.props.cart,
-      cid: this.props.cartid
+      Cart: [],
     };
+    this.renderCards = this.renderCards.bind(this);
   }
 
-  incrementQunatity() {
-    console.log("clicked");
+  // getData = async () => {
+  //   const cookies = new Cookies();
+  //   let user = cookies.get('user');
 
-    this.setState({
-      Quantity: this.state.Quantity + 1,
-    });
+  //   const uid = {
+  //     UserID: user.userId
+  //   }
 
+  //   const resusertemp = await axios.post('http://localhost:5000/cart/getCartUser', uid);
+  //   console.log(resusertemp);
+  //   console.log(resusertemp.data.cart);
+  //   this.setState({
+  //     Cart: resusertemp.data.cart
+  //   })
+  //   console.log(this.state.Cart);
+  // }
+
+  // componentDidMount() {
+  //   this.getData();
+
+  // }
+  updateQty() {
+    const item = {
+      UserID: this.state.user.userId,
+      DressCode: this.props.obj.DressCode,
+      Subtype: this.props.obj.Subtype,
+      Description: this.props.obj.Description,
+      ProductId: this.props.obj.productid,
+      Quantity: this.state.Quantity,
+      DressPrice: this.props.obj.DressPrice,
+      DressImage: this.props.obj.DressImage,
+      Total: this.state.Quantity * this.props.obj.DressPrice,
+    };
+
+    axios
+      .put("http://localhost:5000/cart/update/" + this.props.obj._id, item)
+      .then((response) => {
+        console.log(response);
+        window.location.href = "/cartview";
+        alert(response.data.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // alert('Item Incremeted.!');
+    window.location.href = "/cartview";
   }
 
-  decrementQunatity() {
-
-    this.setState({
-      index: this.state.Cart.findIndex(obj => obj._id === this.state.id)
-    })
-
-
-    console.log("indeccccc");
-    console.log(this.state.index);
-
-    console.log(this.props.key);
-    if (this.state.Quantity > 0) {
-      this.setState({
+  decrementQunatity = async () => {
+    console.log(this.props.obj.Description);
+    console.log(this.state.Cart);
+    // console.log(this.state.cid);
+    if (this.state.Quantity > 1) {
+      await this.setState({
         Quantity: this.state.Quantity - 1,
       });
     }
+    this.updateQty();
+  };
+
+  incrementQunatity = async () => {
+    console.log("increment clicked");
+    await this.setState({
+      Quantity: this.state.Quantity + 1,
+    });
+    console.log(this.props.obj.Description);
+    this.updateQty();
+  };
+
+  removeFromCart() {
+    // e.preventDefault();
+
+    console.log("Delete");
+    console.log(this.state.cid);
+
+    axios
+      .delete("http://localhost:5000/cart/delete/" + this.state.cid)
+      .then(console.log("Deleted"))
+      .catch((err) => console.log(err));
+
+    alert("Item has removed from Cart..!");
+    window.location.href = "/cartview";
   }
 
+  // componentDidMount() {
+  //   const cookies = new Cookies();
+  //   let user = cookies.get('user');
 
+  //   const uid = {
+  //     UserID: user.userId
+  //   }
 
-  delete() {
-    this.setState({
-      index: this.state.Cart.findIndex(obj => obj._id == this.state.id),
-      new: this.state.Cart.splice(this.state.index, 1)
-    })
+  //   const resusertemp = axios.post('http://localhost:5000/cart/getCartUser', uid);
+  //   this.setState({
+  //     Cart: resusertemp.data.cart
+  //   })
 
-    const cartid = this.state.cid;
+  // }
 
-    const load = {
-      CartItems: this.state.Cart
+  renderCards() {
+    console.log(this.props.obj.Description);
+    if (this.state.user) {
+      const userId = this.state.user.userId;
+
+      if (this.props.obj.UserID == userId) {
+        return (
+          <Card className="mr-4 mb-4 wishlist-card" style={{ width: "18rem" }}>
+            <Link>
+              <Card.Img
+                width="70px"
+                height="250px"
+                variant="top"
+                src={`http://localhost:5000/${this.props.obj.DressImage}`}
+              />
+            </Link>
+            <Card.Body>
+              <Card.Text className="text-center">
+                {this.props.obj.Description}
+              </Card.Text>
+              <Card.Title className="text-center">
+                {this.props.obj.DressCode}
+              </Card.Title>
+              <Card.Title className="text-center">
+                LKR {this.props.obj.DressPrice}
+              </Card.Title>
+              <div class="btn-group btn-group-medium" align="center">
+                <Button
+                  onClick={(e) => this.incrementQunatity()}
+                  variant="medium"
+                  className="btn btn-primary"
+                >
+                  {" "}
+                  <i class="fa fa-plus-square" aria-hidden="true"></i>
+                </Button>
+
+                <Card.Text className="text-center">
+                  Quantity {this.state.Quantity}
+                </Card.Text>
+
+                <Button
+                  onClick={(e) => this.decrementQunatity()}
+                  variant="dark"
+                  className="mb-2 ml-3 mr-3"
+                >
+                  {" "}
+                  <i class="fa fa-minus-square" aria-hidden="true"></i>
+                </Button>
+              </div>
+
+              <Button
+                onClick={(e) => this.removeFromCart()}
+                variant="dark"
+                className="mb-2"
+                block
+              >
+                <i class="fas fa-trash mr-2" /> Remove From Cart
+              </Button>
+            </Card.Body>
+          </Card>
+        );
+      }
+    } else {
+      alert("Please Log In..!");
+      window.location.href = "/sign-in";
     }
-
-    axios.put('http://localhost:5000/cart/update/' + cartid, load)
-      .then(console.log('Deleted'))
-      .catch(err => console.log(err));
-    window.location.href = "/cartview";
-
   }
 
   render() {
     return (
-
-      <MDBCol mb-5>
-        <MDBCard mb-5 style={{ width: "22rem" }}>
-          <MDBCardImage
-            className="img-fluid"
-            src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
-            waves
-          />
-          <MDBCardBody>
-            <Grid textAlign="center">
-              <MDBCardTitle align="center">
-                {this.props.obj.DressType}
-              </MDBCardTitle>
-            </Grid>
-            <Grid align="center">
-              <MDBCardText align="center">Dress Code</MDBCardText>
-              <MDBCardText align="center">
-                {this.props.obj.DressCode}
-              </MDBCardText>
-            </Grid>
-            <Grid align="center">
-              <MDBCardText align="center">Dress Price</MDBCardText>
-              <MDBCardText align="center">
-                {this.props.obj.DressPrice}
-              </MDBCardText>
-            </Grid>
-
-            <Grid align="center">
-              <MDBCardText large style={{ paddingRight: "10px" }}>
-                Quantity
-              </MDBCardText>
-              <MDBBtn onClick={(e) => this.incrementQunatity()}>
-                {" "}
-                <i
-                  className="fa fa-plus-square"
-                  style={{ paddingRight: "5px" }}
-                ></i>{" "}
-              </MDBBtn>
-              <MDBCardText large style={{ paddingRight: "10px" }}>
-                {this.state.Quantity}
-              </MDBCardText>
-
-              <MDBBtn onClick={(e) => this.decrementQunatity()}>
-                <i
-                  className="fa fa-minus-square"
-                  style={{ paddingRight: "5px" }}
-                  aria-hidden="true"
-                ></i>{" "}
-              </MDBBtn>
-            </Grid>
-            <Grid textAlign="center">
-              <MDBBtn onClick={(e) => this.delete()} className="button" align="center">
-                Remove From Cart
-              </MDBBtn>
-            </Grid>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-
-
-
+      <div>
+        {console.log(this.props.obj.Description)}
+        {this.renderCards()}
+      </div>
     );
   }
 }
