@@ -115,11 +115,9 @@ class App extends Component {
             </Switch>
 
           </Router>
-          {
-            (window.location.pathname !== '/sign-in') ? (
-              <Footer />
-            ) : null
-          }
+         
+          <Footer />
+          
 
         </div>
 

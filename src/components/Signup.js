@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import axios from 'axios';
+import NavBar from './Home/NavBar';
 
 class Signup extends Component {
     constructor(props) {
@@ -69,10 +70,12 @@ class Signup extends Component {
     render() { 
         return ( 
 
-            
+            <div>
+            <NavBar/>
+            <div className="container">
            
             <form onSubmit={this.onSubmit}>
-            <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+            <Grid textAlign='center' style={{ height: '70vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 400 }}>
               <Header as='h2' color='teal' textAlign='center'>
                 Sign-Up 
@@ -148,7 +151,8 @@ class Signup extends Component {
             </Grid.Column>
             </Grid>
             </form>
-          
+          </div>
+          </div>
          );
     }
 }
