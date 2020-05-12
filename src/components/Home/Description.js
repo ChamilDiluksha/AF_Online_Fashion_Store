@@ -130,6 +130,9 @@ export default class Description extends Component {
   }
 
   displayComments() {
+    const cookies = new Cookies();
+    let user = cookies.get('user');
+
     const prodId = this.state.productid;
 
     return this.state.Comments.map(function(object, i) {
@@ -139,6 +142,24 @@ export default class Description extends Component {
           <div class="content">
             <h3 class="author">{object.Username}</h3>
             <div class="metadata"><h6><Moment format="YYYY/MM/DD">{object.date}</Moment></h6></div>
+            <Button variant="dark" size="sm" onClick={() => {
+              if (user) {
+                if (user.userId == object.UserId) {
+                  axios.delete('http://localhost:5000/comment/delete/'+object._id)
+                  .then(console.log('Deleted'))
+                    .catch(err => console.log(err));
+                    alert('Comment Deleted..!');
+                    window.location.reload();
+                }
+                else {
+                  alert('You Can not Delete this Comment..!');
+                }
+              }
+              else {
+                alert('Please Login First..!');
+                window.location.href = "/sign-in";
+              }
+              }} className="float-right">Delete</Button>
             <div class="text"><h5>{object.Comment}</h5></div>
           </div>
           <Rating icon='star' defaultRating={object.Review} maxRating={4} size='huge' disabled/>

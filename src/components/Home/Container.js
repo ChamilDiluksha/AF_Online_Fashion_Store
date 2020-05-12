@@ -51,12 +51,9 @@ export default class Container extends Component {
           console.log(error);
         })
 
-
-
     return this.state.category.map(function(object, i) {
       return <Link to={'/items/'+ object._id}>
         <Card  className="mr-4 category-card" style={{ width: '18rem' }}>
-          {console.log('les')}
           <Card.Img variant="top"  src={category1}/>
           <Card.Body>
             <Card.Title className="text-center">{object.CategoryType}</Card.Title>

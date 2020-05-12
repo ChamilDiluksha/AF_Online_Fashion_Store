@@ -128,7 +128,7 @@ export default class NavBar extends Component {
               <NavDropdown title="Categories" id="basic-nav-dropdown" value={this.state.category} onChange={this.onChangeCategory}>
                 {
                   this.state.category.map(function(category) {
-                    return <NavDropdown.Item href="#action/3.1">{category}</NavDropdown.Item>;
+                    return <NavDropdown.Item href={'/items/'+ category._id}>{category.CategoryType}</NavDropdown.Item>;
                   })
                 }
 

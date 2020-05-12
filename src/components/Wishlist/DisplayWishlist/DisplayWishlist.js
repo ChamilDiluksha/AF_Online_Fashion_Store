@@ -47,16 +47,28 @@ class DisplayWishlist extends Component {
       window.location.href = "/wishlist";
     }
 
+    addToCart = (e) => {
+      e.preventDefault();
+
+      axios.delete('http://localhost:5000/wishlist/delete/'+this.props.obj._id)
+        .then(console.log('Deleted'))
+          .catch(err => console.log(err));
+
+      alert('Added to Shopping Cart..!');
+// TODO: Kalpani link this  shopping cart
+      window.location.href = "/wishlist";
+    }
+
     renderCards() {
       if (this.state.user) {
         const userId = this.state.user.userId;
 
         if (this.props.obj.UserId == userId) {
           return (<Card  className="mr-4 mb-4 wishlist-card" style={{ width: '18rem' }}>
-            <Link to='/description'><Card.Img variant="top" src={`http://localhost:5000/${this.props.obj.Images[0]}`} /></Link>
+            <Card.Img variant="top" src={`http://localhost:5000/${this.props.obj.Images[0]}`} />
             <Card.Body>
               <Card.Title className="text-center">{this.props.obj.Subtype}</Card.Title>
-              <Button variant="dark" className="mb-2" block><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button>
+              <Button variant="dark" onClick={this.addToCart} className="mb-2" block><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button>
               <Button variant="outline-dark" onClick={this.deleteItem} className="mb-2" block><i class="fas fa-trash mr-2"/> Remove from Wishlist</Button>
             </Card.Body>
           </Card>
@@ -66,7 +78,7 @@ class DisplayWishlist extends Component {
       else {
         alert('Please Log In..!');
         window.location.href = "/sign-in";
-      }  
+      }
     }
 
   render() {
