@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {  Message } from 'semantic-ui-react'
 import {Button, Col, Form, FormControl} from 'react-bootstrap';
+import ImageUpload from './ImageUpload';
 
 class Category extends Component {
     constructor(props) {
@@ -24,7 +25,8 @@ class Category extends Component {
                 {stage:''}
             ],
             description : '',
-            message:''
+            message:'',
+            images: [],
 
 
          }
@@ -104,7 +106,8 @@ class Category extends Component {
             CategoryType : this.state.CategoryType,
             SubType : this.state.SubType,
             stages: this.state.ItemStages,
-            description :this.state.description 
+            description :this.state.description,
+            images: this.state.images
         }
 
 
@@ -125,11 +128,17 @@ class Category extends Component {
             SubType : '',
             ItemStages:[],
             allStages:[{stage:''}],
-            description : ''
+            description : '',
+            images:[]
 
         });
 
 
+    }
+
+    updateFiles = (newImages) => {
+        console.log(newImages)
+        this.setState({ images: newImages })
     }
 
     render() { 
@@ -137,6 +146,7 @@ class Category extends Component {
             <div style={{paddingBottom :"30px"}}>
             <div className="row">
             <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"60px"}}>
+            <h5 style={{padding:"15px"}}>Create Category</h5>
             <Form onSubmit={this.onSubmit}>
 
                     <Form.Row>
@@ -192,6 +202,11 @@ class Category extends Component {
                                 onChange={this.onChangeDescription}
                                 placeholder="Description" />
                     </Form.Group>
+
+                    <div style={{paddingTop:"5px"}}> 
+                    <Form.Label>Choose Image</Form.Label>
+                        <ImageUpload refreshFunction = {this.updateFiles} /> 
+                    </div>
 
                     <Button variant="primary" type="submit">
                         Submit

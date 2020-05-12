@@ -143,8 +143,8 @@ export default class NavBar extends Component {
               >
                 {this.state.category.map(function (category) {
                   return (
-                    <NavDropdown.Item href="#action/3.1">
-                      {category}
+                    <NavDropdown.Item href={"/items/" + category._id}>
+                      {category.CategoryType}
                     </NavDropdown.Item>
                   );
                 })}

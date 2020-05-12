@@ -156,6 +156,7 @@ class Category extends Component {
           
             <div className="row">
             <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"60px"}}>
+            <h5 style={{padding:"15px"}}>Edit Category</h5>
             <Form onSubmit={this.onSubmit}>
 
                     <Form.Row>

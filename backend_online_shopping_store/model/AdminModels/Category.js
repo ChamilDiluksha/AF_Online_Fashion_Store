@@ -32,7 +32,12 @@ let Category = new Schema({
     description: {
         type: String,
         required: true
-    }
+    },
+
+    images: {
+        type: Array,
+        default:[]
+    },
 },
 {
     collection: 'Category'
