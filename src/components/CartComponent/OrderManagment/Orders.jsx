@@ -15,9 +15,8 @@ class Orders extends Component {
       <tr>
         <td>
           <Image src={`http://localhost:5000/${this.props.obj.DressImage}`} />
-
-          <span>{this.props.obj.DressCode}</span>
         </td>
+        <td>{this.props.obj.DressCode}</td>
         <td>{this.props.obj.OrderId}</td>
         <td>{this.props.obj.Description}</td>
         <td>{this.props.obj.Quantity}</td>

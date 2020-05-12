@@ -115,7 +115,7 @@ export default class Description extends Component {
         Description: this.state.Description,
         ProductId: this.state.productid,
         Quantity: this.state.Quantity,
-        DressPrice: this.state.DressPrice,
+        DressPrice: this.state.NewPrice,
         DressImage: this.state.Image[0],
         Total: this.state.Quantity * this.state.DressPrice,
       };
