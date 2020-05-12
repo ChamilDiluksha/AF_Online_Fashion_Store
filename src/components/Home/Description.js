@@ -6,7 +6,7 @@ import './HomeStyle.css';
 import Cookies from "universal-cookie";
 import NavBar from './NavBar';
 import Card from 'react-bootstrap/Card';
-import { Comment, Header, Rating } from 'semantic-ui-react';
+import { Comment, Header, Rating} from 'semantic-ui-react';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 import men1 from './images/men1.jpg';
