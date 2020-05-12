@@ -1,96 +1,69 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
-const Cart = require("../../model/CartModels/Cart");
-const multer = require("multer");
-const Product = require("../../model/product/");
-const nodeMailer = require("nodemailer");
+const Order = require("../../model/CartModels/Order");
 const texts = require("../../constants/texts");
-const emailCongig = texts.emailConfigure;
 
 exports.addOrder = (req, res, next) => {
   const { body } = req;
 
-  const { UserID, CartItems } = body;
-
-  Car;
-  t.find({
+  const {
+    OrderId,
     UserID,
-  })
-    .exec()
-    .then((cart) => {
-      if (cart.length >= 1) {
-        return res.json({
-          message: "Cart Entry for the user is already existing",
-        });
-      } else {
-        const newCartEntry = new Cart();
-        newCartEntry.userID = UserID;
-        newCartEntry.CartItems = CartItems;
+    DressCode,
+    Subtype,
+    Description,
+    ProductId,
+    Quantity,
+    DressPrice,
+    DressImage,
+    Total,
+    PlacedDate,
+  } = body;
 
-        newCartEntry
-          .save()
-          .then((result) => {
-            console.log(result);
-            res.status(201).json({
-              message: "Cart entry successfully created",
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    });
-};
+  const newOrderEntry = new Order();
+  newOrderEntry.OrderId = OrderId;
+  newOrderEntry.UserID = UserID;
+  newOrderEntry.DressCode = DressCode;
+  newOrderEntry.Subtype = Subtype;
+  newOrderEntry.Description = Description;
+  newOrderEntry.ProductId = ProductId;
+  newOrderEntry.Quantity = Quantity;
+  newOrderEntry.DressPrice = DressPrice;
+  newOrderEntry.DressImage = DressImage;
+  newOrderEntry.Total = Total;
+  newOrderEntry.PlacedDate = PlacedDate;
 
-exports.getAllCartEntries = (req, res) => {
-  Cart.find((err, manager) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(manager);
-    }
-  });
-};
-
-exports.getCartEntry = (req, res) => {
-  let userid = req.params.id;
-  Cart.findById(userid)
-    .then((cart) => res.json(cart))
-    .catch((err) => res.status(400).json("Error: " + err));
-};
-
-exports.editCartEntry = (req, res) => {
-  const { body } = req;
-  const { UserID, CartItems } = body;
-
-  Cart.findById(req.params.id, (err, cart) => {
-    if (!cart) res.status(404).send("Cart Entry data is not found");
-    else {
-      cart.CartItems = CartItems;
-      cart
-        .save()
-        .then((cart) => {
-          res.json("cart edited Successfully");
-        })
-        .catch((err) => {
-          res.status(400).send("unable to update the database");
-        });
-    }
-  });
-};
-
-exports.deleteCartEntry = (req, res, next) => {
-  Cart.remove({ _id: req.params.id })
-    .exec()
+  newOrderEntry
+    .save()
     .then((result) => {
-      res.status(200).json({
-        message: "Cart entry deleted",
+      console.log(result);
+      res.status(201).json({
+        message: "Your Order has been placed Sucessfully",
       });
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json({
-        error: err,
-      });
+    });
+};
+
+exports.userInOrder = (req, res, next) => {
+  const { body } = req;
+
+  const { UserID } = body;
+  Order.find({
+    UserID,
+  })
+    .exec()
+    .then((order) => {
+      if (order.length < 1) {
+        return res.json({
+          message: "Order not existing",
+        });
+      } else {
+        res.json({
+          order,
+          message: "Order existing",
+        });
+      }
     });
 };
