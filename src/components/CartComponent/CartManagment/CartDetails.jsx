@@ -145,8 +145,6 @@ class CartDetails extends Component {
           <Card className="mr-4 mb-4 wishlist-card" style={{ width: "18rem" }}>
             <Link>
               <Card.Img
-                width="70px"
-                height="250px"
                 variant="top"
                 src={`http://localhost:5000/${this.props.obj.DressImage}`}
               />
@@ -161,34 +159,30 @@ class CartDetails extends Component {
               <Card.Title className="text-center">
                 LKR {this.props.obj.DressPrice}
               </Card.Title>
-              <div class="btn-group btn-group-medium" align="center">
-                <Button
-                  onClick={(e) => this.incrementQunatity()}
-                  variant="medium"
-                  className="btn btn-primary"
-                >
-                  {" "}
-                  <i class="fa fa-plus-square" aria-hidden="true"></i>
-                </Button>
-
+              <div className="btn-group btn-group-medium" align="center">
+              <Button
+                onClick={(e) => this.decrementQunatity()}
+                variant="dark"
+                className="mr-4"
+              >
+                <i class="fa fa-minus-square"></i>
+              </Button>
                 <Card.Text className="text-center">
                   Quantity {this.state.Quantity}
                 </Card.Text>
-
                 <Button
-                  onClick={(e) => this.decrementQunatity()}
+                  onClick={(e) => this.incrementQunatity()}
                   variant="dark"
-                  className="mb-2 ml-3 mr-3"
+                  className="ml-4"
                 >
-                  {" "}
-                  <i class="fa fa-minus-square" aria-hidden="true"></i>
+                  <i class="fa fa-plus-square"></i>
                 </Button>
               </div>
 
               <Button
                 onClick={(e) => this.removeFromCart()}
-                variant="dark"
-                className="mb-2"
+                variant="outline-dark"
+                className="mb-2 mt-3"
                 block
               >
                 <i class="fas fa-trash mr-2" /> Remove From Cart

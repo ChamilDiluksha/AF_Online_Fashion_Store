@@ -104,37 +104,35 @@ export default class CartView extends Component {
       <div>
         <NavBar />
         <div className="main-container">
-          <h1 className="page-header ml-4">MY SHOPPING CART </h1>
-          <div class="btn-group btn-group-medium" align="center">
-            <div className="container mt-4 category-container">
-              <div className="row">{this.renderCards()}</div>
-            </div>
-            <div className="mt-4 ">
-              <Card
-                bg="light"
-                className="mr-4 mb-4 wishlist-card"
-                style={{ width: "18rem" }}
-              >
-                <Card.Body bg-dark>
-                  <Card.Title>Cart Summery</Card.Title>
-                  <Card.Title className="text-center">Sub Total</Card.Title>
-                  <Card.Title className="text-center">
-                    LKR {this.state.Total}
-                  </Card.Title>
-
-                  <Button variant="dark" className="mb-2 ml-3 mr-3">
+          <h1 className="page-header ml-4">My Shopping Cart </h1>
+          <div className="container mt-4 category-container">
+            <div class="btn-group btn-group-medium" align="center">
+              <div className="container mt-4 category-container">
+                <div className="row">{this.renderCards()}</div>
+              </div>
+              <div className="mt-4 ">
+                <Card
+                  bg="light"
+                  className="mr-4 mb-4 wishlist-card"
+                  style={{ width: "18rem" }}
+                >
+                  <Card.Body bg-dark>
+                    <Card.Title className="sub-total"><b>Cart Summery</b></Card.Title>
+                    <Card.Title className="text-center mt-4 mb-4">Sub Total : LKR {this.state.Total}</Card.Title>
                     <Link
-                      variant="light"
+                      variant="dark"
                       to={{
                         pathname: "/checkout",
                         aboutProps: this.state,
                       }}
                     >
-                      Proceed To Checkout
+                    <Button variant="dark" className="mb-2 ml-3 mr-3">
+                        Proceed To Checkout
+                    </Button>
                     </Link>
-                  </Button>
-                </Card.Body>
-              </Card>
+                  </Card.Body>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
