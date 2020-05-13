@@ -73,7 +73,6 @@ export default class OrderHistory extends Component {
               >
                 <MDBTableHead>
                   <tr>
-                    <th>Dress Image</th>
                     <th>Dress Code</th>
                     <th>Order ID</th>
                     <th>Description</th>
