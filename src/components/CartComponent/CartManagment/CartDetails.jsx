@@ -35,27 +35,6 @@ class CartDetails extends Component {
     this.renderCards = this.renderCards.bind(this);
   }
 
-  // getData = async () => {
-  //   const cookies = new Cookies();
-  //   let user = cookies.get('user');
-
-  //   const uid = {
-  //     UserID: user.userId
-  //   }
-
-  //   const resusertemp = await axios.post('http://localhost:5000/cart/getCartUser', uid);
-  //   console.log(resusertemp);
-  //   console.log(resusertemp.data.cart);
-  //   this.setState({
-  //     Cart: resusertemp.data.cart
-  //   })
-  //   console.log(this.state.Cart);
-  // }
-
-  // componentDidMount() {
-  //   this.getData();
-
-  // }
   updateQty() {
     const item = {
       UserID: this.state.user.userId,
@@ -120,21 +99,6 @@ class CartDetails extends Component {
     window.location.href = "/cartview";
   }
 
-  // componentDidMount() {
-  //   const cookies = new Cookies();
-  //   let user = cookies.get('user');
-
-  //   const uid = {
-  //     UserID: user.userId
-  //   }
-
-  //   const resusertemp = axios.post('http://localhost:5000/cart/getCartUser', uid);
-  //   this.setState({
-  //     Cart: resusertemp.data.cart
-  //   })
-
-  // }
-
   renderCards() {
     console.log(this.props.obj.Description);
     if (this.state.user) {
@@ -160,13 +124,13 @@ class CartDetails extends Component {
                 LKR {this.props.obj.DressPrice}
               </Card.Title>
               <div className="btn-group btn-group-medium" align="center">
-              <Button
-                onClick={(e) => this.decrementQunatity()}
-                variant="dark"
-                className="mr-4"
-              >
-                <i class="fa fa-minus-square"></i>
-              </Button>
+                <Button
+                  onClick={(e) => this.decrementQunatity()}
+                  variant="dark"
+                  className="mr-4"
+                >
+                  <i class="fa fa-minus-square"></i>
+                </Button>
                 <Card.Text className="text-center">
                   Quantity {this.state.Quantity}
                 </Card.Text>

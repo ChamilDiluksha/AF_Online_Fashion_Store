@@ -21,11 +21,7 @@ export default class Checkout extends Component {
   }
 
   async onSubmit() {
-    console.log(this.props.location.aboutProps.Cart);
-
-    console.log("inside submit");
     const t = this.state.cart;
-
     const tempDate = new Date();
     const oid =
       "ORD" +
@@ -51,7 +47,7 @@ export default class Checkout extends Component {
           Total: object.Total,
           PlacedDate: tempDate,
         };
-        console.log(orderobj);
+
         axios
           .post("http://localhost:5000/order/create", orderobj)
           .then(console.log("created"))
@@ -61,10 +57,6 @@ export default class Checkout extends Component {
 
     await Promise.all(
       t.map(function (object, i) {
-        console.log("inside delete ");
-
-        console.log(object._id);
-
         axios
           .delete("http://localhost:5000/cart/delete/" + object._id)
           .then(console.log("Deleted"))
@@ -83,9 +75,7 @@ export default class Checkout extends Component {
         <div className="ml-5 mr-5 mt-5 mb-5">
           <h1>Getting Your Order</h1>
 
-          <Form
-          // onSubmit={(e) => this.onSubmit()}
-          >
+          <Form>
             <h3>
               <i class="fa fa-truck" aria-hidden="true"></i> Shipping
               Information
@@ -124,7 +114,7 @@ export default class Checkout extends Component {
             </fieldset>
 
             <Form.Group as={Col}>
-              <Form.Label>Card Type</Form.Label>
+              <Form.Label>Card PIN</Form.Label>
               <Form.Control required type="text" />
             </Form.Group>
 

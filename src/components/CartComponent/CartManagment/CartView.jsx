@@ -8,11 +8,6 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import axios from "axios";
-// import category1 from './images/category1.jpg';
-// import category2 from './images/category2.jpg';
-// import category3 from './images/category3.jpg';
-
-// import DisplayWishlist from './DisplayWishlist/DisplayWishlist';
 import CartDetails from "./CartDetails";
 
 export default class CartView extends Component {
@@ -46,8 +41,7 @@ export default class CartView extends Component {
         "http://localhost:5000/cart/getCartUser",
         uid
       );
-      console.log(resusertemp);
-      console.log(resusertemp.data.cart);
+
       this.setState({
         Cart: resusertemp.data.cart,
         message: resusertemp.data.message,
@@ -61,8 +55,6 @@ export default class CartView extends Component {
       this.setState({
         Total: total,
       });
-
-      console.log(this.state.Cart);
     } else {
       alert("Please Log In..!");
       window.location.href = "/sign-in";
@@ -117,8 +109,12 @@ export default class CartView extends Component {
                   style={{ width: "18rem" }}
                 >
                   <Card.Body bg-dark>
-                    <Card.Title className="sub-total"><b>Cart Summery</b></Card.Title>
-                    <Card.Title className="text-center mt-4 mb-4">Sub Total : LKR {this.state.Total}</Card.Title>
+                    <Card.Title className="sub-total">
+                      <b>Cart Summery</b>
+                    </Card.Title>
+                    <Card.Title className="text-center mt-4 mb-4">
+                      Sub Total : LKR {this.state.Total}
+                    </Card.Title>
                     <Link
                       variant="dark"
                       to={{
@@ -126,9 +122,9 @@ export default class CartView extends Component {
                         aboutProps: this.state,
                       }}
                     >
-                    <Button variant="dark" className="mb-2 ml-3 mr-3">
+                      <Button variant="dark" className="mb-2 ml-3 mr-3">
                         Proceed To Checkout
-                    </Button>
+                      </Button>
                     </Link>
                   </Card.Body>
                 </Card>

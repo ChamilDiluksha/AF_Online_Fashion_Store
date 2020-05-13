@@ -21,10 +21,8 @@ import "semantic-ui-css/semantic.min.css";
 
 //import cart managment components
 import ViewCart from "./components/CartComponent/CartManagment/ViewCart";
-import ViewOrder from "./components/CartComponent/OrderManagment/ViewOrder";
 import OrderHistory from "./components/CartComponent/OrderManagment/OrderHistory";
 import Checkout from "./components/CartComponent/OrderManagment/Checkout";
-import UserCart from "./components/CartComponent/CartManagment/UserCart";
 import CartView from "./components/CartComponent/CartManagment/CartView";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -93,16 +91,15 @@ class App extends Component {
               <Route path="/wishlist" component={Wishlist} />
               <Route path="/delivery" component={Delivery} />
               <Route path="/sizeguide" component={Sizeguide} />
-              <Route path="/vieworder" component={ViewOrder} />
-              <Route path="/viewcart" component={ViewCart} />
 
+              <Route path="/viewcart" component={ViewCart} />
               <Route path="/checkout" component={Checkout} />
               <Route path="/cartview" component={CartView} />
               <Route path="/orderhistory" component={OrderHistory} />
             </Switch>
           </Router>
 
-          <Footer /> 
+          <Footer />
         </div>
       </React.Fragment>
     );

@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const Cart = require("../../model/CartModels/Cart");
 const texts = require("../../constants/texts");
 
-
 exports.addToCart = (req, res, next) => {
   const { body } = req;
   const {
@@ -15,8 +14,8 @@ exports.addToCart = (req, res, next) => {
     Quantity,
     DressPrice,
     DressImage,
-    Total
-  } = body
+    Total,
+  } = body;
 
   const newCartEntry = new Cart();
   newCartEntry.UserID = UserID;
@@ -40,7 +39,6 @@ exports.addToCart = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
-
 };
 
 exports.getAllCartEntries = (req, res) => {
@@ -53,8 +51,6 @@ exports.getAllCartEntries = (req, res) => {
   });
 };
 
-
-
 exports.editCartEntry = (req, res) => {
   const { body } = req;
   const {
@@ -66,14 +62,14 @@ exports.editCartEntry = (req, res) => {
     Quantity,
     DressPrice,
     DressImage,
-    Total
-  } = body
-
-
+    Total,
+  } = body;
 
   Cart.findById(req.params.id, (err, cart) => {
     if (!cart)
-      res.status(404).send("Error - Could not find the cart item inside the cart");
+      res
+        .status(404)
+        .send("Error - Could not find the cart item inside the cart");
     else {
       cart.UserID = UserID;
       cart.DressCode = DressCode;
@@ -85,30 +81,21 @@ exports.editCartEntry = (req, res) => {
       cart.DressImage = DressImage;
       cart.Total = Total;
 
-
-      cart.save()
+      cart
+        .save()
         .then((cart) => {
           res.json({
-            // message: "cart edited Successfully" + cart.CartItems
-            message: "Your cart has been updated!!"
-
+            message: "Your cart has been updated!!",
           });
         })
         .catch((err) => {
           res.json({
-
-            message: "Error - Could not update the cart"
-
+            message: "Error - Could not update the cart",
           });
-          // res.status(400).send("Error - Could not update the cart");
         });
     }
   });
 };
-
-
-
-
 
 exports.deleteCartItem = (req, res, next) => {
   const { body } = req;
@@ -130,24 +117,6 @@ exports.deleteCartItem = (req, res, next) => {
     });
 };
 
-
-
-
-
-
-
-
-
-
-// exports.getCartItemEntry = (req, res) => {
-//   let userid = req.params.id;
-
-//   Cart.find(userid)
-//     .then((cart) => res.json(cart))
-//     .catch((err) => res.status(400).json("Error: " + err));
-// };
-
-
 exports.userInCart = (req, res, next) => {
   const { body } = req;
 
@@ -159,24 +128,16 @@ exports.userInCart = (req, res, next) => {
     .then((cart) => {
       if (cart.length < 1) {
         return res.json({
-          message: "Cart not existing"
+          message: "Cart not existing",
         });
-      }
-      else {
+      } else {
         res.json({
           cart,
-          message: "Cart existing"
+          message: "Cart existing",
         });
       }
-    }
-    )
+    });
 };
-
-
-
-
-
-
 
 exports.getCartEntry = (req, res) => {
   let userid = req.params.id;
@@ -184,12 +145,6 @@ exports.getCartEntry = (req, res) => {
     .then((cart) => res.json(cart))
     .catch((err) => res.status(400).json("Error: " + err));
 };
-
-
-
-
-
-
 
 exports.deleteCartEntry = (req, res, next) => {
   Cart.remove({ _id: req.params.id })
@@ -206,38 +161,3 @@ exports.deleteCartEntry = (req, res, next) => {
       });
     });
 };
-
-
-// exports.userInCart = (req, res, next) => {
-//   const { body } = req;
-
-//   const { UserID, CartItems } = body;
-//   Cart.find({
-//     UserID,
-//   })
-//     .exec()
-//     .then((cart) => {
-//       if (cart.length < 1) {
-//         // res.json({
-//         //   message: "Cart not existing " + UserID
-//         // });
-
-
-//       }
-//       else {
-//         cart.map(object => {
-//           if (object.DressCode === CartItems.DressCode) {
-
-//             object.DressPrice = CartItems.DressPrice;
-//             object.Quantity = CartItems.Quantity;
-//             object.Discount = CartItems.Discount;
-//             object.Image = CartItems.Image;
-//             itemAtCart: "true"
-//           }
-
-//         }
-//         )
-//       }
-//     }
-//     )
-// };
