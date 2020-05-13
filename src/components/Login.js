@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+import NavBar from './Home/NavBar';
 
 class Login extends Component {
     constructor(props) {
@@ -73,7 +74,10 @@ class Login extends Component {
 
     render() { 
         return ( 
-            <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+            <div>
+            <NavBar/>
+            <div className="container">
+            <Grid textAlign='center' style={{ height: '70vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 400 }}>
               <Header as='h2' color='teal' textAlign='center'>
                 Log-in to your account
@@ -134,6 +138,8 @@ class Login extends Component {
             }
             </Grid.Column>
           </Grid>
+          </div>
+          </div>
          );
     }
 }

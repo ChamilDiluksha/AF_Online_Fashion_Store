@@ -12,34 +12,39 @@ let Order = new Schema(
       type: String,
       required: true,
     },
-
-    OrderItems: {
-      type: [
-        {
-          DressCode: String,
-          DressType: String,
-          DressPrice: Number,
-          Quantity: Number,
-          Discount: Number,
-          Image: { data: Buffer, contentType: String },
-        },
-      ],
+    DressCode: {
+      type: String,
     },
-
-    TotalPrice: {
+    Subtype: {
+      type: String,
+    },
+    Description: {
+      type: String,
+    },
+    ProductId: {
+      type: String,
+    },
+    Quantity: {
       type: Number,
-      required: true,
+    },
+    DressPrice: {
+      type: Number,
+    },
+    DressImage: {
+      type: String,
+    },
+    Total: {
+      type: Number,
     },
 
     PlacedDate: {
       type: Date,
-      required: true,
     },
   },
 
   {
-    collection: "Order",
+    collection: "OrderHistory",
   }
 );
 
-module.exports = mongoose.model("Order", Order);
+module.exports = mongoose.model("OrderHistory", Order);
