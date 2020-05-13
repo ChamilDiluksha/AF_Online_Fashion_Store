@@ -8,9 +8,6 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Cookies from "universal-cookie";
 import axios from 'axios';
-import category1 from'./images/category1.jpg';
-import category2 from'./images/category2.jpg';
-import category3 from'./images/category3.jpg';
 
 import DisplayWishlist from './DisplayWishlist/DisplayWishlist';
 

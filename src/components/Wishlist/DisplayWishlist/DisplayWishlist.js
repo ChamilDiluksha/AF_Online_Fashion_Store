@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import '../../Home/HomeStyle.css';
 import Cookies from "universal-cookie";
-import category1 from'../images/category1.jpg';
 
 class DisplayWishlist extends Component {
     constructor(props) {

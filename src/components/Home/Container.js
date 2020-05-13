@@ -11,9 +11,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import NavBar from './NavBar';
 import { Link } from 'react-router-dom';
 
-import category1 from'./images/category1.jpg';
-import category2 from'./images/category2.jpg';
-import category3 from'./images/category3.jpg';
 import carousel1 from'./images/carousel1.jpg';
 import carousel2 from'./images/carousel2.jpg';
 import carousel3 from'./images/carousel3.jpg';
