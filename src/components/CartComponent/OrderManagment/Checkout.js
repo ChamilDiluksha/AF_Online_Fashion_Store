@@ -51,7 +51,7 @@ export default class Checkout extends Component {
           Total: object.Total,
           PlacedDate: tempDate,
         };
-
+        console.log(orderobj);
         axios
           .post("http://localhost:5000/order/create", orderobj)
           .then(console.log("created"))

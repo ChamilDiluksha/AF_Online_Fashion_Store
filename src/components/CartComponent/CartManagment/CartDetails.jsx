@@ -62,7 +62,7 @@ class CartDetails extends Component {
       DressCode: this.props.obj.DressCode,
       Subtype: this.props.obj.Subtype,
       Description: this.props.obj.Description,
-      ProductId: this.props.obj.productid,
+      ProductId: this.props.obj.ProductId,
       Quantity: this.state.Quantity,
       DressPrice: this.props.obj.DressPrice,
       DressImage: this.props.obj.DressImage,
