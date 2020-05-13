@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import { Link } from 'react-router-dom';
 import { Image, Statistic } from "semantic-ui-react";
 import { Button } from "react-bootstrap";
 
@@ -23,7 +23,7 @@ class Orders extends Component {
         <td>{this.props.obj.DressPrice}</td>
         <td>{this.props.obj.Total}</td>
         <td>
-          <Button>Comment</Button>
+        <Link to={'/description/'+ this.props.obj.ProductId}><Button variant="dark">Comment</Button></Link>
         </td>
       </tr>
     );

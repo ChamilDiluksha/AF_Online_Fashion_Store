@@ -4,7 +4,6 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./HomeStyle.css";
 import Cookies from "universal-cookie";
-<<<<<<< HEAD
 import NavBar from './NavBar';
 import Card from 'react-bootstrap/Card';
 import { Comment, Header, Rating} from 'semantic-ui-react';
@@ -13,19 +12,7 @@ import Badge from 'react-bootstrap/Badge';
 import { Link } from 'react-router-dom';
 import AddComment from '../AddComment';
 import Moment from 'react-moment';
-=======
-import NavBar from "./NavBar";
-import Card from "react-bootstrap/Card";
-import { Comment, Header, Rating } from "semantic-ui-react";
-import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
-import men1 from "./images/men1.jpg";
-import men2 from "./images/men2.jpg";
-import men3 from "./images/men3.jpg";
-import { Link } from "react-router-dom";
-import AddComment from "../AddComment";
-import Moment from "react-moment";
->>>>>>> 2a08d562fb9185bb7ca788fa584d25ad519cae6e
+
 
 export default class Description extends Component {
   constructor(props) {
