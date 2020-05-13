@@ -62,8 +62,15 @@ export default class OrderHistory extends Component {
               className="col-13"
               style={{ paddingLeft: "30px", paddingRight: "100px" }}
             >
-              <h5 align="center">Purchase History</h5>
-              <MDBTable small style={{ marginTop: 20, width: "600px" }}>
+              <h1 align="center">Purchase History</h1>
+              <MDBTable
+                small
+                style={{
+                  marginTop: "50px",
+                  width: "1000px",
+                  marginLeft: "250px",
+                }}
+              >
                 <MDBTableHead>
                   <tr>
                     <th>Dress Code</th>

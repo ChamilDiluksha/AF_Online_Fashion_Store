@@ -4,17 +4,15 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./HomeStyle.css";
 import Cookies from "universal-cookie";
-import NavBar from "./NavBar";
-import Card from "react-bootstrap/Card";
-import { Comment, Header, Rating } from "semantic-ui-react";
-import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
-import men1 from "./images/men1.jpg";
-import men2 from "./images/men2.jpg";
-import men3 from "./images/men3.jpg";
-import { Link } from "react-router-dom";
-import AddComment from "../AddComment";
-import Moment from "react-moment";
+import NavBar from './NavBar';
+import Card from 'react-bootstrap/Card';
+import { Comment, Header, Rating} from 'semantic-ui-react';
+import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
+import { Link } from 'react-router-dom';
+import AddComment from '../AddComment';
+import Moment from 'react-moment';
+
 
 export default class Description extends Component {
   constructor(props) {
@@ -115,7 +113,7 @@ export default class Description extends Component {
         Description: this.state.Description,
         ProductId: this.state.productid,
         Quantity: this.state.Quantity,
-        DressPrice: this.state.DressPrice,
+        DressPrice: this.state.NewPrice,
         DressImage: this.state.Image[0],
         Total: this.state.Quantity * this.state.DressPrice,
       };
