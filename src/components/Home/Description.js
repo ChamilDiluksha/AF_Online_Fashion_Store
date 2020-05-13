@@ -4,15 +4,14 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./HomeStyle.css";
 import Cookies from "universal-cookie";
-import NavBar from './NavBar';
-import Card from 'react-bootstrap/Card';
-import { Comment, Header, Rating} from 'semantic-ui-react';
-import Button from 'react-bootstrap/Button';
-import Badge from 'react-bootstrap/Badge';
-import { Link } from 'react-router-dom';
-import AddComment from '../AddComment';
-import Moment from 'react-moment';
-
+import NavBar from "./NavBar";
+import Card from "react-bootstrap/Card";
+import { Comment, Header, Rating } from "semantic-ui-react";
+import Button from "react-bootstrap/Button";
+import Badge from "react-bootstrap/Badge";
+import { Link } from "react-router-dom";
+import AddComment from "../AddComment";
+import Moment from "react-moment";
 
 export default class Description extends Component {
   constructor(props) {
@@ -26,13 +25,13 @@ export default class Description extends Component {
       DressCode: "",
       DressType: "",
       DressPrice: 0,
-      Quantity: 0,
+      Quantity: 1,
       Discount: 0,
       Image: "",
       Description: "",
       Subtype: "",
       productid: "",
-      Quantity: 0,
+      Quantity: 1,
       Comments: [],
       NewPrice: 0,
       updated: true,
@@ -57,7 +56,7 @@ export default class Description extends Component {
           Subtype: response.data.Subtype,
           Description: response.data.description,
           Image: response.data.images,
-          Quantity: 0,
+          Quantity: 1,
           NewPrice: response.data.DressPrice - response.data.Discount,
         });
       })
@@ -80,7 +79,7 @@ export default class Description extends Component {
   clickDecrement() {
     let quentity = this.state.Quantity;
 
-    if (quentity > 0) {
+    if (quentity > 1) {
       quentity = quentity - 1;
     }
 
