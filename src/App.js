@@ -18,12 +18,6 @@ import Items from "../src/components/Home/Items";
 import Description from "../src/components/Home/Description";
 import "semantic-ui-css/semantic.min.css";
 
-import AddManager from "./components/AdminDashboard/NavComponenets/CreateStoreManager";
-import AddCategory from "./components/AdminDashboard/NavComponenets/CreateCategory";
-import viewManager from "./components/AdminDashboard/ViewComponent/viewManager";
-import viewCategory from "./components/AdminDashboard/ViewComponent/viewCategory";
-import editManager from "./components/AdminDashboard/EditComponent/editStoreManager";
-import editCategory from "./components/AdminDashboard/EditComponent/editCategory";
 
 //import cart managment components
 import ViewCart from "./components/CartComponent/CartManagment/ViewCart";

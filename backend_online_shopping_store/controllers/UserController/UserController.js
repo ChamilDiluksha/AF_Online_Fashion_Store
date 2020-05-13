@@ -81,7 +81,7 @@ exports.userSignin = (req, res, next) => {
                         },
                         'secret',
                         {
-                            expiresIn: "5h"
+                            expiresIn: "1h"
                         }
                     );
                 } else {

@@ -203,7 +203,7 @@ class Category extends Component {
                                 placeholder="Description" />
                     </Form.Group>
 
-                    <div style={{paddingTop:"5px"}}> 
+                    <div style={{paddingTop:"5px", paddingBottom:"5px"}}> 
                     <Form.Label>Choose Image</Form.Label>
                         <ImageUpload refreshFunction = {this.updateFiles} /> 
                     </div>
