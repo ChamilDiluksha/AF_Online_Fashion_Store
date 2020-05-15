@@ -265,11 +265,9 @@ class StoreManager extends Component {
                 </Form.Group>
             </Form.Row>
 
-            <Form.Group id="formGridCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
+           
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" >
                 Submit
             </Button>
         </Form>
