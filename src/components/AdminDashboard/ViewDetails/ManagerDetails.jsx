@@ -2,18 +2,30 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Image } from 'semantic-ui-react'
 import axios from 'axios';
+import Cookies from "universal-cookie";
 
 
 
 class ManagerDetails extends Component {
     constructor(props) {
         super(props);
-     
+        const cookies = new Cookies();
+        let user = cookies.get('user');
+        let token = cookies.get('token');
+        this.state = {
+          user: user,
+          token: token,
+        };
+
         this.delete = this.delete.bind(this);
     }
 
     delete() {
-        axios.delete('http://localhost:5000/storemanager/delete/'+this.props.obj._id)
+        axios.delete('http://localhost:5000/storemanager/delete/'+this.props.obj._id , {
+            headers: {
+              'Authorization': `Bearer ${this.state.token}`
+            }
+        })
             .then(console.log('Deleted'))
             .catch(err => console.log(err));
         window.location.href = "/log/Admin/ViewManager";

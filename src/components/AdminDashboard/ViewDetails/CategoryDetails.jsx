@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from "universal-cookie";
 
 class CategoryDetails extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        const cookies = new Cookies();
+        let user = cookies.get('user');
+        let token = cookies.get('token');
+        this.state = {
+          user: user,
+          token: token,
+        };
     }
 
 
 
     delete() {
-        axios.delete('http://localhost:5000/category/delete/'+this.props.obj._id)
+        axios.delete('http://localhost:5000/category/delete/'+this.props.obj._id , {
+            headers: {
+              'Authorization': `Bearer ${this.state.token}`
+            }
+        })
             .then(console.log('Deleted'))
             .catch(err => console.log(err));
         window.location.href = "/log/Admin/vieCategory";
