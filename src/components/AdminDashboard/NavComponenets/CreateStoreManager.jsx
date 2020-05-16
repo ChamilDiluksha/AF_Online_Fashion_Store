@@ -144,8 +144,9 @@ class StoreManager extends Component {
 
     render() { 
         return ( 
-            <div style={{padding:"15px"}}>
-            <h5 style={{padding:"15px"}}>Create Store Manager</h5>
+            <div className="row" >
+            <div  className="col-13" style={{paddingRight:"100px"}}>
+            <h5>Create Store Manager</h5>
 
             <Form onSubmit={this.onSubmit}>
                 <Form.Row>
@@ -296,6 +297,7 @@ class StoreManager extends Component {
            null
 
             }
+    </div>
     </div>
          );
     }

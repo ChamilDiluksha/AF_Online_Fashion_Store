@@ -73,16 +73,6 @@ class ImageUpload extends Component {
                 )}
             </Dropzone>
 
-            <div style={{ display: 'flex', width: '35px', height: '24px', overflowX: 'scroll' }}>
-
-            {this.state.Images.map((image, index) => (
-                    <div onClick={() => this.onDelete(image)}>
-                        <img style={{ minWidth: '30px', width: '30px', height: '240px' }} src={`http://localhost:5000/${image}`} alt={`productImg-${index}`} />
-                    </div>
-                ))}
-
-
-            </div>
          
 
             </div>

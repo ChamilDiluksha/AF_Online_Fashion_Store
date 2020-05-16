@@ -43,10 +43,16 @@ class ManagerDetails extends Component {
             <span>{this.props.obj.fname}</span>
             </td>
             <td>
+                {this.props.obj.lname}
+            </td>
+            <td>
                 {this.props.obj.email}
             </td>
             <td>
                 {this.props.obj.contact}
+            </td>
+            <td>
+                {this.props.obj.address}
             </td>
             <td>
                 <Link to={"/log/Admin/EditManager/"+this.props.obj._id} className="edit"> <i className="fas fa-user-edit" style={{paddingRight:"10px"}}></i></Link>

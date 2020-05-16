@@ -143,9 +143,9 @@ class Category extends Component {
 
     render() { 
         return ( 
-            <div style={{paddingBottom :"30px"}}>
+            <div>
             <div className="row">
-            <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"60px"}}>
+            <div  className="col-13" style={{paddingRight:"60px"}}>
             <h5 style={{padding:"15px"}}>Create Category</h5>
             <Form onSubmit={this.onSubmit}>
 
@@ -208,7 +208,7 @@ class Category extends Component {
                         <ImageUpload refreshFunction = {this.updateFiles} /> 
                     </div>
 
-                    <Button variant="primary" type="submit">
+                    <Button className="mt-3" variant="primary" type="submit">
                         Submit
                     </Button>
             </Form>
@@ -237,11 +237,11 @@ class Category extends Component {
 
             }
             </div>
-            <div style={{ paddingTop:"5px"}}> 
+            <div className="mt-5 ml-1" > 
 
                 
-            <Form.Group>
-                                <Form.Label>Sub Item</Form.Label>
+                    <Form.Group>
+                            <Form.Label>Sub Item</Form.Label>
 
                                 {}
                                 <table  className="stageTable" id="tab_logic">
@@ -272,7 +272,7 @@ class Category extends Component {
                                     ))}
                                     </tbody>
                                 </table>
-                                <table className="buttons">
+                                <table className="buttons mt-3">
                                     <tbody>
                                     <tr>
                                         <td align="right">
@@ -284,7 +284,7 @@ class Category extends Component {
                                     </tr>
                                     </tbody>
                                 </table>
-                            </Form.Group>
+                    </Form.Group>
 
             </div>
             </div>
