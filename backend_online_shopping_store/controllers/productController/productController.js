@@ -168,7 +168,7 @@ exports.editProduct = (req, res) => {
     });
 }
 
-exports.deleteProduct = (req,res) => {
+exports.deleteProduct = (req,res,next) => {
     ProductItem.remove({_id: req.params.id})
         .exec()
         .then(result => {

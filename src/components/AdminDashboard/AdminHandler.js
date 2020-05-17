@@ -12,12 +12,12 @@ class AdminDashboardHandler extends Component {
             <div>
                 
                 <NavBar />
-                   <div className="row">
-                        <div className="col-13" style={{ paddingLeft:"30px", paddingRight:"25px"}}>
+                   <div className="row main-container" style={{ marginBottom:"200px"}}>
+                        <div className="col-13 ml-5" >
                             
                             <SideNavBar />
                         </div>
-                        <div className="col-18">
+                        <div className="col-18 container">
                             <MainDashboard />
                         </div>
                    </div>

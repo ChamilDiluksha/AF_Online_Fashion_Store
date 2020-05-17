@@ -6,9 +6,14 @@ class UploadDressItems extends Component {
     
     render() { 
         return ( 
-            <div>
-                <StoreNavigation />
-                <ProductController />
+            <div >
+                <div >
+                    <StoreNavigation />
+                </div>
+                <div className="container"> 
+                    <ProductController />
+                </div>
+                
             </div>
          );
     }

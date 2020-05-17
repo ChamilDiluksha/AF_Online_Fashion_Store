@@ -40,10 +40,10 @@ class ViewDressDetails extends Component {
 
         return (
             <div className="row" >
-            <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"100px"}}>
-                <h1 style = {{marginLeft: '570px'}}>!!! VIEW PRODUCTS LIST !!!</h1>
+            <div  className="col-13" style={{paddingRight:"100px"}}>
+                <h1 className="mb-5"><center>!!! VIEW PRODUCTS LIST !!!</center></h1>
 
-                <MDBTable small  style={{ marginTop: '50px', width:'1000px', marginLeft: '250px'}}>
+                <MDBTable responsive>
                 <MDBTableHead>
                     <tr>
                         <th>Product Image</th>

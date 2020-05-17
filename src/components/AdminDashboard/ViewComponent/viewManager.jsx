@@ -49,15 +49,17 @@ class ViewManager extends Component {
     render() { 
         return ( 
             <div className="row" >
-            <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"100px"}}>
+            <div  className="col-13" style={{paddingRight:"100px"}}>
 
                 <h5 align="center">Managers List</h5>
-                <MDBTable small  style={{ marginTop: 20, width:"600px" }}>
+                <MDBTable hover  responsive>
                 <MDBTableHead>
                     <tr>
                         <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Email</th>
                         <th>Contact No</th>
+                        <th>Address</th>
                         <th colSpan="2">Action</th>
                     </tr>
                     </MDBTableHead>
@@ -66,7 +68,7 @@ class ViewManager extends Component {
                     </MDBTableBody>
                 </MDBTable>
                 </div>
-                <div style={{ paddingTop:"50px"}}>
+                <div className="mt-5 ml-3">
                
                 <Statistic.Group>
             

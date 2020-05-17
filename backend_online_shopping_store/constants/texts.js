@@ -10,5 +10,9 @@ module.exports = {
         Email : 'chamilpearson@gmail.com',
         password: 'Sliit#*1996'
 
+    },
+
+    JWTKEY :{
+        key : 'UserScret'
     }
 }

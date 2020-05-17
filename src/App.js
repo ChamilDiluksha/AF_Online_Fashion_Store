@@ -19,19 +19,11 @@ import About from "../src/components/Home/AboutUs";
 import Description from "../src/components/Home/Description";
 import "semantic-ui-css/semantic.min.css";
 
-import AddManager from "./components/AdminDashboard/NavComponenets/CreateStoreManager";
-import AddCategory from "./components/AdminDashboard/NavComponenets/CreateCategory";
-import viewManager from "./components/AdminDashboard/ViewComponent/viewManager";
-import viewCategory from "./components/AdminDashboard/ViewComponent/viewCategory";
-import editManager from "./components/AdminDashboard/EditComponent/editStoreManager";
-import editCategory from "./components/AdminDashboard/EditComponent/editCategory";
 
 //import cart managment components
 import ViewCart from "./components/CartComponent/CartManagment/ViewCart";
-import ViewOrder from "./components/CartComponent/OrderManagment/ViewOrder";
 import OrderHistory from "./components/CartComponent/OrderManagment/OrderHistory";
 import Checkout from "./components/CartComponent/OrderManagment/Checkout";
-import UserCart from "./components/CartComponent/CartManagment/UserCart";
 import CartView from "./components/CartComponent/CartManagment/CartView";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -100,7 +92,6 @@ class App extends Component {
               <Route path="/wishlist" component={Wishlist} />
               <Route path="/delivery" component={Delivery} />
               <Route path="/sizeguide" component={Sizeguide} />
-              <Route path="/vieworder" component={ViewOrder} />
               <Route path="/viewcart" component={ViewCart} />
               <Route path="/about" component={About} />
               <Route path="/checkout" component={Checkout} />

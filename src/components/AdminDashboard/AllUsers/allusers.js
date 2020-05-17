@@ -47,10 +47,10 @@ class users extends Component {
     render() { 
         return ( 
             <div className="row" >
-            <div  className="col-13" style={{ paddingLeft:"30px", paddingRight:"100px"}}>
+            <div  className="col-13" style={{paddingRight:"100px"}}>
 
                 <h5 align="center">Users List</h5>
-                <MDBTable small  style={{ marginTop: 20, width:"600px" }}>
+                <MDBTable hover responsive>
                 <MDBTableHead>
                     <tr>
                         <th>User Emails</th>
@@ -63,7 +63,7 @@ class users extends Component {
                     </MDBTableBody>
                 </MDBTable>
                 </div>
-                <div style={{ paddingTop:"50px"}}>
+                <div className="mt-5 ml-3">
                
                 <Statistic.Group>
             

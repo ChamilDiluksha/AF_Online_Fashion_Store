@@ -54,7 +54,7 @@ export default class NavBar extends Component {
         const cookies = new Cookies();
         cookies.remove("token");
         cookies.remove("user");
-        window.location.href = "/";
+        window.location.href = "/sign-in";
 
         // if( window.location.path === "http://localhost:3000/log"){
         //     console.log('inside if')
