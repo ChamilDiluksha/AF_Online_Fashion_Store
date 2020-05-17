@@ -46,9 +46,7 @@ class CategoryDetails extends Component {
             <td>
                 {this.props.obj.SubType}
             </td>
-            <td>
-                {this.props.obj.description}
-            </td>
+        
             <td>
                 <Link to={"/log/Admin/EditCategory/"+this.props.obj._id} className="edit"><i className="fas fa-edit" style={{paddingRight:"10px"}}></i></Link>
             </td>

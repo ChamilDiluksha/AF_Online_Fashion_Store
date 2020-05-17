@@ -154,8 +154,8 @@ class Category extends Component {
         return ( 
             
           
-            <div className="row">
-            <div  className="col-13" style={{ paddingRight:"60px"}}>
+            <div className="row container">
+            <div  className="col-13 ml-5" style={{ paddingRight:"60px"}}>
             <h5 style={{padding:"15px"}}>Edit Category</h5>
             <Form onSubmit={this.onSubmit}>
 
@@ -217,7 +217,7 @@ class Category extends Component {
                     </Button>
             </Form>
             </div>
-            <div className="mt-5 ml-1"> 
+            <div className="mt-5 ml-5"> 
             <Form.Group>
                                 <Form.Label>Sub Item</Form.Label>
 

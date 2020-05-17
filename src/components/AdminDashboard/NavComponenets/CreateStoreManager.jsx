@@ -144,8 +144,8 @@ class StoreManager extends Component {
 
     render() { 
         return ( 
-            <div className="row" >
-            <div  className="col-13" style={{paddingRight:"100px"}}>
+            <div className="row container" >
+            <div  className="col-13 ml-5" style={{paddingRight:"100px"}}>
             <h5>Create Store Manager</h5>
 
             <Form onSubmit={this.onSubmit}>

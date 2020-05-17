@@ -144,8 +144,8 @@ class Category extends Component {
     render() { 
         return ( 
             <div>
-            <div className="row">
-            <div  className="col-13" style={{paddingRight:"60px"}}>
+            <div className="row container">
+            <div  className="col-13 ml-5" style={{paddingRight:"60px"}}>
             <h5 style={{padding:"15px"}}>Create Category</h5>
             <Form onSubmit={this.onSubmit}>
 
@@ -237,7 +237,7 @@ class Category extends Component {
 
             }
             </div>
-            <div className="mt-5 ml-1" > 
+            <div className="mt-5 ml-5" > 
 
                 
                     <Form.Group>
