@@ -149,8 +149,9 @@ class EditManager extends Component {
 
     render() { 
         return ( 
-            <div className="row container">
-            <div  className="col-13 ml-5" style={{ paddingRight:"100px"}}>
+            <div className="row">
+            <div  className="col-13 mt-5 ml-5" style={{ paddingRight:"100px"}}>
+            <div className="container ">
             {(this.state.Gender === 'Female') ? 
             <Image  src='https://react.semantic-ui.com/images/avatar/small/molly.png' rounded size='mini' avatar/> : 
             <Image  src='https://react.semantic-ui.com/images/avatar/small/matthew.png' rounded size='mini' avatar/>
@@ -261,6 +262,7 @@ class EditManager extends Component {
                 Submit
             </Button>
         </Form>
+        </div>
         </div>
         <div className="mt-5 ml-5">
         <Card.Group >

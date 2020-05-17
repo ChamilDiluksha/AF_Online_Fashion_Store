@@ -46,25 +46,9 @@ class users extends Component {
 
     render() { 
         return ( 
-            <div className="row container" >
-            <div  className="col-13 ml-5" style={{paddingRight:"100px"}}>
-
-                <h5 align="center">Users List</h5>
-                <MDBTable striped hover  responsive>
-                <MDBTableHead>
-                    <tr>
-                        <th>User Emails</th>
-                        <th>User Type</th>
-                        <th colSpan="1">Action</th>
-                    </tr>
-                    </MDBTableHead>
-                    <MDBTableBody>
-                    { this.tabRow() }
-                    </MDBTableBody>
-                </MDBTable>
-                </div>
-                <div className="mt-5 ml-5">
-               
+            <div className="row">
+            <div className="mt-5 mt-5 ml-5">
+            <div className="container ">
                 <Statistic.Group>
             
                         <Statistic color='teal'>
@@ -86,7 +70,27 @@ class users extends Component {
                         <Statistic.Label>Customers</Statistic.Label>
                         </Statistic>
                 </Statistic.Group>
+            </div>
+            </div>
+            <div className="container">
+            <div  className="col-13 mt-5 ml-5" style={{paddingRight:"100px"}}>
+          
+                <h5 align="center">Users List</h5>
+                <MDBTable striped hover  responsive>
+                <MDBTableHead>
+                    <tr>
+                        <th>User Emails</th>
+                        <th>User Type</th>
+                        <th colSpan="1">Action</th>
+                    </tr>
+                    </MDBTableHead>
+                    <MDBTableBody>
+                    { this.tabRow() }
+                    </MDBTableBody>
+                </MDBTable>
                 </div>
+                </div>
+               
             </div>
          );
     }

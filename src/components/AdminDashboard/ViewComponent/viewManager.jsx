@@ -48,9 +48,36 @@ class ViewManager extends Component {
 
     render() { 
         return ( 
-            <div className="row container" >
-            <div  className="col-13 ml-5 mr-5" >
+            <div className="row " >
+            <div className="container">
+            <div className="mt-5 ml-5">
+               
+               <Statistic.Group>
+           
+                       <Statistic color='teal'>
+                       <Statistic.Value>
+                           <Image src='https://react.semantic-ui.com/images/avatar/small/matthew.png' inline circular />
+                           {this.state.managers.length}
+                       </Statistic.Value>
+                       <Statistic.Label>Store Managers</Statistic.Label>
+                       </Statistic>
 
+                       <Statistic color='pink'>
+                       <Statistic.Value> {this.countPersons()}</Statistic.Value>
+                       <Statistic.Label>Female</Statistic.Label>
+                       </Statistic>
+
+                       
+                       <Statistic color='violet'>
+                       <Statistic.Value> { this.state.managers.length - this.countPersons()}</Statistic.Value>
+                       <Statistic.Label>Male</Statistic.Label>
+                       </Statistic>
+               </Statistic.Group>
+            </div>
+            </div>
+            <div className="container">
+            <div  className="col-13 mt-5 ml-5 mr-5" >
+               
                 <h5 align="center">Managers List</h5>
                 <MDBTable hover striped responsive>
                 <MDBTableHead>
@@ -68,30 +95,8 @@ class ViewManager extends Component {
                     </MDBTableBody>
                 </MDBTable>
                 </div>
-                <div className="mt-5 ml-5">
-               
-                <Statistic.Group>
-            
-                        <Statistic color='teal'>
-                        <Statistic.Value>
-                            <Image src='https://react.semantic-ui.com/images/avatar/small/matthew.png' inline circular />
-                            {this.state.managers.length}
-                        </Statistic.Value>
-                        <Statistic.Label>Store Managers</Statistic.Label>
-                        </Statistic>
-
-                        <Statistic color='pink'>
-                        <Statistic.Value> {this.countPersons()}</Statistic.Value>
-                        <Statistic.Label>Female</Statistic.Label>
-                        </Statistic>
-
-                        
-                        <Statistic color='violet'>
-                        <Statistic.Value> { this.state.managers.length - this.countPersons()}</Statistic.Value>
-                        <Statistic.Label>Male</Statistic.Label>
-                        </Statistic>
-                </Statistic.Group>
                 </div>
+              
             </div>
          );
     }

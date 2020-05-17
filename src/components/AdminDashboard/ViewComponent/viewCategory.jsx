@@ -53,26 +53,8 @@ class ViewCategory extends Component {
     render() { 
         return ( 
             <div className="row">
-            <div  className="col-13 ml-5" style={{paddingRight:"60px"}}>
-                <h5 align="center">Category List</h5>
-                <MDBTable striped hover responsive>
-                
-                    <MDBTableHead>
-                    <tr>
-                        <th>Category Iamge</th>
-                        <th>Category ID</th>
-                        <th>Category Type</th>
-                        <th>Sub Type</th>
-                        <th colSpan="2">Action</th>
-                    </tr>
-                    </MDBTableHead>
-                    <MDBTableBody>
-                    { this.tabRow() }
-                    </MDBTableBody>
-                
-                </MDBTable>
-                </div>
-                <div className="mt-5 ml-5" > 
+                 <div className="container">
+                 <div className="mt-5 ml-5" > 
                 <Statistic.Group>
             
                         <Statistic color='teal'>
@@ -101,6 +83,31 @@ class ViewCategory extends Component {
                         
                     </Statistic.Group>
                 </div>
+                </div>
+                <div className="container">
+                    <div  className="col-13 mt-5 ml-5 mr-5" >
+            
+                        <h5 align="center">Category List</h5>
+                        <MDBTable striped hover responsive>
+                        
+                            <MDBTableHead>
+                            <tr>
+                                <th>Category Iamge</th>
+                                <th>Category ID</th>
+                                <th>Category Type</th>
+                                <th>Sub Type</th>
+                                <th colSpan="2">Action</th>
+                            </tr>
+                            </MDBTableHead>
+                            <MDBTableBody>
+                            { this.tabRow() }
+                            </MDBTableBody>
+                        
+                        </MDBTable>
+                    </div>
+                    
+                </div>
+               
             </div>
          );
     }

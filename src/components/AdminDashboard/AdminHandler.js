@@ -12,7 +12,7 @@ class AdminDashboardHandler extends Component {
             <div>
                 
                 <NavBar />
-                   <div className="row main-container" style={{ marginBottom:"200px"}}>
+                   <div className="row " style={{ marginBottom:"200px"}}>
                         <div className="col-13 ml-5" >
                             
                             <SideNavBar />
