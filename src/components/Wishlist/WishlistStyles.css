@@ -46,3 +46,9 @@ body {
 .cus-service li {
   cursor: pointer;
 }
+
+@media (max-width:800px) {
+  .wishlist-container {
+    margin-left: 120px;
+  }
+}

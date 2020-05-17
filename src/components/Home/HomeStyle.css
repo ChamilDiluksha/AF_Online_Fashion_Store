@@ -65,4 +65,14 @@ body {
 
 .footer a {
   color: inherit;
-} 
+}
+
+@media (max-width:800px) {
+  .category-card {
+    margin-left: 120px;
+  }
+
+  .product-card {
+    margin-left: 120px;
+  }
+}

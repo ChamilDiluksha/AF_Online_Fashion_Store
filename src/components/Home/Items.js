@@ -62,7 +62,7 @@ export default class Items extends Component {
     let clickedCategory = this.state.CategoryType;
 
      return this.state.product.map(function(object, i){
-       return  (object.Category == clickedCategory) ? <Card  className="mr-4 product-card mb-3" style={{ width: '18rem' }}>
+       return  (object.Category == clickedCategory) ? <Card  className="mr-4 mt-3 product-card mb-3" style={{ width: '18rem' }}>
               <Link to={'/description/'+ object._id}><Card.Img variant="top" src={`http://localhost:5000/${ object.images[0]} `} alt="No Preview"/></Link>
               <Card.Body>
                 <Card.Title className="text-center">{ object.Subtype }</Card.Title>

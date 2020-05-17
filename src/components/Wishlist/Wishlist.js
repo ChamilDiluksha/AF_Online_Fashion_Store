@@ -54,7 +54,7 @@ export default class wishlist extends Component {
       <NavBar/>
       <div className="main-container">
         <h1 className="page-header ml-4">My Wishlist </h1>
-        <div className="container mt-4 category-container">
+        <div className="container mt-4 wishlist-container">
           <div className="row">
               {this.renderCards()}
             </div>
