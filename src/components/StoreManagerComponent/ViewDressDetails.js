@@ -43,7 +43,7 @@ class ViewDressDetails extends Component {
             <div  className="col-13" style={{paddingRight:"100px"}}>
                 <h1 className="mb-5"><center>!!! VIEW PRODUCTS LIST !!!</center></h1>
 
-                <MDBTable responsive>
+                <MDBTable striped hover responsive>
                 <MDBTableHead>
                     <tr>
                         <th>Product Image</th>

@@ -55,7 +55,7 @@ class ViewCategory extends Component {
             <div className="row">
             <div  className="col-13 ml-5" style={{paddingRight:"60px"}}>
                 <h5 align="center">Category List</h5>
-                <MDBTable hover responsive>
+                <MDBTable striped hover responsive>
                 
                     <MDBTableHead>
                     <tr>

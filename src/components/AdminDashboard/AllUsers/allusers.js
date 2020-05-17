@@ -50,7 +50,7 @@ class users extends Component {
             <div  className="col-13 ml-5" style={{paddingRight:"100px"}}>
 
                 <h5 align="center">Users List</h5>
-                <MDBTable hover responsive>
+                <MDBTable striped hover  responsive>
                 <MDBTableHead>
                     <tr>
                         <th>User Emails</th>

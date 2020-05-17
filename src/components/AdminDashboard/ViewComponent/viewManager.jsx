@@ -49,10 +49,10 @@ class ViewManager extends Component {
     render() { 
         return ( 
             <div className="row container" >
-            <div  className="col-13 ml-5" style={{paddingRight:"100px"}}>
+            <div  className="col-13 ml-5 mr-5" >
 
                 <h5 align="center">Managers List</h5>
-                <MDBTable hover  responsive>
+                <MDBTable hover striped responsive>
                 <MDBTableHead>
                     <tr>
                         <th>First Name</th>
