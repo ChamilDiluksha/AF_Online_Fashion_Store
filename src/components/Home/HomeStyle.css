@@ -62,3 +62,7 @@ body {
 .price {
   text-decoration: line-through;
 }
+
+.footer a {
+  color: inherit;
+} 

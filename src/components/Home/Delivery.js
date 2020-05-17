@@ -10,7 +10,7 @@ export default class Delivery extends Component {
       <NavBar/>
       <div className="main-container">
         <div className="container mt-4 category-container">
-          <div className="row">
+          <div className="row ml-3 mr-3">
               <h2>Delivery</h2>
               <p>Our staff at Colombo warehouse work hard to dispatch your goods within 24 hours, but it could take a bit longer during promotions. The delivery dates and charges will depend on your shipping address and order date. We will send you an e-mail and text message when your order dispatch from our warehouse.</p>
               <p>We deliver to all addresses in Sri Lanka. A full postal address is required including postcode. Unfortunately, we cannot deliver to military bases or PO boxes. Any international customer should use there local CSKP website or our global services based in London.</p>

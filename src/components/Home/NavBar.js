@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./HomeStyle.css";
 import Cookies from "universal-cookie";
+import { Container, Header, List } from "semantic-ui-react";
 import axios from "axios";
 import {
   Navbar,
@@ -31,6 +32,9 @@ export default class NavBar extends Component {
       Images: [],
       Wishlist: [],
       category: [],
+      product: [],
+      Search: '',
+      showSearch: false
     };
 
     this.btnLinks = this.btnLinks.bind(this);
@@ -83,6 +87,15 @@ export default class NavBar extends Component {
       .catch(function (error) {
         console.log(error);
       });
+
+      axios
+        .get("http://localhost:5000/product/")
+        .then((response) => {
+          this.setState({ product: response.data });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
   }
 
   btnLinks() {
@@ -152,7 +165,7 @@ export default class NavBar extends Component {
 
               <Nav.Link href="/delivery">Delivery</Nav.Link>
               <Nav.Link href="/sizeguide">Size Guide</Nav.Link>
-              <Nav.Link href="#link">About Us</Nav.Link>
+              <Nav.Link href="/about">About Us</Nav.Link>
               {this.displayHistory()}
             </Nav>
 
@@ -176,12 +189,8 @@ export default class NavBar extends Component {
               </Nav.Link>
             )}
 
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search..."
-                className="mr-sm-2"
-              />
+            <Form inline onSubmit={this.clickSearch}>
+              <FormControl type="text" placeholder="Search..." value={this.state.Search} onChange={this.onChangeSearch} className="mr-sm-2"/>
               <Button variant="outline-dark">Search</Button>
             </Form>
           </Navbar.Collapse>

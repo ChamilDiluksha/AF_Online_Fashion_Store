@@ -62,8 +62,7 @@ export default class Items extends Component {
     let clickedCategory = this.state.CategoryType;
 
      return this.state.product.map(function(object, i){
-       return  (object.Category == clickedCategory) ?  <Link to={'/description'}>
-            <Card  className="mr-4 product-card mb-3" style={{ width: '18rem' }}>
+       return  (object.Category == clickedCategory) ? <Card  className="mr-4 product-card mb-3" style={{ width: '18rem' }}>
               <Link to={'/description/'+ object._id}><Card.Img variant="top" src={`http://localhost:5000/${ object.images[0]} `} alt="No Preview"/></Link>
               <Card.Body>
                 <Card.Title className="text-center">{ object.Subtype }</Card.Title>
@@ -72,8 +71,7 @@ export default class Items extends Component {
                 <Link to={'/description/'+ object._id}><Button variant="dark" className="mb-2" block ><i class="fas fa-shopping-cart mr-2"/> Add to Cart</Button></Link>
                 <Link to={'/description/'+ object._id}><Button variant="outline-dark" className="mb-2" block><i class="fas fa-heart mr-2"/> Add to Wishlist</Button></Link>
               </Card.Body>
-            </Card>
-          </Link> : ''
+            </Card> : ''
         ;
   });
 }

@@ -15,6 +15,7 @@ import Wishlist from "./components/Wishlist/Wishlist";
 import Delivery from "../src/components/Home/Delivery";
 import Sizeguide from "../src/components/Home/Sizeguide";
 import Items from "../src/components/Home/Items";
+import About from "../src/components/Home/AboutUs";
 import Description from "../src/components/Home/Description";
 import "semantic-ui-css/semantic.min.css";
 
@@ -101,14 +102,14 @@ class App extends Component {
               <Route path="/sizeguide" component={Sizeguide} />
               <Route path="/vieworder" component={ViewOrder} />
               <Route path="/viewcart" component={ViewCart} />
-
+              <Route path="/about" component={About} />
               <Route path="/checkout" component={Checkout} />
               <Route path="/cartview" component={CartView} />
               <Route path="/orderhistory" component={OrderHistory} />
             </Switch>
           </Router>
 
-          <Footer /> 
+          <Footer />
         </div>
       </React.Fragment>
     );
