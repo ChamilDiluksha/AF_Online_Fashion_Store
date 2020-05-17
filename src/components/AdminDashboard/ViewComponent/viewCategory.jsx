@@ -53,7 +53,7 @@ class ViewCategory extends Component {
     render() { 
         return ( 
             <div className="row">
-            <div  className="col-13" style={{paddingRight:"60px"}}>
+            <div  className="col-13 ml-5" style={{paddingRight:"60px"}}>
                 <h5 align="center">Category List</h5>
                 <MDBTable hover responsive>
                 
@@ -63,7 +63,6 @@ class ViewCategory extends Component {
                         <th>Category ID</th>
                         <th>Category Type</th>
                         <th>Sub Type</th>
-                        <th>Description</th>
                         <th colSpan="2">Action</th>
                     </tr>
                     </MDBTableHead>
@@ -73,7 +72,7 @@ class ViewCategory extends Component {
                 
                 </MDBTable>
                 </div>
-                <div className="mt-5 ml-3" > 
+                <div className="mt-5 ml-5" > 
                 <Statistic.Group>
             
                         <Statistic color='teal'>
