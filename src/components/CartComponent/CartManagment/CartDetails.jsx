@@ -1,21 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
-  MDBContainer,
-} from "mdbreact";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Cookies from "universal-cookie";
 import "./cartStyles.css";
-import { Grid } from "semantic-ui-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class CartDetails extends Component {
@@ -36,6 +25,7 @@ class CartDetails extends Component {
   }
 
   updateQty() {
+
     const item = {
       UserID: this.state.user.userId,
       DressCode: this.props.obj.DressCode,
@@ -51,7 +41,6 @@ class CartDetails extends Component {
     axios
       .put("http://localhost:5000/cart/update/" + this.props.obj._id, item)
       .then((response) => {
-        console.log(response);
         window.location.href = "/cartview";
         alert(response.data.message);
       })
@@ -59,16 +48,13 @@ class CartDetails extends Component {
         console.log(error);
       });
 
-    // alert('Item Incremeted.!');
+
     window.location.href = "/cartview";
   }
 
   decrementQunatity = async () => {
-    console.log(this.props.obj.Description);
-    console.log(this.state.Cart);
-    // console.log(this.state.cid);
     if (this.state.Quantity > 1) {
-      await this.setState({
+      this.setState({
         Quantity: this.state.Quantity - 1,
       });
     }
@@ -76,20 +62,14 @@ class CartDetails extends Component {
   };
 
   incrementQunatity = async () => {
-    console.log("increment clicked");
-    await this.setState({
+    this.setState({
       Quantity: this.state.Quantity + 1,
     });
-    console.log(this.props.obj.Description);
+
     this.updateQty();
   };
 
   removeFromCart() {
-    // e.preventDefault();
-
-    console.log("Delete");
-    console.log(this.state.cid);
-
     axios
       .delete("http://localhost:5000/cart/delete/" + this.state.cid)
       .then(console.log("Deleted"))
@@ -97,32 +77,38 @@ class CartDetails extends Component {
 
     alert("Item has removed from Cart..!");
     window.location.href = "/cartview";
+
   }
 
   renderCards() {
-    console.log(this.props.obj.Description);
     if (this.state.user) {
       const userId = this.state.user.userId;
 
       if (this.props.obj.UserID == userId) {
         return (
+
           <Card className="mr-4 mb-4 wishlist-card" style={{ width: "18rem" }}>
+
             <Link>
               <Card.Img
                 variant="top"
                 src={`http://localhost:5000/${this.props.obj.DressImage}`}
               />
             </Link>
+
             <Card.Body>
               <Card.Text className="text-center">
                 {this.props.obj.Description}
               </Card.Text>
+
               <Card.Title className="text-center">
                 {this.props.obj.DressCode}
               </Card.Title>
+
               <Card.Title className="text-center">
                 LKR {this.props.obj.DressPrice}
               </Card.Title>
+
               <div className="btn-group btn-group-medium" align="center">
                 <Button
                   onClick={(e) => this.decrementQunatity()}
@@ -131,9 +117,11 @@ class CartDetails extends Component {
                 >
                   <i class="fa fa-minus-square"></i>
                 </Button>
+
                 <Card.Text className="text-center">
                   Quantity {this.state.Quantity}
                 </Card.Text>
+
                 <Button
                   onClick={(e) => this.incrementQunatity()}
                   variant="dark"
@@ -141,6 +129,7 @@ class CartDetails extends Component {
                 >
                   <i class="fa fa-plus-square"></i>
                 </Button>
+
               </div>
 
               <Button

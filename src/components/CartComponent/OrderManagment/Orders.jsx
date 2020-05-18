@@ -13,6 +13,7 @@ class Orders extends Component {
   render() {
     return (
       <tr>
+
         <td>
           <Image
             size="small"
@@ -32,6 +33,7 @@ class Orders extends Component {
             <Button variant="dark">Comment</Button>
           </Link>
         </td>
+
       </tr>
     );
   }
