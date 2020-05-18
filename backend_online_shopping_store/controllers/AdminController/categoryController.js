@@ -93,7 +93,8 @@ exports.editCategory = (req, res) => {
         CategoryType,
         SubType,
         stages,
-        description
+        description,
+        images
     } = body;
 
     CategoryItem.findById(req.params.id, (err, category) => {
@@ -105,6 +106,7 @@ exports.editCategory = (req, res) => {
             category.SubType = SubType;
             category.stages = stages;
             category.description = description;
+            category.images = images;
 
             category.save().then(category => {
                 res.json('Update complete');

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Button, Col, Form, FormControl} from 'react-bootstrap';
+import ImageUpload from '../NavComponenets/ImageUpload';
 
 class Category extends Component {
     constructor(props) {
@@ -23,7 +24,8 @@ class Category extends Component {
                 {stage:""}
             ],
             ItemStages:[],
-            message:''
+            message:'',
+            images: [],
 
 
          }
@@ -123,7 +125,8 @@ class Category extends Component {
             CategoryType : this.state.CategoryType,
             SubType : this.state.SubType,
             stages: this.state.ItemStages,
-            description :this.state.description 
+            description :this.state.description,
+            images: this.state.images
         }
 
 
@@ -143,12 +146,19 @@ class Category extends Component {
             SubType : '',
             ItemStages:[],
             stages:[{stage:''}],
-            description : ''
+            description : '',
+            images:[]
 
         });
         window.location.href = "/log/Admin/vieCategory";
 
     }
+
+    updateFiles = (newImages) => {
+        console.log(newImages)
+        this.setState({ images: newImages })
+    }
+
 
     render() { 
         return ( 
@@ -213,7 +223,13 @@ class Category extends Component {
                                 placeholder="Description" />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+
+                    <div style={{paddingTop:"5px", paddingBottom:"5px"}}> 
+                    <Form.Label>Choose Image</Form.Label>
+                        <ImageUpload refreshFunction = {this.updateFiles} /> 
+                    </div>
+
+                    <Button className="mt-3" variant="primary" type="submit">
                         Submit
                     </Button>
             </Form>
