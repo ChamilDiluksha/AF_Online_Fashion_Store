@@ -1,8 +1,8 @@
-const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
 const Order = require("../../model/CartModels/Order");
 const texts = require("../../constants/texts");
 
+
+//add new order entry
 exports.addOrder = (req, res, next) => {
   const { body } = req;
 
@@ -46,6 +46,7 @@ exports.addOrder = (req, res, next) => {
     });
 };
 
+//get the order history entries of the specific user
 exports.userInOrder = (req, res, next) => {
   const { body } = req;
 
