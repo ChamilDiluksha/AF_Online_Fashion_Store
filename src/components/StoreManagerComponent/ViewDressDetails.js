@@ -40,7 +40,8 @@ class ViewDressDetails extends Component {
 
         return (
             <div className="row" >
-            <div  className="col-13" style={{paddingRight:"100px"}}>
+            <div className="container">
+            <div  className="col-13 mt-5 ml-5 mr-5" >
                 <h1 className="mb-5"><center>!!! VIEW PRODUCTS LIST !!!</center></h1>
 
                 <MDBTable striped hover responsive>
@@ -64,6 +65,7 @@ class ViewDressDetails extends Component {
                 </MDBTableBody>
 
                 </MDBTable>
+            </div>
             </div>
             </div>
         );
