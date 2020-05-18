@@ -1,8 +1,8 @@
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const Cart = require("../../model/CartModels/Cart");
 const texts = require("../../constants/texts");
 
+//Add new product entry to the cart
 exports.addToCart = (req, res, next) => {
   const { body } = req;
   const {
@@ -41,6 +41,7 @@ exports.addToCart = (req, res, next) => {
     });
 };
 
+//get all the cart items 
 exports.getAllCartEntries = (req, res) => {
   Cart.find((err, cart) => {
     if (err) {
@@ -51,6 +52,7 @@ exports.getAllCartEntries = (req, res) => {
   });
 };
 
+//edit product entry detailes inside the cart
 exports.editCartEntry = (req, res) => {
   const { body } = req;
   const {
@@ -97,26 +99,8 @@ exports.editCartEntry = (req, res) => {
   });
 };
 
-exports.deleteCartItem = (req, res, next) => {
-  const { body } = req;
 
-  const { UserID } = body;
-
-  Cart.remove({ _id: req.params.id })
-    .exec()
-    .then((result) => {
-      res.status(200).json({
-        message: "Cart entry deleted",
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
-    });
-};
-
+//get the cart products for the specific user
 exports.userInCart = (req, res, next) => {
   const { body } = req;
 
@@ -139,6 +123,8 @@ exports.userInCart = (req, res, next) => {
     });
 };
 
+
+//get cart entry of a user
 exports.getCartEntry = (req, res) => {
   let userid = req.params.id;
   Cart.findById(userid)
@@ -146,6 +132,7 @@ exports.getCartEntry = (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
+//remove product from the cart 
 exports.deleteCartEntry = (req, res, next) => {
   Cart.remove({ _id: req.params.id })
     .exec()
