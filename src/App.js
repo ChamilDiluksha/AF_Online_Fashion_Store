@@ -21,6 +21,7 @@ import "semantic-ui-css/semantic.min.css";
 
 
 //import cart managment components
+import ViewCart from "./components/CartComponent/CartManagment/ViewCart";
 import OrderHistory from "./components/CartComponent/OrderManagment/OrderHistory";
 import Checkout from "./components/CartComponent/OrderManagment/Checkout";
 import CartView from "./components/CartComponent/CartManagment/CartView";
@@ -91,6 +92,7 @@ class App extends Component {
               <Route path="/wishlist" component={Wishlist} />
               <Route path="/delivery" component={Delivery} />
               <Route path="/sizeguide" component={Sizeguide} />
+              <Route path="/viewcart" component={ViewCart} />
               <Route path="/about" component={About} />
               <Route path="/checkout" component={Checkout} />
               <Route path="/cartview" component={CartView} />

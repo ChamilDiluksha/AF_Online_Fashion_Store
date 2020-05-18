@@ -17,10 +17,6 @@ export default class Checkout extends Component {
       user: user,
       cart: this.props.location.aboutProps.Cart,
       cartItem: "",
-      firstName: "",
-      lastName: "",
-      address: "",
-      paymentType: ""
     };
   }
 
@@ -28,22 +24,10 @@ export default class Checkout extends Component {
     const t = this.state.cart;
     const tempDate = new Date();
     const oid =
-      "ORD" + tempDate.valueOf();
-
-    const paymentobj = {
-      OrderID: oid,
-      UserID: this.state.user.userId,
-      Total: this.props.location.aboutProps.Total,
-      Address: this.state.address,
-      PaymentType: this.state.paymentType,
-      Name: this.state.firstName + " " + this.state.lastName,
-    };
-
-    await axios
-      .post("http://localhost:5000/payment/create", paymentobj)
-      .then(console.log("created"))
-      .catch((err) => console.log(err));
-
+      "ORD" +
+      this.state.user.userId +
+      Math.floor(Math.random() * (+10000 - +100)) +
+      +100;
 
     await Promise.all(
       t.map(function (object, i) {
@@ -80,24 +64,9 @@ export default class Checkout extends Component {
       })
     );
 
-
     alert("Your Order has been Placed sucessfully.!");
     window.location.href = "/log";
   }
-
-  onChangeFirstName = (e) => {
-    this.setState({ firstName: e.target.value })
-  }
-  onChangeLastName = (e) => {
-    this.setState({ lastName: e.target.value })
-  }
-  onChangePaymentType = (e) => {
-    this.setState({ paymentType: e.target.value })
-  }
-  onChangeAddress = (e) => {
-    this.setState({ address: e.target.value })
-  }
-
 
   render() {
     return (
@@ -108,55 +77,51 @@ export default class Checkout extends Component {
 
           <Form>
             <h3>
-              <i class="fa fa-truck" aria-hidden="true"></i> Shipping Information
+              <i class="fa fa-truck" aria-hidden="true"></i> Shipping
+              Information
             </h3>
 
             <Form.Group as={Col}>
               <Form.Label>First Name</Form.Label>
-              <Form.Control required type="text"
-                onChange={this.onChangeFirstName} />
+              <Form.Control required type="text" />
             </Form.Group>
-
             <Form.Group as={Col}>
               <Form.Label>Last Name</Form.Label>
-              <Form.Control required type="text"
-                onChange={this.onChangeLastName} />
+              <Form.Control required type="text" />
             </Form.Group>
 
             <Form.Group as={Col}>
               <Form.Label>Delivery Address</Form.Label>
-              <Form.Control required type="text"
-                onChange={this.onChangeAddress} />
+              <Form.Control required type="text" />
             </Form.Group>
 
             <h3>
-              <i class="fa fa-credit-card-alt" aria-hidden="true"></i> Payment Information
+              <i class="fa fa-credit-card-alt" aria-hidden="true"></i> Payment
+              Information
             </h3>
 
-            <Form.Group as={Row}>
-              <Form.Label as="legend" column sm={2}>
-                Payment Type
-
+            <fieldset>
+              <Form.Group as={Row}>
+                <Form.Label as="legend" column sm={2}>
+                  Card Type
+                </Form.Label>
                 <Col sm={10}>
-                  <Form.Check name="groupOptions" type="radio" value="Credit Card" label="Credit Card"
-                    onChange={this.onChangePaymentType} />
-                  <Form.Check name="groupOptions" type="radio" value="Debit Card" label="Debit Card"
-                    onChange={this.onChangePaymentType} />
-
-                  <Form.Group>
-                    <Form.Control placeholder="Card PIN" required type="text" />
-                  </Form.Group>
-
-                  <Form.Group>
-                    <Form.Control placeholder="Card NO" required type="text" />
-                  </Form.Group>
-
-                  <Form.Check name="groupOptions" value="Cash on Delivery" type="radio" label="Cash on Delivery"
-                    onChange={this.onChangePaymentType} />
+                  <Form.Check type="radio" label="VISA" />
+                  <Form.Check type="radio" label="Master Card" />
+                  <Form.Check type="radio" label="American Express" />
                 </Col>
-              </Form.Label>
+              </Form.Group>
+            </fieldset>
+
+            <Form.Group as={Col}>
+              <Form.Label>Card PIN</Form.Label>
+              <Form.Control required type="text" />
             </Form.Group>
 
+            <Form.Group as={Col}>
+              <Form.Label>Card No</Form.Label>
+              <Form.Control required type="text" />
+            </Form.Group>
 
             <Form.Group as={Col}>
               <Form.Label>Total Amount</Form.Label>
@@ -170,7 +135,6 @@ export default class Checkout extends Component {
             <Button variant="outline-primary" onClick={(e) => this.onSubmit()}>
               Place Order
             </Button>
-
           </Form>
         </div>
       </div>

@@ -114,7 +114,7 @@ export default class Description extends Component {
         Quantity: this.state.Quantity,
         DressPrice: this.state.NewPrice,
         DressImage: this.state.Image[0],
-        Total: this.state.Quantity * this.state.NewPrice,
+        Total: this.state.Quantity * this.state.DressPrice,
       };
 
       const resusertemp = await axios.post(

@@ -55,7 +55,6 @@ export default class CartView extends Component {
       this.setState({
         Total: total,
       });
-
     } else {
       alert("Please Log In..!");
       window.location.href = "/sign-in";
@@ -77,6 +76,7 @@ export default class CartView extends Component {
   }
 
   renderCards() {
+    // console.log(this.state.Cart.length);
 
     if (this.state.message === "Cart not existing") {
       this.emptCart();
@@ -109,15 +109,12 @@ export default class CartView extends Component {
                   style={{ width: "18rem" }}
                 >
                   <Card.Body bg-dark>
-
                     <Card.Title className="sub-total">
                       <b>Cart Summery</b>
                     </Card.Title>
-
                     <Card.Title className="text-center mt-4 mb-4">
                       Sub Total : LKR {this.state.Total}
                     </Card.Title>
-
                     <Link
                       variant="dark"
                       to={{
