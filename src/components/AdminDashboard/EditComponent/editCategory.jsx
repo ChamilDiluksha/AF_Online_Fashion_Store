@@ -109,8 +109,8 @@ class Category extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-
         let editstages;
+
         for(let i = 0; i < this.state.stages.length ; i++){
             editstages = {
                 stageNo: i + 1,
@@ -128,8 +128,6 @@ class Category extends Component {
             description :this.state.description,
             images: this.state.images
         }
-
-
 
         axios.put('http://localhost:5000/category/update/'+this.props.match.params.id, obj)
         .then(res => {
@@ -165,91 +163,91 @@ class Category extends Component {
             
           
             <div className="row">
-            <div  className="col-13 mt-5 ml-5" style={{ paddingRight:"60px"}}>
-            <div className="container ">
-            <h5 style={{padding:"15px"}}>Edit Category</h5>
-            <Form onSubmit={this.onSubmit}>
+                <div  className="col-13 mt-5 ml-5" style={{ paddingRight:"60px"}}>
+                    <div className="container ">
+                        <h5 style={{padding:"15px"}}>Edit Category</h5>
+                        <Form onSubmit={this.onSubmit}>
 
-                    <Form.Row>
-                        <Form.Group as={Col} >
+                                <Form.Row>
+                                    <Form.Group as={Col} >
+                                            <Form.Control
+                                                required
+                                                type="text"
+                                                id="cid"
+                                                name="cid"
+                                                value={this.state.CategoryID}
+                                                onChange={this.onChangeCategoryID}
+                                                placeholder="Category ID"/>
+                                    </Form.Group>
+
+                                    <Form.Group as={Col} >
+                                            <Form.Control
+                                                required
+                                                type="text"
+                                                id="ctype"
+                                                name="ctype"
+                                                value={this.state.CategoryType}
+                                                onChange={this.onChangeCategoryType}
+                                                placeholder="Category Name"/>
+                                    </Form.Group>
+
+                                </Form.Row>
+
+                                <Form.Group >
+                                <Form.Label>Sub type</Form.Label>
+                                    <Form.Control as="select" 
+                                    id="subtype"
+                                    name="subtype"
+                                    value={this.state.SubType}
+                                    onChange={this.onChangeSubType}>
+                                    >
+                                        <option>None</option>
+                                        <option>CLOTHING</option>
+                                        <option>SPECIAL COLLECTIONS</option>
+                                        <option>ACCESSORIES</option>
+                                        
+
+                                </Form.Control>
+                                </Form.Group>
+
+                                <Form.Group>
                                 <Form.Control
-                                    required
-                                    type="text"
-                                    id="cid"
-                                    name="cid"
-                                    value={this.state.CategoryID}
-                                    onChange={this.onChangeCategoryID}
-                                    placeholder="Category ID"/>
-                        </Form.Group>
-
-                        <Form.Group as={Col} >
-                                <Form.Control
-                                    required
-                                    type="text"
-                                    id="ctype"
-                                    name="ctype"
-                                    value={this.state.CategoryType}
-                                    onChange={this.onChangeCategoryType}
-                                    placeholder="Category Name"/>
-                        </Form.Group>
-
-                </Form.Row>
-
-                    <Form.Group >
-                    <Form.Label>Sub type</Form.Label>
-                        <Form.Control as="select" 
-                        id="subtype"
-                        name="subtype"
-                        value={this.state.SubType}
-                        onChange={this.onChangeSubType}>
-                        >
-                            <option>None</option>
-                            <option>CLOTHING</option>
-                            <option>SPECIAL COLLECTIONS</option>
-                            <option>ACCESSORIES</option>
-                            
-
-                        </Form.Control>
-                    </Form.Group>
-
-                    <Form.Group>
-                    <Form.Control
-                                required
-                                type="text"
-                                id="description"
-                                name="description"
-                                value={this.state.description}
-                                onChange={this.onChangeDescription}
-                                placeholder="Description" />
-                    </Form.Group>
+                                            required
+                                            type="text"
+                                            id="description"
+                                            name="description"
+                                            value={this.state.description}
+                                            onChange={this.onChangeDescription}
+                                            placeholder="Description" />
+                                </Form.Group>
 
 
-                    <div style={{paddingTop:"5px", paddingBottom:"5px"}}> 
-                    <Form.Label>Choose Image</Form.Label>
-                        <ImageUpload refreshFunction = {this.updateFiles} /> 
+                                <div style={{paddingTop:"5px", paddingBottom:"5px"}}> 
+                                <Form.Label>Choose Image</Form.Label>
+                                    <ImageUpload refreshFunction = {this.updateFiles} /> 
+                                </div>
+
+                                <Button className="mt-3" variant="primary" type="submit">
+                                    Submit
+                                </Button>
+                        </Form>
                     </div>
+                </div>
+                <div className="mt-5 ml-5"> 
+                    <Form.Group>
+                            <Form.Label>Sub Item</Form.Label>
 
-                    <Button className="mt-3" variant="primary" type="submit">
-                        Submit
-                    </Button>
-            </Form>
-            </div>
-            </div>
-            <div className="mt-5 ml-5"> 
-            <Form.Group>
-                                <Form.Label>Sub Item</Form.Label>
-
-                                {}
-                                <table  className="stageTable" id="tab_logic">
-                                    <thead>
+                            {}
+                            <table  className="stageTable" id="tab_logic">
+                                <thead>
 
                                             <tr>
                                                 <td>No</td>
                                                 <td align="center">Item</td>
                                             </tr>
 
-                                    </thead>
-                                    <tbody>
+                                </thead>
+                                <tbody>
                                     {this.state.stages.map((item, idx) => (
                                         <tr id="addr0" key={idx}>
                                             <td>
@@ -266,21 +264,21 @@ class Category extends Component {
                                             </td>
                                         </tr>
                                     ))}
-                                    </tbody>
+                                </tbody>
                                 </table>
                                 <table className="buttons">
                                     <tbody>
-                                    <tr>
-                                        <td align="right">
-                                           <br/> <Button onClick={this.handleAddStage}>Add Item</Button>
-                                        </td>
-                                        <td align="left">
-                                        <br/><Button onClick={this.handleRemoveStage}>Delete Item</Button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td align="right">
+                                            <br/> <Button onClick={this.handleAddStage}>Add Item</Button>
+                                            </td>
+                                            <td align="left">
+                                            <br/><Button onClick={this.handleRemoveStage}>Delete Item</Button>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                            </Form.Group>
+                    </Form.Group>
             </div>
 
             </div>

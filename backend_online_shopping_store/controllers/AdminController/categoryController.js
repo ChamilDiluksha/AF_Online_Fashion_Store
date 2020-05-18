@@ -1,6 +1,7 @@
 const CategoryItem = require("../../model/AdminModels/Category");
 const multer = require('multer');
 
+//add category
 exports.addCategory = (req, res, next) => {
 
     const {body} = req;
@@ -50,6 +51,7 @@ exports.addCategory = (req, res, next) => {
     });
 }
 
+//get all categories
 exports.getAllCategory = (req, res) => {
     CategoryItem.find((err, category) => {
         if(err){
@@ -68,11 +70,14 @@ exports.getAllCategory = (req, res) => {
 //     .catch(err => res.status(400).json('Error: ' + err));
 // }
 
+
+//get specific category value
 exports.getCategory = ((req, res) => {
   CategoryItem.findById(req.params.id)
     .then(exercise => res.json(exercise))
       .catch(err => res.status(400).json('Error: ' + err));
 });
+
 
 exports.getClickedCategory = (req, res) => {
     let categoryid = req.query.id;
@@ -85,6 +90,7 @@ exports.getClickedCategory = (req, res) => {
         }))
 }
 
+//edit category
 exports.editCategory = (req, res) => {
     const {body} = req;
 
@@ -118,7 +124,7 @@ exports.editCategory = (req, res) => {
     });
 }
 
-
+//delete category
 exports.deleteCategory = (req,res,next) => {
     CategoryItem.remove({_id: req.params.id})
         .exec()
@@ -135,6 +141,8 @@ exports.deleteCategory = (req,res,next) => {
         });
 }
 
+
+//Insert Image
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './uploads/')

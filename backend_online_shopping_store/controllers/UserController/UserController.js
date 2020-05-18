@@ -7,7 +7,7 @@ const JWT_KEY = texts.JWTKEY.key;
 
 
 
-
+// user registration
 exports.user_signup = (req, res, next) => {
 
     const { Username } = req.body;
@@ -62,7 +62,7 @@ exports.user_signup = (req, res, next) => {
 
 
 
-
+// user login functionality
 exports.userSignin = (req, res, next) => {
     User.find({ Username: req.body.Username }).exec().then(user => {
         if (user.length < 1) {
@@ -114,6 +114,7 @@ exports.userSignin = (req, res, next) => {
 }
 
 
+//validate user
 exports.user_validate = (req, res, next) => {
     User.find({ _id: req.body.user.userId, Token: req.body.token }).exec().then(user => {
         if (user.length < 1) {
@@ -128,6 +129,8 @@ exports.user_validate = (req, res, next) => {
     });
 }
 
+
+//sign out function
 exports.user_signout = (req, res, next) => {
     User.find({ _id: req.body.user.userId, Token: req.body.token }).exec().then(user => {
         if (user.length < 1) {
@@ -154,6 +157,7 @@ exports.user_signout = (req, res, next) => {
 }
 
 
+//get all users details
 exports.GetAlluser_details = (req, res) => {
     User.find((err, user) => {
         if (err) {
@@ -165,6 +169,7 @@ exports.GetAlluser_details = (req, res) => {
     });
 }
 
+//delete specific user details
 exports.deleteUser = (req,res,next) => {
     User.remove({_id: req.params.id})
         .exec()
