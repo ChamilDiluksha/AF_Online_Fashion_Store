@@ -52,6 +52,9 @@ app.use("/comment", commentRoute);
 const orderRoute = require("./routes/CartRoute/OrderRoute");
 app.use("/order", orderRoute);
 
+const paymentRoute = require("./routes/CartRoute/PaymentRoute");
+app.use("/payment", paymentRoute);
+
 // server listening port
 app.listen(port, () => {
   console.log(serverMessages.SERVER + port);
