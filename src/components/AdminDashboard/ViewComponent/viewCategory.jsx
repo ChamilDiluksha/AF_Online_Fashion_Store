@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TableRow from '../ViewDetails/CategoryDetails';
-import { Image, Statistic } from 'semantic-ui-react'
+import { Statistic } from 'semantic-ui-react'
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 class ViewCategory extends Component {

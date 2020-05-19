@@ -42,6 +42,7 @@ class Category extends Component {
                     SubType: response.data.SubType,
                     stages:response.data.stages,
                     description: response.data.description,
+                    images: response.data.images,
                 });
             })
             .catch(function (error) {

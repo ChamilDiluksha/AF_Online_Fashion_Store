@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Button, Col, Form} from 'react-bootstrap';
 import axios from 'axios';
 import {  Message } from 'semantic-ui-react'
-import {  Card, Divider, Image, Placeholder } from 'semantic-ui-react'
+import {  Card, Image } from 'semantic-ui-react'
 
 class EditManager extends Component {
     constructor(props) {

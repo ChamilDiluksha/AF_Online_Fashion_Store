@@ -3,12 +3,10 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
 import axios from "axios";
-import Admin from "./components/AdminDashboard/AdminHandler";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 // Import home components
 import Dashboard from "./components/Dashboard";
-import NavBar from "../src/components/Home/NavBar";
 import Container from "../src/components/Home/Container";
 import Footer from "../src/components/Home/Footer";
 import Wishlist from "./components/Wishlist/Wishlist";
