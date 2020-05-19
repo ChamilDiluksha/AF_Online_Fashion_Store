@@ -90,7 +90,8 @@ export class EditProductPage extends Component {
                 .then(response => {
                     this.setState({ 
                         stages: response.data.stages,
-                        Category:response.data.CategoryType
+                        Category:response.data.CategoryType,
+                        DressType:response.data.SubType
                     });
                 })
                 .catch(function (error) {
@@ -198,21 +199,14 @@ export class EditProductPage extends Component {
                    </Form.Group>  
 
                   
-                  <Form.Group as={Col}>
+                   <Form.Group as={Col}>
                   <Form.Label>Select Dress Type</Form.Label>
-                  <Form.Control as="select" 
-                        id="Dtype"
-                        name="Dtype"
-                        value={this.state.DressType}
-                        onChange={this.handleChangeDressType} >
-                     {
-                        this.state.ArrayCategory.map(function(category) {
-                        return <option 
-                        key={category.SubType}
-                        value={category.SubType}>{category.SubType}
-                        </option>;
-                        })
-                    }
+                  <Form.Control required 
+                                type="text" 
+                                id = "dtype" 
+                                name = "dresstype" 
+                                value = {this.state.DressType} 
+                                onChange = {this.handleChangeDressType}  >
                   </Form.Control>
                   </Form.Group>
 
