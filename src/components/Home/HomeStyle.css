@@ -63,16 +63,20 @@ body {
   text-decoration: line-through;
 }
 
+.discount-token {
+  margin-left: 10%;
+}
+
 .footer a {
   color: inherit;
 }
 
 @media (max-width:800px) {
   .category-card {
-    margin-left: 120px;
+    margin-left: 42%;
   }
 
   .product-card {
-    margin-left: 120px;
+    margin-left: 24%;
   }
 }

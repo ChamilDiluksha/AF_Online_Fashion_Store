@@ -49,6 +49,6 @@ body {
 
 @media (max-width:800px) {
   .wishlist-container {
-    margin-left: 120px;
+    margin-left: 25%;
   }
 }

@@ -6,7 +6,7 @@ import "./HomeStyle.css";
 import Cookies from "universal-cookie";
 import NavBar from "./NavBar";
 import Card from "react-bootstrap/Card";
-import { Comment, Header, Rating } from "semantic-ui-react";
+import { Comment, Header, Rating, Button as SButton, Label } from "semantic-ui-react";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import { Link } from "react-router-dom";
@@ -33,7 +33,7 @@ export default class Description extends Component {
       productid: "",
       Quantity: 1,
       Comments: [],
-      NewPrice: 0,
+      NewPrice: 0.00,
       updated: true,
     };
 
@@ -57,7 +57,7 @@ export default class Description extends Component {
           Description: response.data.description,
           Image: response.data.images,
           Quantity: 1,
-          NewPrice: response.data.DressPrice - response.data.Discount,
+          NewPrice: response.data.DressPrice * (100 - response.data.Discount) / 100,
         });
       })
       .catch(function (error) {
@@ -271,9 +271,19 @@ export default class Description extends Component {
                     <Card.Title className="text-center price">
                       Rs. {this.state.DressPrice}.00
                     </Card.Title>
+                    <div className="discount-token">
+                      <SButton as='div' labelPosition='right'>
+                        <SButton  color='blue'>
+                          <i class="fas fa-tag mr-2" />Discount
+                        </SButton>
+                        <Label as='a' basic color='blue'  pointing='left'>
+                          {this.state.Discount} %
+                        </Label>
+                      </SButton>
+                    </div>
                     <hr />
                     <Card.Title className="text-center">
-                      New Price: <h2>Rs. {this.state.NewPrice}.00</h2>
+                      New Price: <h2>Rs. {this.state.NewPrice.toFixed(2)}</h2>
                     </Card.Title>
                   </Card.Body>
                 </Card>
@@ -291,7 +301,7 @@ export default class Description extends Component {
                     <b>Price : </b>Rs. {this.state.DressPrice}.00
                   </li>
                   <li>
-                    <b>Discount : </b>Rs. {this.state.Discount}.00
+                    <b>Discount : </b> {this.state.Discount} %
                   </li>
                   <li>
                     <b>Type : </b>
