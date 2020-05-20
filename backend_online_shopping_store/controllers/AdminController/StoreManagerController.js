@@ -6,7 +6,7 @@ const nodeMailer = require('nodemailer');
 const texts = require('../../constants/texts');
 const emailCongig = texts.emailConfigure;
 
-
+//add store manager
 exports.addManager = (req, res, next) => {
     const {body} = req;
     const {
@@ -150,6 +150,8 @@ exports.addManager = (req, res, next) => {
         });
 }
 
+
+//get all store managers
 exports.getAllManager = (req, res) => {
     Manager.find((err, manager) => {
         if(err){
@@ -162,6 +164,7 @@ exports.getAllManager = (req, res) => {
 }
 
 
+//get specific manager details
 exports.getManager = (req, res) => {
     let managerid = req.params.id;
     Manager.findById(managerid)
@@ -172,7 +175,7 @@ exports.getManager = (req, res) => {
 
 
 
-
+//edit store manger details
 exports.editManager = (req, res) => {
     const {body} = req;
     const {
@@ -219,6 +222,7 @@ exports.editManager = (req, res) => {
 }
 
 
+//delete store manger details
 exports.deleteManager = (req,res,next) => {
     Manager.remove({_id: req.params.id})
         .exec()

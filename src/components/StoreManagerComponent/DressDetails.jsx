@@ -18,11 +18,7 @@ class DressDetails extends Component {
     }
 
     delete() {
-        axios.delete('http://localhost:5000/product/delete/'+this.props.obj._id , {
-            headers: {
-              'Authorization': `Bearer ${this.state.token}`
-            }
-        })
+        axios.delete('http://localhost:5000/product/delete/'+this.props.obj._id)
             .then(console.log('Deleted'))
             .catch(err => console.log(err));
         window.location.href = "/log/StoreManager/ViewDressDetails";

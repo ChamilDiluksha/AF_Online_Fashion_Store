@@ -3,12 +3,10 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
 import axios from "axios";
-import Admin from "./components/AdminDashboard/AdminHandler";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 // Import home components
 import Dashboard from "./components/Dashboard";
-import NavBar from "../src/components/Home/NavBar";
 import Container from "../src/components/Home/Container";
 import Footer from "../src/components/Home/Footer";
 import Wishlist from "./components/Wishlist/Wishlist";
@@ -21,7 +19,6 @@ import "semantic-ui-css/semantic.min.css";
 
 
 //import cart managment components
-import ViewCart from "./components/CartComponent/CartManagment/ViewCart";
 import OrderHistory from "./components/CartComponent/OrderManagment/OrderHistory";
 import Checkout from "./components/CartComponent/OrderManagment/Checkout";
 import CartView from "./components/CartComponent/CartManagment/CartView";
@@ -92,7 +89,6 @@ class App extends Component {
               <Route path="/wishlist" component={Wishlist} />
               <Route path="/delivery" component={Delivery} />
               <Route path="/sizeguide" component={Sizeguide} />
-              <Route path="/viewcart" component={ViewCart} />
               <Route path="/about" component={About} />
               <Route path="/checkout" component={Checkout} />
               <Route path="/cartview" component={CartView} />
