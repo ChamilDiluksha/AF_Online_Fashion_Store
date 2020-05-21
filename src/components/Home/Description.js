@@ -37,6 +37,8 @@ export default class Description extends Component {
       updated: true,
     };
 
+
+
     this.clickDecrement = this.clickDecrement.bind(this);
     this.clickIncrement = this.clickIncrement.bind(this);
     this.displayComments = this.displayComments.bind(this);
@@ -210,12 +212,10 @@ export default class Description extends Component {
                   <Moment format="YYYY/MM/DD">{object.date}</Moment>
                 </h6>
               </div>
-              <Button
+              {(user) ? (user.userId == object.UserId) ?<Button
                 variant="dark"
                 size="sm"
                 onClick={() => {
-                  if (user) {
-                    if (user.userId == object.UserId) {
                       axios
                         .delete(
                           "http://localhost:5000/comment/delete/" + object._id
@@ -224,18 +224,12 @@ export default class Description extends Component {
                         .catch((err) => console.log(err));
                       alert("Comment Deleted..!");
                       window.location.reload();
-                    } else {
-                      alert("You Can not Delete this Comment..!");
-                    }
-                  } else {
-                    alert("Please Login First..!");
-                    window.location.href = "/sign-in";
-                  }
                 }}
-                className="float-right"
+                className="float-right ml-3"
               >
                 Delete
-              </Button>
+              </Button> : '' : ''}
+              {(user) ? (user.userId == object.UserId) ? <Link to={'/editComment/'+object._id}><Button variant="outline-dark" size="sm" className="float-right">Update</Button></Link> : '' : ''}
               <div class="text">
                 <h5>{object.Comment}</h5>
               </div>

@@ -15,6 +15,7 @@ import Sizeguide from "../src/components/Home/Sizeguide";
 import Items from "../src/components/Home/Items";
 import About from "../src/components/Home/AboutUs";
 import Description from "../src/components/Home/Description";
+import UpdateComments from "./components/UpdateComment";
 import "semantic-ui-css/semantic.min.css";
 
 
@@ -92,6 +93,7 @@ class App extends Component {
               <Route path="/about" component={About} />
               <Route path="/checkout" component={Checkout} />
               <Route path="/cartview" component={CartView} />
+              <Route path="/editComment/:id" component={UpdateComments} />
               <Route path="/orderhistory" component={OrderHistory} />
             </Switch>
           </Router>

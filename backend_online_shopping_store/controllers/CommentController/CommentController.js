@@ -44,8 +44,15 @@ exports.getAllComments = (req, res) => {
     });
 }
 
+exports.getComment = (req, res) => {
+    let commentid = req.params.id;
+    Comments.findById(commentid)
+    .then(comment => res.json(comment))
+    .catch(err => res.status(400).json('Error: ' + err));
+}
+
 exports.updateComment = (req, res) => {
-  Exercise.findById(req.params.id)
+  Comments.findById(req.params.id)
     .then(comment => {
       comment.Comment = req.body.Comment;
       comment.Review = req.body.Review;
