@@ -54,22 +54,17 @@ export default class OrderHistory extends Component {
 
   render() {
     return (
-      <div>
-        <NavBar />
-        <div className="main-container">
-          <div className="row">
-            <div
-              className="col-13"
-              style={{ paddingLeft: "30px", paddingRight: "100px" }}
-            >
+      <div className="mb-3">
+        <div style={{paddingBottom:"80px"}}>
+          <NavBar />
+        </div>
+        <div className="row" >
+            <div className="container">
+            <div  className="col-13 mt-5 ml-5 mr-5" >
               <h1 align="center">Purchase History</h1>
               <MDBTable
-                small
-                style={{
-                  marginTop: "50px",
-                  width: "1000px",
-                  marginLeft: "250px",
-                }}
+                responsive
+                
               >
                 <MDBTableHead>
                   <tr>
