@@ -32,7 +32,7 @@ exports.UploadImage = (req, res, next) => {
     
 }
 
-
+// Add a product to the system
 exports.addProduct = (req, res, next) => {
 
     const {body} = req;
@@ -93,7 +93,7 @@ exports.addProduct = (req, res, next) => {
     });
 }
 
-
+// Get all added product details
 exports.getAllProducts = (req, res) => {
     ProductItem.find((err, product) => {
         if(err){
@@ -105,7 +105,7 @@ exports.getAllProducts = (req, res) => {
     });
 }
 
-
+// Get a single product details
 exports.getProduct = (req, res) => {
     let productid = req.params.id;
     ProductItem.findById(productid)
@@ -113,7 +113,7 @@ exports.getProduct = (req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 }
 
-
+// Edit products
 exports.editProduct = (req, res) => {
 
     const {body} = req;
@@ -168,6 +168,7 @@ exports.editProduct = (req, res) => {
     });
 }
 
+// Delete a selected product
 exports.deleteProduct = (req,res,next) => {
     ProductItem.remove({_id: req.params.id})
         .exec()

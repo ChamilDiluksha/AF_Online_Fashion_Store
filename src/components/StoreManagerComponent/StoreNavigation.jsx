@@ -57,7 +57,7 @@ class StoreNavigation extends Component {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                <Nav.Link href="">HOME</Nav.Link>
+                
                     <Nav.Link href="/log">ADD ITEMS</Nav.Link>
                     <Nav.Link href="/log/StoreManager/ViewDressDetails">VIEW ALL</Nav.Link>
                 </Nav>
