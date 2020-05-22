@@ -73,3 +73,16 @@ exports.deleteItem = (req,res) => {
             });
         });
 }
+
+exports.getCount = (req,res) => {
+   WishlistItems.find({"UserId" : req.params.id}).countDocuments(function (err, count) {
+        if (err) {
+           throw err;
+        }
+
+        else {
+          res.json(count);
+        }
+
+    });
+}

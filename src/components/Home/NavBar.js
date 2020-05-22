@@ -5,16 +5,7 @@ import "./HomeStyle.css";
 import Cookies from "universal-cookie";
 import { Container, Header, List } from "semantic-ui-react";
 import axios from "axios";
-import {
-  Navbar,
-  Nav,
-  NavItem,
-  NavDropdown,
-  MenuItem,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import DisplayWishlist from "../Wishlist/DisplayWishlist/DisplayWishlist";
 
@@ -34,7 +25,8 @@ export default class NavBar extends Component {
       category: [],
       product: [],
       Search: '',
-      showSearch: false
+      showSearch: false,
+      itemCount: 0
     };
 
     this.btnLinks = this.btnLinks.bind(this);
@@ -70,6 +62,9 @@ export default class NavBar extends Component {
   };
 
   componentDidMount() {
+    const cookies = new Cookies();
+    let user = cookies.get("user");
+
     axios
       .get("http://localhost:5000/wishlist/display")
       .then((response) => {
@@ -96,6 +91,17 @@ export default class NavBar extends Component {
         .catch(function (error) {
           console.log(error);
         });
+
+        if (user) {
+          axios
+            .get("http://localhost:5000/wishlist/getcount/" + user.userId)
+            .then((response) => {
+              this.setState({ itemCount: response.data });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
   }
 
   btnLinks() {
@@ -115,7 +121,7 @@ export default class NavBar extends Component {
           }
         }}
       >
-        Wish List <i class="fas fa-heart" />
+         <Badge className="mr-2" variant="primary" pill>{this.state.itemCount} </Badge> Wish List <i class="fas fa-heart" />
       </Button>
     );
   }

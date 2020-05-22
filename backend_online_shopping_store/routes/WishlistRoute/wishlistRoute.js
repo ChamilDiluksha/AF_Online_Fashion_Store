@@ -5,5 +5,6 @@ const WishlistController = require('../../controllers/WishlistController/Wishlis
 WishlistRouter.post("/create", WishlistController.addItem);
 WishlistRouter.get("/display", WishlistController.getAllItems);
 WishlistRouter.delete("/delete/:id", WishlistController.deleteItem);
+WishlistRouter.get("/getcount/:id", WishlistController.getCount);
 
 module.exports = WishlistRouter;
