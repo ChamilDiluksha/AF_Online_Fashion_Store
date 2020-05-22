@@ -86,7 +86,7 @@ class ViewCategory extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div  className="col-13 mt-5 ml-5 mr-5" >
+                    <div  className="col-10 mt-5 ml-5 mr-5" >
             
                         <h5 align="center">Category List</h5>
                         <MDBTable striped hover responsive>
