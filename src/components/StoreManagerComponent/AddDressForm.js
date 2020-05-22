@@ -151,15 +151,15 @@ export class UploadProductPage extends Component {
             <h3 class = "x"> !!! Upload Item Here !!! </h3>
             </div>
             <br /> <br />
-                <label> Enter Dress Image </label> <br />
+                <label> Enter Product Image </label> <br />
                 <div> <ImageUpload refreshFunction = {this.updateFiles} /> </div>
-
+                <br /> <br />
                  <Form onSubmit = {this.onSubmit}>
                 
             
 
                   <Form.Group as ={Col} >
-                  <Form.Label>Dress Code</Form.Label>
+                  <Form.Label>Product Code</Form.Label>
                   <Form.Control required 
                                 type="text" 
                                 id = "dcode" 
@@ -169,7 +169,7 @@ export class UploadProductPage extends Component {
                   </Form.Group>
 
                   <Form.Group as ={Col} >
-                  <Form.Label>  Select Dress Category   </Form.Label>
+                  <Form.Label>  Select Product Category   </Form.Label>
                         
                         <Pitem 
                         TodoItem={this.state.ArrayCategory} 
@@ -178,7 +178,7 @@ export class UploadProductPage extends Component {
                    </Form.Group>  
                   
                    <Form.Group as={Col}>
-                  <Form.Label>Select Dress Type</Form.Label>
+                  <Form.Label>Select Product Type</Form.Label>
                   <Form.Control required 
                                 type="text" 
                                 id = "dtype" 
@@ -189,7 +189,7 @@ export class UploadProductPage extends Component {
                   </Form.Group>
 
                   <Form.Group as={Col}>
-                  <Form.Label>Select Sub Dress Type</Form.Label>
+                  <Form.Label>Select Sub Product Type</Form.Label>
                   <Form.Control as="select" 
                         id="Dtype"
                         name="Dtype"
@@ -209,7 +209,7 @@ export class UploadProductPage extends Component {
 
 
                   <Form.Group as ={Col} >
-                  <Form.Label>Dress Description</Form.Label>
+                  <Form.Label>Product Description</Form.Label>
                   <Form.Control required 
                                 type="text" 
                                 id = "description" 
@@ -219,7 +219,7 @@ export class UploadProductPage extends Component {
                   </Form.Group>
 
                   <Form.Group as ={Col} >
-                  <Form.Label>Dress Price</Form.Label>
+                  <Form.Label>Product Price</Form.Label>
                   <Form.Control required 
                                 type="number" 
                                 id = "dprice" 
@@ -229,7 +229,7 @@ export class UploadProductPage extends Component {
                   </Form.Group>
 
                   <Form.Group as ={Col} >
-                  <Form.Label>Dress Discount</Form.Label>
+                  <Form.Label>Product Discount</Form.Label>
                   <Form.Control required 
                                 type="number" 
                                 id = "discount" 
