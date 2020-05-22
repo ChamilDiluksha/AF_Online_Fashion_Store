@@ -7,6 +7,6 @@ StoreManagerRoute.post("/create", ManagerController.addManager);
 StoreManagerRoute.get("/", ManagerController.getAllManager);
 StoreManagerRoute.get("/:id", ManagerController.getManager);
 StoreManagerRoute.put("/update/:id", ManagerController.editManager);
-StoreManagerRoute.delete("/delete/:id", checkAuth ,ManagerController.deleteManager);
+StoreManagerRoute.delete("/delete/:id" ,ManagerController.deleteManager);
 
 module.exports = StoreManagerRoute;
