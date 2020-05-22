@@ -133,11 +133,7 @@ export default class NavBar extends Component {
           }
         }}
       >
-<<<<<<< HEAD
          <Badge className="mr-1" variant="primary" pill>{this.state.itemCount}</Badge> Wish List <i class="fas fa-heart" />
-=======
-        <Badge className="mr-2" variant="primary" pill>{this.state.itemCount} </Badge> Wish List <i class="fas fa-heart" />
->>>>>>> 0424586011d3d1d67f4bee48d80cd8190f554204
       </Button>
     );
   }
