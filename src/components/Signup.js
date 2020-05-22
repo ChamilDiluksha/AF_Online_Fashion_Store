@@ -70,7 +70,7 @@ class Signup extends Component {
     render() { 
         return ( 
 
-            <div>
+            <div className="mb-3">
             <div className="mb-5" style={{paddingBottom:"50px"}}>
                 <NavBar/>
             </div>
