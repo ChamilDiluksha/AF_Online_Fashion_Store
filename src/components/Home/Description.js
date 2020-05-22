@@ -1,6 +1,6 @@
+// Import modules and files
 import React, { Component } from "react";
 import axios from "axios";
-// Import bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./HomeStyle.css";
 import Cookies from "universal-cookie";
@@ -20,7 +20,6 @@ export default class Description extends Component {
     super(props);
 
     this.state = {
-      // UserID: user.username.toString(),
       user: user,
       DressCode: "",
       DressType: "",
@@ -37,14 +36,13 @@ export default class Description extends Component {
       updated: true,
     };
 
-
-
     this.clickDecrement = this.clickDecrement.bind(this);
     this.clickIncrement = this.clickIncrement.bind(this);
     this.displayComments = this.displayComments.bind(this);
   }
 
   componentDidMount() {
+    // Get selected product from db using axios
     axios
       .get("http://localhost:5000/product/" + this.props.match.params.id)
       .then((response) => {
@@ -66,6 +64,7 @@ export default class Description extends Component {
         console.log(error);
       });
 
+    // Get all comments from db using axios
     axios
       .get("http://localhost:5000/comment/display")
       .then((response) => {
@@ -78,6 +77,7 @@ export default class Description extends Component {
       });
   }
 
+  // Change quentity
   clickDecrement() {
     let quentity = this.state.Quantity;
 
@@ -96,10 +96,7 @@ export default class Description extends Component {
     this.setState({ Quantity: quentity });
   }
 
-  // getState() {
-  //   console.log(this.state);
-  // }
-
+  // Method for add to cart: kalpani
   addToCart = async (e) => {
     e.preventDefault();
     const cookies = new Cookies();
@@ -162,12 +159,15 @@ export default class Description extends Component {
     }
   };
 
+  // Method for add to wishlist
   addToWhishList = (e) => {
     e.preventDefault();
 
+    // Get logged uer
     const cookies = new Cookies();
     let user = cookies.get("user");
 
+    // Save wishlist item
     if (user) {
       const obj = {
         Subtype: this.state.Subtype,
@@ -192,6 +192,7 @@ export default class Description extends Component {
     }
   };
 
+  // Method for display comments
   displayComments() {
     const cookies = new Cookies();
     let user = cookies.get("user");
@@ -267,10 +268,10 @@ export default class Description extends Component {
                     </Card.Title>
                     <div className="discount-token">
                       <SButton as='div' labelPosition='right'>
-                        <SButton  color='blue'>
+                        <SButton  color='teal'>
                           <i class="fas fa-tag mr-2" />Discount
                         </SButton>
-                        <Label as='a' basic color='blue'  pointing='left'>
+                        <Label as='a' basic color='teal'  pointing='left'>
                           {this.state.Discount} %
                         </Label>
                       </SButton>

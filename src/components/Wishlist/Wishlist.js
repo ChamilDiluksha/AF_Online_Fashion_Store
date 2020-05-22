@@ -1,5 +1,5 @@
+// Import modules and files
 import React, {Component}from 'react';
-// Import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './WishlistStyles.css';
 import NavBar from '../Home/NavBar';
@@ -13,19 +13,17 @@ import DisplayWishlist from './DisplayWishlist/DisplayWishlist';
 
 export default class wishlist extends Component {
   constructor(props) {
-      const cookies = new Cookies();
-      let user = cookies.get('user');
+    const cookies = new Cookies();
+    let user = cookies.get('user');
 
-      super(props);
-      this.state = {
-          user: user,
-          Subtype: '',
-          Wishlist: []
-      }
+    super(props);
+    this.state = {
+      user: user,
+      Subtype: '',
+      Wishlist: []
+    }
 
-      // - {this.state.user.userId}
-      this.renderCards = this.renderCards.bind(this);
-
+    this.renderCards = this.renderCards.bind(this);
   }
 
   componentDidMount() {
@@ -38,14 +36,11 @@ export default class wishlist extends Component {
           })
   }
 
-
-  renderCards() { return this.state.Wishlist.map(function(object, i){
+  // Display wishlist items
+  renderCards() {
+    return this.state.Wishlist.map(function(object, i) {
       return <DisplayWishlist obj={object} key={i} />;
-  });
-}
-
-  getState() {
-    console.log(this.state);
+    });
   }
 
   render() {
@@ -56,8 +51,8 @@ export default class wishlist extends Component {
         <h1 className="page-header ml-4">My Wishlist </h1>
         <div className="container mt-4 wishlist-container">
           <div className="row">
-              {this.renderCards()}
-            </div>
+            {this.renderCards()}
+          </div>
         </div>
       </div>
     </div>

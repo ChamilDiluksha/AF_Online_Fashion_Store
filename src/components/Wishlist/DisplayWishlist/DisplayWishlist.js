@@ -10,6 +10,7 @@ class DisplayWishlist extends Component {
   constructor(props) {
     const cookies = new Cookies();
     let user = cookies.get("user");
+
     super(props);
 
     this.state = {
@@ -33,10 +34,9 @@ class DisplayWishlist extends Component {
       });
   }
 
+  // Method for delete wishlist item
   deleteItem = (e) => {
     e.preventDefault();
-
-    console.log("Delete");
 
     axios
       .delete("http://localhost:5000/wishlist/delete/" + this.props.obj._id)
@@ -47,6 +47,7 @@ class DisplayWishlist extends Component {
     window.location.href = "/wishlist";
   };
 
+  // Method for add to cart from wishlist: kalpani
   async addToCart() {
     const product = await axios
       .get("http://localhost:5000/product/" + this.props.obj.ProductId)
@@ -79,42 +80,34 @@ class DisplayWishlist extends Component {
     window.location.href = "/cartview";
   }
 
+  // Method for display wishlist cards
   renderCards() {
+    // Check whether user logged in
     if (this.state.user) {
       const userId = this.state.user.userId;
 
+      // Check current logged user
       if (this.props.obj.UserId == userId) {
         return (
           <Card className="mr-4 mb-4 wishlist-card" style={{ width: "18rem" }}>
-            <Card.Img
-              variant="top"
-              src={`http://localhost:5000/${this.props.obj.Images[0]}`}
-            />
+            <Link to={'/description/' + this.props.obj.ProductId}><Card.Img variant="top" src={`http://localhost:5000/${this.props.obj.Images[0]}`}/></Link>
             <Card.Body>
               <Card.Title className="text-center">
                 {this.props.obj.Subtype}
               </Card.Title>
-              <Button
-                variant="dark"
-                onClick={(e) => this.addToCart()}
-                className="mb-2"
-                block
-              >
+              <Button variant="dark" onClick={(e) => this.addToCart()} className="mb-2" block>
                 <i class="fas fa-shopping-cart mr-2" /> Add to Cart
               </Button>
-              <Button
-                variant="outline-dark"
-                onClick={this.deleteItem}
-                className="mb-2"
-                block
-              >
+              <Button variant="outline-dark" onClick={this.deleteItem} className="mb-2" block>
                 <i class="fas fa-trash mr-2" /> Remove from Wishlist
               </Button>
             </Card.Body>
           </Card>
         );
       }
-    } else {
+    }
+
+    else {
       alert("Please Log In..!");
       window.location.href = "/sign-in";
     }

@@ -1,53 +1,40 @@
+// Import modules and files
 import React, {Component} from 'react';
-// Import axios
 import axios from 'axios';
-// Import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './HomeStyle.css';
-
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
 import NavBar from './NavBar';
 import { Link } from 'react-router-dom';
 
+// Carousel images
 import carousel1 from'./images/carousel1.jpg';
 import carousel2 from'./images/carousel2.jpg';
 import carousel3 from'./images/carousel3.jpg';
 
 export default class Container extends Component {
   constructor(props) {
-      super(props);
-      this.state = {
-          category : [],
-          product: [],
-          image: ''
-        }
+    super(props);
+    this.state = {
+      category : []
+    }
   }
 
-  // Get all categories from db usin axios
   componentDidMount() {
-      axios.get('http://localhost:5000/category/')
-          .then(response => {
-              this.setState({ category: response.data });
-          })
-          .catch(function (error) {
-              console.log(error);
-          })
-  }
-
-  // Methods for create category cards
-  renderCards() {
-    axios.get('http://localhost:5000/product/')
+    // Get all categories from db using axios
+    axios.get('http://localhost:5000/category/')
       .then(response => {
-          this.setState({
-            product: response.data
-          });
+        this.setState({ category: response.data });
       })
         .catch(function (error) {
           console.log(error);
         })
+  }
 
+  // Methods for create category cards
+  renderCards() {
     return this.state.category.map(function(object, i) {
       return <Link to={'/items/'+ object._id}>
         <Card  className="mr-4 mb-4 category-card" style={{ width: '18rem' }}>
@@ -57,8 +44,8 @@ export default class Container extends Component {
           </Card.Body>
         </Card>
       </Link>;
-  });
-}
+    });
+  }
 
   render() {
     return (
@@ -86,6 +73,6 @@ export default class Container extends Component {
           </div>
         </div>
       </div>
-      )
-    }
+    )
   }
+}

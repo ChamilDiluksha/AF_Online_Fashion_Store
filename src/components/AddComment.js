@@ -1,3 +1,4 @@
+// Import modules and files
 import React,{Component} from 'react';
 import Cookies from "universal-cookie";
 import { Comment, Header, Rating } from 'semantic-ui-react';
@@ -9,6 +10,7 @@ export default class AddComment extends Component{
   constructor(props) {
     const cookies = new Cookies();
     let user = cookies.get('user');
+
     super(props);
 
     this.state = {
@@ -20,63 +22,63 @@ export default class AddComment extends Component{
       ProductId: ''
     }
 
-
     this.onChangeComment = this.onChangeComment.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeReview = this.onChangeReview.bind(this);
   }
 
+  // Get the input from textfield
   onChangeComment(e) {
     this.setState({
       Comment: e.target.value
     });
   }
 
+  // Get the rating value
   onChangeReview = (event, data) => {
     this.setState({
       Review: data.rating
     });
   }
 
+  // Method for handle comment submission
   onSubmit(e) {
-      e.preventDefault();
+    e.preventDefault();
 
-      const cookies = new Cookies();
-      let user = cookies.get('user');
+    const cookies = new Cookies();
+    let user = cookies.get('user');
 
-      const {productid} = this.props;
+    const {productid} = this.props;
 
-      if (user) {
-        const comment = {
-          Comment: this.state.Comment,
-          Review: this.state.Review,
-          date: this.state.date,
-          ProductId: productid,
-          UserId: user.userId,
-          Username: user.username
-        }
-
-        console.log(comment);
-
-        axios.post('http://localhost:5000/comment/create', comment)
-          .then(res => console.log(res.data));
-
-        this.setState({
-          Comment: ''
-        })
-
-        window.location.reload();
+    if (user) {
+      const comment = {
+        Comment: this.state.Comment,
+        Review: this.state.Review,
+        date: this.state.date,
+        ProductId: productid,
+        UserId: user.userId,
+        Username: user.username
       }
 
-      else {
-        alert('Please Login First..!');
-        window.location.href = "/sign-in";
-      }
+      console.log(comment);
 
+      axios.post('http://localhost:5000/comment/create', comment)
+        .then(res => console.log(res.data));
+
+      this.setState({
+        Comment: ''
+      })
+
+      window.location.reload();
+    }
+
+    else {
+      alert('Please Login First..!');
+      window.location.href = "/sign-in";
+    }
   }
 
   render(){
-
     return (
       <div className="mt-5">
         <h2>Add Comments</h2>

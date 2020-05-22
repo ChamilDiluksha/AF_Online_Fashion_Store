@@ -11,6 +11,7 @@ export default class UpdateComment extends Component{
   constructor(props) {
     const cookies = new Cookies();
     let user = cookies.get('user');
+
     super(props);
 
     this.state = {
@@ -22,11 +23,9 @@ export default class UpdateComment extends Component{
       ProductId: ''
     }
 
-
     this.onChangeComment = this.onChangeComment.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeReview = this.onChangeReview.bind(this);
-    this.getState = this.getState.bind(this);
   }
 
   componentDidMount() {
@@ -58,29 +57,24 @@ export default class UpdateComment extends Component{
   }
 
   onSubmit(e) {
-      e.preventDefault();
+    e.preventDefault();
 
-      const cookies = new Cookies();
-      let user = cookies.get('user');
+    const cookies = new Cookies();
+    let user = cookies.get('user');
 
-      const comment = {
-        Comment: this.state.Comment,
-        Review: this.state.Review,
-        date: this.state.date
-      }
+    const comment = {
+      Comment: this.state.Comment,
+      Review: this.state.Review,
+      date: this.state.date
+    }
 
-      axios.post('http://localhost:5000/comment/update/'+this.props.match.params.id, comment)
-      .then(res => console.log(res.data));
+    axios.post('http://localhost:5000/comment/update/'+this.props.match.params.id, comment)
+    .then(res => console.log(res.data));
 
-      alert('Comment Updated...');
+    alert('Comment Updated...');
 
-      window.location = '/description/' + this.state.ProductId;
-      window.opener.location.reload();
-
-  }
-
-  getState() {
-    console.log(this.state.Review);
+    window.location = '/description/' + this.state.ProductId;
+    window.opener.location.reload();
   }
 
   render(){
