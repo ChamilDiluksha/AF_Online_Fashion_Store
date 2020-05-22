@@ -71,11 +71,13 @@ class Signup extends Component {
         return ( 
 
             <div>
-            <NavBar/>
-            <div className="container">
-           
+            <div className="mb-5" style={{paddingBottom:"50px"}}>
+                <NavBar/>
+            </div>
+
+            <div className="container mt-5">
             <form onSubmit={this.onSubmit}>
-            <Grid textAlign='center' style={{ height: '70vh' }} verticalAlign='middle'>
+            <Grid textAlign='center' style={{ height: '60vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 400 }}>
               <Header as='h2' color='teal' textAlign='center'>
                 Sign-Up 

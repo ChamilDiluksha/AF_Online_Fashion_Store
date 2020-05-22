@@ -75,10 +75,14 @@ class Login extends Component {
     render() { 
         return ( 
             <div>
-            <NavBar/>
-            <div className="container">
-            <Grid textAlign='center' style={{ height: '70vh' }} verticalAlign='middle'>
-            <Grid.Column style={{ maxWidth: 400 }}>
+
+            <div className="mb-5" style={{paddingBottom:"50px"}}>
+                <NavBar/>
+            </div>
+
+            <div className="container mt-5">
+            <Grid textAlign='center' style={{ height: '60vh' }} verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 400}}>
               <Header as='h2' color='teal' textAlign='center'>
                 Log-in to your account
               </Header>
