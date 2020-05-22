@@ -22,9 +22,11 @@ class CartDetails extends Component {
       Cart: [],
     };
     this.renderCards = this.renderCards.bind(this);
+    // this.incrementQunatity = this.incrementQunatity.bind(this);
+    // this.decrementQunatity = this.decrementQunatity.bind(this);
   }
 
-  updateQty() {
+  updateQty(tempQty) {
 
     const item = {
       UserID: this.state.user.userId,
@@ -32,10 +34,10 @@ class CartDetails extends Component {
       Subtype: this.props.obj.Subtype,
       Description: this.props.obj.Description,
       ProductId: this.props.obj.ProductId,
-      Quantity: this.state.Quantity,
+      Quantity: tempQty,
       DressPrice: this.props.obj.DressPrice,
       DressImage: this.props.obj.DressImage,
-      Total: this.state.Quantity * this.props.obj.DressPrice,
+      Total: tempQty * this.props.obj.DressPrice,
     };
 
     axios
@@ -52,21 +54,28 @@ class CartDetails extends Component {
     window.location.href = "/cartview";
   }
 
-  decrementQunatity = async () => {
+  decrementQunatity() {
+    let tempQty = this.state.Quantity;
     if (this.state.Quantity > 1) {
       this.setState({
         Quantity: this.state.Quantity - 1,
       });
+
+      tempQty = this.state.Quantity - 1
+
     }
-    this.updateQty();
+    this.updateQty(tempQty);
   };
 
-  incrementQunatity = async () => {
+  incrementQunatity() {
+
     this.setState({
       Quantity: this.state.Quantity + 1,
     });
 
-    this.updateQty();
+    let tempQty = this.state.Quantity + 1
+    this.updateQty(tempQty);
+
   };
 
   removeFromCart() {

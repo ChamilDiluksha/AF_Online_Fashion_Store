@@ -4,6 +4,7 @@ const CommentController = require('../../controllers/CommentController/CommentCo
 
 CommentRouter.post("/create", CommentController.addComment);
 CommentRouter.get("/display", CommentController.getAllComments);
+CommentRouter.get("/:id", CommentController.getComment);
 CommentRouter.post("/update/:id", CommentController.updateComment);
 CommentRouter.delete("/delete/:id", CommentController.deleteComment);
 
