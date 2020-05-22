@@ -132,6 +132,7 @@ exports.getCartEntry = (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
+
 //remove product from the cart 
 exports.deleteCartEntry = (req, res, next) => {
   Cart.remove({ _id: req.params.id })
@@ -148,3 +149,17 @@ exports.deleteCartEntry = (req, res, next) => {
       });
     });
 };
+
+//method to display cart item count to user
+exports.getCount = (req, res) => {
+  Cart.find({ "UserID": req.params.id }).countDocuments(function (err, count) {
+    if (err) {
+      throw err;
+    }
+
+    else {
+      res.json(count);
+    }
+
+  });
+}
