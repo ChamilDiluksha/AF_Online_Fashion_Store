@@ -1,7 +1,6 @@
 import React, {Component}from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './NavBar';
-import Table from 'react-bootstrap/Table';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 
 import about from'./images/about.jpg';

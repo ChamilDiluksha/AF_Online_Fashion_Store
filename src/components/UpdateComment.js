@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import Cookies from "universal-cookie";
-import { Comment, Header, Rating } from 'semantic-ui-react';
+import { Rating } from 'semantic-ui-react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
@@ -58,9 +58,6 @@ export default class UpdateComment extends Component{
 
   onSubmit(e) {
     e.preventDefault();
-
-    const cookies = new Cookies();
-    let user = cookies.get('user');
 
     const comment = {
       Comment: this.state.Comment,

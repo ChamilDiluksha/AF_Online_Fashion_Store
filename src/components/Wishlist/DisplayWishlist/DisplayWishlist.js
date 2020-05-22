@@ -77,6 +77,7 @@ class DisplayWishlist extends Component {
       .then(console.log("Deleted"))
       .catch((err) => console.log(err));
 
+    window.location.reload();
     window.location.href = "/cartview";
   }
 

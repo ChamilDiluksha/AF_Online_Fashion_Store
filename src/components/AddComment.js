@@ -1,7 +1,7 @@
 // Import modules and files
 import React,{Component} from 'react';
 import Cookies from "universal-cookie";
-import { Comment, Header, Rating } from 'semantic-ui-react';
+import { Rating } from 'semantic-ui-react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';

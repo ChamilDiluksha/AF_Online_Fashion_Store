@@ -3,9 +3,6 @@ import React, {Component}from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './WishlistStyles.css';
 import NavBar from '../Home/NavBar';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import Cookies from "universal-cookie";
 import axios from 'axios';
 

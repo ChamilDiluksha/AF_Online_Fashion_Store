@@ -3,11 +3,9 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./HomeStyle.css";
 import Cookies from "universal-cookie";
-import { Container, Header, List } from "semantic-ui-react";
 import axios from "axios";
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button, Badge } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import DisplayWishlist from "../Wishlist/DisplayWishlist/DisplayWishlist";
 
 export default class NavBar extends Component {
   constructor(props) {
