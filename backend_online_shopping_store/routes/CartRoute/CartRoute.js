@@ -9,6 +9,7 @@ CartRoute.post("/getCartUser", CartController.userInCart);
 CartRoute.get("/getItem/:id/:item", CartController.getCartEntry);
 CartRoute.put("/update/:id", CartController.editCartEntry);
 CartRoute.delete("/delete/:id", CartController.deleteCartEntry);
+CartRoute.get("/getcount/:id", CartController.getCount);
 
 module.exports = CartRoute;
 

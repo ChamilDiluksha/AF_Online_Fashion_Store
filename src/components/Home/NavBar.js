@@ -5,16 +5,7 @@ import "./HomeStyle.css";
 import Cookies from "universal-cookie";
 import { Container, Header, List } from "semantic-ui-react";
 import axios from "axios";
-import {
-  Navbar,
-  Nav,
-  NavItem,
-  NavDropdown,
-  MenuItem,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import DisplayWishlist from "../Wishlist/DisplayWishlist/DisplayWishlist";
 
@@ -34,7 +25,9 @@ export default class NavBar extends Component {
       category: [],
       product: [],
       Search: '',
-      showSearch: false
+      showSearch: false,
+      itemCount: 0,
+      cartCount: 0,
     };
 
     this.btnLinks = this.btnLinks.bind(this);
@@ -70,6 +63,9 @@ export default class NavBar extends Component {
   };
 
   componentDidMount() {
+    const cookies = new Cookies();
+    let user = cookies.get("user");
+
     axios
       .get("http://localhost:5000/wishlist/display")
       .then((response) => {
@@ -88,14 +84,36 @@ export default class NavBar extends Component {
         console.log(error);
       });
 
+    axios
+      .get("http://localhost:5000/product/")
+      .then((response) => {
+        this.setState({ product: response.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    if (user) {
       axios
-        .get("http://localhost:5000/product/")
+        .get("http://localhost:5000/wishlist/getcount/" + user.userId)
         .then((response) => {
-          this.setState({ product: response.data });
+          this.setState({ itemCount: response.data });
         })
         .catch(function (error) {
           console.log(error);
         });
+    }
+
+    if (user) {
+      axios
+        .get("http://localhost:5000/cart/getcount/" + user.userId)
+        .then((response) => {
+          this.setState({ cartCount: response.data });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   }
 
   btnLinks() {
@@ -115,7 +133,7 @@ export default class NavBar extends Component {
           }
         }}
       >
-        Wish List <i class="fas fa-heart" />
+        <Badge className="mr-2" variant="primary" pill>{this.state.itemCount} </Badge> Wish List <i class="fas fa-heart" />
       </Button>
     );
   }
@@ -126,8 +144,8 @@ export default class NavBar extends Component {
     return user ? (
       <Nav.Link href="/orderhistory">Purchase History</Nav.Link>
     ) : (
-      ""
-    );
+        ""
+      );
   }
 
   onChangeCategory(e) {
@@ -183,23 +201,19 @@ export default class NavBar extends Component {
                 </NavDropdown>
               </Nav>
             ) : (
-              <Nav.Link href="/sign-in">
-                <i class="fas fa-user mr-2" />{" "}
-                {this.state.user ? this.state.user.username : "Sign In"}
-              </Nav.Link>
-            )}
+                <Nav.Link href="/sign-in">
+                  <i class="fas fa-user mr-2" />{" "}
+                  {this.state.user ? this.state.user.username : "Sign In"}
+                </Nav.Link>
+              )}
 
             <Form inline onSubmit={this.clickSearch}>
-              <FormControl type="text" placeholder="Search..." value={this.state.Search} onChange={this.onChangeSearch} className="mr-sm-2"/>
+              <FormControl type="text" placeholder="Search..." value={this.state.Search} onChange={this.onChangeSearch} className="mr-sm-2" />
               <Button variant="outline-dark mt-2">Search</Button>
             </Form>
           </Navbar.Collapse>
         </Navbar>
         {this.btnLinks()}
-        {/* <Link to={{
-          pathname: '/usercart',
-          aboutProps: this.state
-        }}> */}
         <Link to="/cartview">
           <Button
             variant="outline-dark"
@@ -208,7 +222,7 @@ export default class NavBar extends Component {
               console.log("Hello");
             }}
           >
-            Shopping Cart <i class="fas fa-shopping-cart" />
+            <Badge className="mr-2" variant="primary" pill>{this.state.cartCount} </Badge> Shopping Cart <i class="fas fa-shopping-cart" />
           </Button>{" "}
         </Link>
       </div>
