@@ -1,3 +1,4 @@
+// Get the model 
 const Comments = require("../../model/Comment/comment");
 
 // Method for add new comment
@@ -9,48 +10,48 @@ exports.addComment = (req, res) => {
     const UserId = req.body.UserId;
     const Username = req.body.Username;
 
+    const newComment = new Comments({
+      Comment,
+      Review,
+      date,
+      ProductId,
+      UserId,
+      Username
+    });
 
-            const newComment = new Comments({
-              Comment,
-              Review,
-              date,
-              ProductId,
-              UserId,
-              Username
-            });
-
-            newComment
-                .save()
-                .then(result => {
-                    console.log(result);
-                    res.status(201).json({
-                        message: 'Comment Added..'
-                    })
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+    newComment
+      .save()
+      .then(result => {
+        console.log(result);
+        res.status(201).json({ message: 'Comment Added..'})
+        })
+        .catch(err => {
+          console.log(err);
+        });
 }
 
 // Method for get all comments
 exports.getAllComments = (req, res) => {
-    Comments.find((err, comment) => {
-        if(err){
-            console.log(err);
-        }
-        else {
-            res.json(comment);
-        }
-    });
+  Comments.find((err, comment) => {
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(comment);
+    }
+  });
 }
 
+// Method for get a single comment
 exports.getComment = (req, res) => {
-    let commentid = req.params.id;
-    Comments.findById(commentid)
+  let commentid = req.params.id;
+
+  Comments.findById(commentid)
     .then(comment => res.json(comment))
-    .catch(err => res.status(400).json('Error: ' + err));
+      .catch(err => res.status(400).json('Error: ' + err));
 }
 
+// Method for update a comment
 exports.updateComment = (req, res) => {
   Comments.findById(req.params.id)
     .then(comment => {

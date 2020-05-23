@@ -1,15 +1,11 @@
+// Import modules and files
 import React, { Component } from "react";
-// Import bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./HomeStyle.css";
 import Cookies from "universal-cookie";
-import { Container, Header, List } from "semantic-ui-react";
 import axios from "axios";
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button, Badge } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import DisplayWishlist from "../Wishlist/DisplayWishlist/DisplayWishlist";
-
-import Card from "react-bootstrap/Card";
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -34,14 +30,18 @@ export default class NavBar extends Component {
     this.displayHistory = this.displayHistory.bind(this);
   }
 
+  // Handle signout: chamil
   onClickSignOut = (e) => {
     e.preventDefault();
+
     console.log("Signout");
     const cookies = new Cookies();
+
     const obj = {
       token: cookies.get("token"),
       user: cookies.get("user"),
     };
+
     axios.post("http://localhost:5000/user/sign-out", obj).then(
       (response) => {
         const cookies = new Cookies();
@@ -67,15 +67,6 @@ export default class NavBar extends Component {
     let user = cookies.get("user");
 
     axios
-      .get("http://localhost:5000/wishlist/display")
-      .then((response) => {
-        this.setState({ Wishlist: response.data });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    axios
       .get("http://localhost:5000/category/")
       .then((response) => {
         this.setState({ category: response.data });
@@ -93,6 +84,7 @@ export default class NavBar extends Component {
         console.log(error);
       });
 
+    // Method for get the item count of wishlist
     if (user) {
       axios
         .get("http://localhost:5000/wishlist/getcount/" + user.userId)
@@ -116,14 +108,13 @@ export default class NavBar extends Component {
     }
   }
 
+  // Navigate to wishlist
   btnLinks() {
     const cookies = new Cookies();
     let user = cookies.get("user");
 
     return (
-      <Button
-        variant="outline-dark"
-        className="float-right mr-4 mb-4 mt-4 wishlist-btn"
+      <Button variant="outline-dark" className="float-right mr-4 mb-4 mt-4 wishlist-btn"
         onClick={() => {
           if (user) {
             window.location.href = "/wishlist";
@@ -131,23 +122,23 @@ export default class NavBar extends Component {
             alert("Please Login First..!");
             window.location.href = "/sign-in";
           }
-        }}
-      >
-         <Badge className="mr-1" variant="primary" pill>{this.state.itemCount}</Badge> Wish List <i class="fas fa-heart" />
+        }}>
+         <Badge className="mr-1" variant="info" pill><p>{this.state.itemCount}</p></Badge> Wish List <i class="fas fa-heart" />
       </Button>
     );
   }
 
+  // Display purchase history link
   displayHistory() {
     const cookies = new Cookies();
     let user = cookies.get("user");
+
     return user ? (
       <Nav.Link href="/orderhistory">Purchase History</Nav.Link>
-    ) : (
-        ""
-      );
+    ) : ("");
   }
 
+  // Get the dropdown value
   onChangeCategory(e) {
     this.setState({
       category: e.target.value,
@@ -222,7 +213,7 @@ export default class NavBar extends Component {
               console.log("Hello");
             }}
           >
-            <Badge className="mr-2" variant="primary" pill>{this.state.cartCount} </Badge> Shopping Cart <i class="fas fa-shopping-cart" />
+            <Badge className="mr-2" variant="info" pill><p>{this.state.cartCount}</p> </Badge> Shopping Cart <i class="fas fa-shopping-cart" />
           </Button>{" "}
         </Link>
       </div>
