@@ -32,12 +32,13 @@ export default class Description extends Component {
       Quantity: 1,
       Comments: [],
       NewPrice: 0.00,
-      updated: true,
+      updated: true
     };
 
     this.clickDecrement = this.clickDecrement.bind(this);
     this.clickIncrement = this.clickIncrement.bind(this);
     this.displayComments = this.displayComments.bind(this);
+    this.displayAvgRate = this.displayAvgRate.bind(this);
   }
 
   componentDidMount() {
@@ -234,18 +235,32 @@ export default class Description extends Component {
                 <h5>{object.Comment}</h5>
               </div>
             </div>
-            <Rating
-              icon="star"
-              defaultRating={object.Review}
-              maxRating={4}
-              size="huge"
-              disabled
-            />
+            <Rating icon="star" defaultRating={object.Review} maxRating={4}  size="huge" disabled/>
             <hr />
           </div>
         );
       }
     });
+  }
+
+  // Method for calculate the average rating
+  displayAvgRate() {
+    const prodId = this.state.productid;
+
+    let count = 0;
+    let total = 0;
+    let average = 0;
+
+    this.state.Comments.map(function (object, i) {
+      if (prodId == object.ProductId) {
+        total = total  + object.Review;
+        count = count + 1;
+      }
+    });
+
+    average = total / count;
+
+    return average;
   }
 
   render() {
@@ -262,6 +277,9 @@ export default class Description extends Component {
                     src={`http://localhost:5000/${this.state.Image[0]}`}
                   />
                   <Card.Body>
+                    <Card.Title className="text-center">Average Rating:</Card.Title>
+                    <div className="ml-3"><Rating icon="star" rating={this.displayAvgRate()} maxRating={4}  size="huge" className="ml-5" disabled/></div>
+                    <hr/>
                     <Card.Title className="text-center price">
                       Rs. {this.state.DressPrice}.00
                     </Card.Title>

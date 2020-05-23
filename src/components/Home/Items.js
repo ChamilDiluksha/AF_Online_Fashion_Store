@@ -7,6 +7,7 @@ import NavBar from './NavBar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Cookies from "universal-cookie";
+import { Rating } from "semantic-ui-react";
 import { Link } from 'react-router-dom';
 
 export default class Items extends Component {
@@ -71,7 +72,7 @@ export default class Items extends Component {
       </Card> : '';
     });
   }
-  
+
   render() {
     return (
       <div>
