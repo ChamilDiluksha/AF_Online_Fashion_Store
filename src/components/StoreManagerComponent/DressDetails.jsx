@@ -56,7 +56,7 @@ class DressDetails extends Component {
                         {this.props.obj.Discount}
                     </td>
                     <td>
-                    <Link to={"/log/StoreManager/EditProduct/"+this.props.obj._id} className="edit"> <i className="fas fa-user-edit" style={{paddingRight:"10px"}}></i></Link>
+                    <Link to={"/log/StoreManager/EditProduct/"+this.props.obj._id} className="edit"> <i class="fas fa-user-tag" style={{paddingRight:"10px"}}></i></Link>
                     </td>
                     <td>
                         

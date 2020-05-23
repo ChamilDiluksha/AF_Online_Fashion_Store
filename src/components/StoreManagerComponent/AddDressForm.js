@@ -134,7 +134,7 @@ export class UploadProductPage extends Component {
                 Discount:0
     
             });
-           
+            window.location.href = "/log/StoreManager/ViewDressDetails";  
     }
 
     updateFiles = (newImages) => {
@@ -228,15 +228,7 @@ export class UploadProductPage extends Component {
                                 onChange = {this.onChangeDressPrice}  />
                   </Form.Group>
 
-                  <Form.Group as ={Col} >
-                  <Form.Label>Product Discount</Form.Label>
-                  <Form.Control required 
-                                type="number" 
-                                id = "discount" 
-                                name = "dressdiscount" 
-                                value = {this.state.Discount} 
-                                onChange = {this.onChangeDiscount}  />
-                  </Form.Group>
+                  
 
 
               

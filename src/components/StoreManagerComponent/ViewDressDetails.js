@@ -55,8 +55,8 @@ class ViewDressDetails extends Component {
                         <th>Product Description</th>
                         <th>Product Price</th>
                         <th>Product Discount</th>
-                        <th > </th>
-                        <th > </th>
+                        <th>Add Discount </th>
+                        <th>Delete Product </th>
                     </tr>
                 </MDBTableHead>
 
