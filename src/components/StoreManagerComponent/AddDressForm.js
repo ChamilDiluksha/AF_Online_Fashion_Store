@@ -118,7 +118,7 @@ export class UploadProductPage extends Component {
                     alert('Product Uploaded Successfully')
                    
                 } else {
-                    alert('Failed to upload video')
+                    alert('Failed to upload product')
                 }
             })
 
